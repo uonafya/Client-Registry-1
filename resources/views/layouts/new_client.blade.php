@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <form action="/create_patient" method="post" style="margin-top: 5%;">
+<div class="container" style="background-color: white">
+    <form action="/create_patient" method="post" style="margin-top: 5%; padding:10px;">
         @csrf
+        <div class="panel-heading">
+            <center>Client Information</center>
+        </div>
+               <hr><br>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="fname">First Name</label>
@@ -90,7 +94,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-success">Save</button>
     </form>
 </div>
 @endsection
