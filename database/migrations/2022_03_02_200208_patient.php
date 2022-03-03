@@ -30,7 +30,7 @@ class Patient extends Migration
             $table->string('updated_by')->nullable();   
             $table->unsignedBigInteger('Link_facility') ->nullable();   
             $table->string('Resident')->nullable();   
-            $table->string('Date_of_Transfer') ->nullable();            
+            $table->string('Date_of_Transfer') ->nullable();         
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
             

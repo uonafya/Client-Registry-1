@@ -19,7 +19,7 @@ class LoginController extends Controller
         {
             if (auth()->user()->is_admin == 1) {
                 // return redirect()->route('admin.home');
-                return redirect()->intended('landing');
+                return redirect()->intended('dashboard');
                 // view('index');
             }else{
                 // return redirect()->route('home');

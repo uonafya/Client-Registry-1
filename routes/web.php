@@ -26,14 +26,13 @@ Route::get('/', function () {
 Route::post('login', [LoginController::class, 'login']);
 // patients
 
-Route::get('/landing', [FacilityController::class, 'index']);
+Route::get('/dashboard', [FacilityController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-
 Route::post('create_patient',[PatientController::class, 'store']);
 Route::patch('patient/{id}',[PatientController::class, 'update']);
 
 Route::get('/merger_patient/{id}/{id_no}',[PatientController::class, 'merge']);
 
 
-Route::get('new_client', [PatientController::class, 'new_client']);
+Route::get('new_client', [PatientController::class, 'new_client'])
