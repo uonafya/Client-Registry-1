@@ -21,13 +21,13 @@ class DatabaseSeeder extends Seeder
                'name'=>'Admin',
                'email'=>'admin@test.com',
                 'is_admin'=>'1',
-               'password'=> bcrypt('123456'),
+               'password'=> bcrypt('admin123'),
             ],
             [
                'name'=>'User',
                'email'=>'user@test.com',
                 'is_admin'=>'0',
-               'password'=> bcrypt('123456'),
+               'password'=> bcrypt('user123'),
             ],
         ];
   

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Patient;
 
 class PatientController extends Controller
 {
@@ -21,9 +22,10 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Patient $patient, Request $request)
     {
-        //
+       
+
     }
 
     /**
@@ -34,7 +36,19 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Patient::create($request->only([
+            'name',
+            'DOB', 
+            'gender', 
+            'Geolocation',
+            'Phone',
+            'ID_Number',
+            'CCC_Number', 
+            'Nemis', 
+            'Resident',
+            'Date_of_Transfer' 
+         ]));
+        
     }
 
     /**
@@ -66,9 +80,36 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Patient $patient, Request $req)
     {
-        //
+        $data = request()->validate([
+            "name" => "required",
+            "DOB" =>"required",
+            "gender" => 'required',
+            "Geolocation" => 'required',
+            "Phone" => "required",
+            "ID_Number" => "required",
+            "CCC_Number" => "required",
+            "Nemis" => 'required',
+            "Resident" => 'required',
+            "Date_of_Transfer" =>  "required"
+        ]);
+        
+        $patient->where('id',$req->id)->update($data);
+        
+        // $patient->update($data);
+    }
+    
+    public function merge(Request $reqs)
+    {
+      $patient = Patient::find($reqs->id);
+      $patient_exists = Patient::where('ID_Number', $reqs->id_no);
+      
+      if($patient_exists->exists())
+      {
+        dd($patient[0]);
+      }
+      
     }
 
     /**

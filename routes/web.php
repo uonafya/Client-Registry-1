@@ -6,6 +6,7 @@ use App\Http\Controllers\FacilityController;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,15 @@ Route::get('/', function () {
 });
 
 Route::post('login', [LoginController::class, 'login']);
+// patients
 
 Route::get('/landing', [FacilityController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
+Route::post('create_patient',[PatientController::class, 'store']);
+Route::patch('patient/{id}',[PatientController::class, 'update']);
+
+Route::get('/merger_patient/{id}/{id_no}',[PatientController::class, 'merge']);
+
 
