@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Patient;
 
 class PatientController extends Controller
 {
@@ -21,9 +22,10 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Patient $patient, Request $request)
     {
-        //
+       
+
     }
 
     /**
@@ -34,7 +36,30 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Patient::create($request->only([
+            'fname',
+            'mname',
+            "lname",
+            'dob', 
+            'gender', 
+            'Geolocation',
+            'phone',
+            'id_no',
+            'CCC_Number', 
+            'nemis', 
+            'Resident',
+            'Date_of_Transfer' 
+         ]));
+         
+         return 'created';
+        
+    }
+    
+    public function new_client(Patient $patient)
+    {
+        $patient = $this->optionCounty();
+        return view('layouts.new_client', compact('patient'));
+        
     }
 
     /**
@@ -66,9 +91,46 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Patient $patient, Request $req)
     {
-        //
+        // name="linked_facility"        
+        // name="mfl_code"
+        // serial_no
+        // name="dot"
+        // name="residence"
+        // name='county'
+        
+        
+        $data = request()->validate([
+            "fname" => "required",
+            "mname" => "required",
+            "lname" => "required",
+            "dob" =>"required",
+            "gender" => 'required',
+            "Geolocation" => 'required',
+            "Phone" => "required",
+            "id_no" => "required",
+            "CCC_Number" => "required",
+            "nemis" => '',
+            "Resident" => 'required',
+            "Date_of_Transfer" =>  "required"
+        ]);
+        
+        $patient->where('id',$req->id)->update($data);
+        
+        // $patient->update($data);
+    }
+    
+    public function merge(Request $reqs)
+    {
+      $patient = Patient::find($reqs->id);
+      $patient_exists = Patient::where('ID_Number', $reqs->id_no);
+      
+      if($patient_exists->exists())
+      {
+        dd($patient[0]);
+      }
+      
     }
 
     /**
@@ -80,5 +142,25 @@ class PatientController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function optionCounty()
+    {
+        return [
+        1 =>'Nakuru',
+         2 => 'uasingishu',
+         3 => 'Nairobi',
+         4 => 'Migori'  
+        ];
+    }
+    
+    public function optionFacility()
+    {
+        return [
+            '12345' => 'migori_hospital' ,
+            '22341' => 'muranga_hospital' ,
+            '32342' => 'nairobi_hospital' ,
+            '62343' => 'kissii_hospital' , 
+        ];
     }
 }

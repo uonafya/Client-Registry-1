@@ -15,19 +15,22 @@ class Patient extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            //$table->foreignId('patient_category_id')->constrained();
-            $table->string('DOB')->unique();            
-            $table->string('gender')->unique()->nullable(); 
-            $table->string('Geolocation')->unique();  
-            $table->string('Phone')->unique();   
-            $table->string('ID_Number')->unique();   
-            $table->string('CCC_Number')->unique();   
-            $table->string('Nemis')->unique();   
-            $table->unsignedBigInteger('Link_facility')->unique()->nullable();   
-            $table->string('Resident')->unique();   
-            $table->string('Date_of_Transfer')->unique()->nullable();            
+            $table->string('fname');
+            $table->string('mname');
+            $table->string('lname');
+            $table->string('dob') ;            
+            $table->string('gender')->nullable(); 
+            $table->string('Geolocation')->nullable() ;  
+            $table->string('phone') ;   
+            $table->string('id_no') ;   
+            $table->string('CCC_Number')->nullable() ;   
+            $table->string('Nemis') ;   
+            $table->Boolean('void')->nullable() ;   
+            $table->string('created_by')->nullable();   
+            $table->string('updated_by')->nullable();   
+            $table->unsignedBigInteger('Link_facility') ->nullable();   
+            $table->string('Resident')->nullable();   
+            $table->string('Date_of_Transfer') ->nullable();         
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
             
