@@ -419,7 +419,7 @@ form.sign-in-form {
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form method="POST" action="login" class="sign-in-form">
+          <form method="POST" action="{{url('login')}}" class="sign-in-form">
             @csrf
             <h2 class="title">Sign in</h2>
             
@@ -431,9 +431,8 @@ form.sign-in-form {
               <i class="fas fa-lock"></i>
               <input id="password" name="password" type="password" placeholder="Password" />
             </div>
-            <a href="facility_landing">
-              <input value="Login" class="btn solid" />
-            </a>
+            
+            <input type="submit" value="Login" class="btn solid" />
 
             </div>
           </form>

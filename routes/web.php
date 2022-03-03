@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FacilityController;
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,9 @@ Route::get('/', function () {
     return view('login_register');
 });
 
+Route::post('login', [LoginController::class, 'login']);
+
 Route::get('/landing', [FacilityController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
