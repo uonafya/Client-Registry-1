@@ -16,6 +16,7 @@ class Patient extends Model
     {
         $this->belongsTo(facility::class);
     }    
-
+    
+  
     
 }

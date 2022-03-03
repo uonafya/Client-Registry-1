@@ -37,17 +37,28 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         Patient::create($request->only([
-            'name',
-            'DOB', 
+            'fname',
+            'mname',
+            "lname",
+            'dob', 
             'gender', 
             'Geolocation',
-            'Phone',
-            'ID_Number',
+            'phone',
+            'id_no',
             'CCC_Number', 
-            'Nemis', 
+            'nemis', 
             'Resident',
             'Date_of_Transfer' 
          ]));
+         
+         return 'created';
+        
+    }
+    
+    public function new_client(Patient $patient)
+    {
+        $patient = $this->optionCounty();
+        return view('layouts.new_client', compact('patient'));
         
     }
 
@@ -82,15 +93,25 @@ class PatientController extends Controller
      */
     public function update(Patient $patient, Request $req)
     {
+        // name="linked_facility"        
+        // name="mfl_code"
+        // serial_no
+        // name="dot"
+        // name="residence"
+        // name='county'
+        
+        
         $data = request()->validate([
-            "name" => "required",
-            "DOB" =>"required",
+            "fname" => "required",
+            "mname" => "required",
+            "lname" => "required",
+            "dob" =>"required",
             "gender" => 'required',
             "Geolocation" => 'required',
             "Phone" => "required",
-            "ID_Number" => "required",
+            "id_no" => "required",
             "CCC_Number" => "required",
-            "Nemis" => 'required',
+            "nemis" => '',
             "Resident" => 'required',
             "Date_of_Transfer" =>  "required"
         ]);
@@ -121,5 +142,25 @@ class PatientController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function optionCounty()
+    {
+        return [
+        1 =>'Nakuru',
+         2 => 'uasingishu',
+         3 => 'Nairobi',
+         4 => 'Migori'  
+        ];
+    }
+    
+    public function optionFacility()
+    {
+        return [
+            '12345' => 'migori_hospital' ,
+            '22341' => 'muranga_hospital' ,
+            '32342' => 'nairobi_hospital' ,
+            '62343' => 'kissii_hospital' , 
+        ];
     }
 }

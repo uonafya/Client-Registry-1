@@ -15,16 +15,21 @@ class Patient extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('DOB') ;            
+            $table->string('fname');
+            $table->string('mname');
+            $table->string('lname');
+            $table->string('dob') ;            
             $table->string('gender')->nullable(); 
-            $table->string('Geolocation') ;  
-            $table->string('Phone') ;   
-            $table->string('ID_Number') ;   
-            $table->string('CCC_Number') ;   
+            $table->string('Geolocation')->nullable() ;  
+            $table->string('phone') ;   
+            $table->string('id_no') ;   
+            $table->string('CCC_Number')->nullable() ;   
             $table->string('Nemis') ;   
+            $table->Boolean('void')->nullable() ;   
+            $table->string('created_by')->nullable();   
+            $table->string('updated_by')->nullable();   
             $table->unsignedBigInteger('Link_facility') ->nullable();   
-            $table->string('Resident') ;   
+            $table->string('Resident')->nullable();   
             $table->string('Date_of_Transfer') ->nullable();            
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
