@@ -8,7 +8,7 @@ class LoginController extends Controller
 {
     public function login(Request $reqs)
     {
-        dd(request('email'), request('password'));
+        // dd(request('email'), request('password'));
         
         $this->validate($reqs, [
             'email' => 'required|email',
