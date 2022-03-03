@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FacilityController;
+
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +21,15 @@ Route::get('/', function () {
     return view('login_register');
 });
 
+Route::get('facility_landing', function(){
+    return view('Layouts.app');
+});
+Route::post('login', [UserController::class,'login'])->middleware('auth');
 
+// Route::get('clientReg',[FacilityController::class, 'index']);
+
+Route::get('/landing', [FacilityController::class, 'index'])->middleware('auth');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
