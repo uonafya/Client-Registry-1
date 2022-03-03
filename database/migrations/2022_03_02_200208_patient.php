@@ -16,6 +16,8 @@ class Patient extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('description');
+            //$table->foreignId('patient_category_id')->constrained();
             $table->string('DOB')->unique();            
             $table->string('gender')->unique()->nullable(); 
             $table->string('Geolocation')->unique();  

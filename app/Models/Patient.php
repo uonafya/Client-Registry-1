@@ -16,6 +16,10 @@ class Patient extends Model
     {
         $this->belongsTo(facility::class);
     }    
+    public function category()
+    {
+        return $this->belongsTo(PatientCategory::class, 'patient_category_id');
+    }
 
     
 }

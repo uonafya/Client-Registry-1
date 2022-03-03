@@ -24,7 +24,6 @@ Route::get('/', function () {
 
 Route::post('login', [LoginController::class, 'login']);
 
-Route::get('/landing', [FacilityController::class, 'index']);
+Route::get('/dashboard', [FacilityController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-
