@@ -28,3 +28,7 @@ Route::get('/landing', [FacilityController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
+Route::get('new_client', function(){
+    return view('layouts.new_client');
+});
+
