@@ -26,4 +26,10 @@ Route::post('login', [LoginController::class, 'login']);
 
 Route::get('/dashboard', [FacilityController::class, 'index']);
 
+<<<<<<< HEAD
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+=======
+Route::get('new_client', function(){
+    return view('layouts.new_client');
+});
+>>>>>>> b545ed22d04d4d96623935d73e639cec686f9e67
