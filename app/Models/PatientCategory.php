@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PatientCategory extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+
+    protected $fillable = [
+        'name',
+    ];
 }

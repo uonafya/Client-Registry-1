@@ -84,7 +84,7 @@
                         
                         <option value="{{ $countyOPtionsValue }}" >{{ $countyOPtionsValue }}</option>                                
                 @endforeach
-                        
+
                     </select>
             
             </div>
