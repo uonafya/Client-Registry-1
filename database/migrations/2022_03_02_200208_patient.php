@@ -20,7 +20,6 @@ class Patient extends Migration
             $table->string('lname');
             $table->string('dob') ;            
             $table->string('gender')->nullable(); 
-            $table->string('Geolocation')->nullable() ;  
             $table->string('phone')->nullable();   
             $table->string('id_no')->nullable();   
             $table->string('CCC_Number')->nullable() ;   
@@ -29,17 +28,21 @@ class Patient extends Migration
             $table->string('created_by')->nullable();   
             $table->string('updated_by')->nullable(); 
             $table->string('date_updated')->nullable(); 
-            $table->string('date_created')->nullable();               
-            $table->unsignedBigInteger('Link_facility') ->nullable();   
+            $table->string('date_created')->nullable();           
             $table->string('Resident')->nullable();   
             $table->string('county')->nullable();   
             $table->string('village')->nullable();
             $table->string('Date_of_Transfer') ->nullable();         
+            
+            $table->string('transferred_by')->nullable();
+            $table->unsignedBigInteger('facility')->nullable();
+            $table->integer('transferin')->default(0);
+            $table->string('enddate') ->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->unsignedBigInteger('patient_category_id');
+            // $table->unsignedBigInteger('patient_category_id');
             $table->timestamps();
             
-            $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onUpdate('cascade');
+            // $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onUpdate('cascade');
             $table->foreign('facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
             
         });

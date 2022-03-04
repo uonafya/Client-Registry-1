@@ -20,7 +20,8 @@ class FacilityController extends Controller
     public function index()
     {
        $patient = Patient::all();
-       return view('Facility.index', compact('patient'));;
+       return $this->hasOne('patient', 'facilities')->view('Facility.index', compact('patient'));
+
     }
     
     public function getFacility()

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
@@ -166,6 +170,83 @@ class PatientController extends Controller
             '62343' => 'kissii_hospital' , 
         ];
     }
+<<<<<<< HEAD
     
     
+=======
+
+    //allcustomers
+    public function allclients()
+    {
+        $users = DB::table('patients')
+            ->where('void',1)
+            ->paginate(10);
+
+
+        return view('layouts.viewclient', ['users' => $users]);
+    }
+
+    public function showclient($id)
+    {
+
+        $users = DB::select('select * from patients where id = ?', [$id]);
+        return $this->belongsTo('facilites', 'facilities')->view('layouts.transferin', ['users' => $users]);
+    }
+    public function editc(Request $request,$id) {
+        $patient = $this->optionCounty();
+        $facility = $this->optionFacility();
+
+        $fname = $request->input('fname');
+        $mname = $request->input('mname');
+        $lname = $request->input('lname');
+        $nemis = $request->input('nemis');
+        $dob = $request->input('dob');
+        $gender = $request->input('gender');
+        $phone = $request->input('phone');
+        $id_no= $request->input('id_no');
+        $facility= $request->input('facility');
+        $cccno= $request->input('cccno');
+        $residence= $request->input('residence');
+        $county= $request->input('county');
+        $enddate= $request->input('enddate');
+        $transferin = 1;
+        $transferred_by=Auth::user()->name;
+        /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
+        /*DB::table('student')->update($data);*/
+        /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
+        DB::update('update patients set enddate=? where id = ?',[$enddate,$id]);
+
+
+      $pcreate = Patient::create([
+//            'fname',
+//            'mname',
+//            'lname',
+//            'nemis',
+//            'dob',
+//            'gender',s
+//            'phone',
+//            'id_no',
+//            'cccno',
+//            'residence',
+//            'county',
+//            'facility',
+
+        'fname' => $request->input('fname'),
+        'mname' => $request->input('mname'),
+        'lname' => $request->input('lname'),
+        'nemis' => $request->input('nemis'),
+        'dob' => $request->input('dob'),
+        'gender' => $request->input('gender'),
+        'phone' => $request->input('phone'),
+        'id_no'=> $request->input('id_no'),
+        'facility'=> $request->input('facility'),
+        'cccno'=> $request->input('cccno'),
+        'residence'=> $request->input('residence'),
+        'county'=> $request->input('county'),
+        'transferin' => 1,
+        'transferred_by'=> Auth::user()->name,
+        ]);
+        return view('layouts.viewclient');
+    }
+>>>>>>> d9b50a945195f12487e855b9380b9f29c6b507ec
 }
