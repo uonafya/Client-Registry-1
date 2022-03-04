@@ -1,0 +1,582 @@
+{
+    "facility": [
+        {
+            "name": "Aguthi Dispensary",
+            "mfl_code": "10017",
+            "county": "Nyeri",
+            "sub_county": "Tetu",
+            "ward": "Aguthi-gaaki",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Gathehu Dispensary",
+            "mfl_code": "21927",
+            "county": "Nyeri",
+            "sub_county": "Mathira East",
+            "ward": "Magutu",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Menduki Medical Services- Ngangarithi",
+            "mfl_code": "24716",
+            "county": "Nyeri",
+            "sub_county": "Nyeri Central",
+            "ward": "Rware",
+            "facility_type": "Medical Center"
+        },
+        {
+            "name": "Ruiru Family Clinic",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Ruiru",
+            "ward": "Kahawa/Sukari",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Kimathi Medical Clinic",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Nursing and Maternity Home"
+        },
+        {
+            "name": "nyandarua hospital",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Ndumberi",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Phoenicia Test Facility Group 2",
+            "mfl_code": "25248",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Majala Majala",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Leo Medical Clinic",
+            "mfl_code": "25254",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Monda Health Centre",
+            "mfl_code": "25255",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Ngerenya Yehu Dispensary",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Ole Keem Health Center",
+            "mfl_code": "25247",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Center"
+        },
+        {
+            "name": "Martini Med Clinic",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "kiambu township",
+            "mfl_code": "25249",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Kuya Health Centre",
+            "mfl_code": "25252",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Phonecia  Hospital",
+            "mfl_code": "25256",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Mbajoni Dispensary",
+            "mfl_code": "25250",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Kiambu township",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "ug urban health centre",
+            "mfl_code": "25251",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Phoenecia Nursing Home",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Nursing Homes"
+        },
+        {
+            "name": "Tiba Medical Clinic",
+            "mfl_code": "25253",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Sample Health Facility 23 Sep 2021",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambaa",
+            "ward": "Cianda",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Kapchepkisa",
+            "mfl_code": "22891",
+            "county": "Baringo",
+            "sub_county": "Baringo North",
+            "ward": "Saimoi/Kipsaraman",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Himacare Medical Centre",
+            "mfl_code": null,
+            "county": "Nandi",
+            "sub_county": "Nandi Hills",
+            "ward": "Nandi Hills",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Sunrise Health Centre",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Lake View Health Center",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "St Lucy Health Center",
+            "mfl_code": null,
+            "county": "Busia",
+            "sub_county": "Bunyala",
+            "ward": "Bunyala Central",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Afya Bora Hospital",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Secondary care hospitals"
+        },
+        {
+            "name": "Vasha",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Test Facility Naivasha LCC",
+            "mfl_code": "25245",
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Medical Clinic"
+        }
+    ],  
+        "patients": [
+            {
+                "first_name": "Wenger",
+                "second_name": "Fundamentals",
+                "surname": "Diesel",
+                "dob": "1960-11-14T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-08-18T12:11:10",
+                "date_created": "2014-07-15T15:45:17",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Kichaka",
+                "second_name": "Fundamentals",
+                "surname": "Diesel",
+                "dob": "1962-04-16T00:00:00",
+                "gender": "M",
+                "date_updated": "2016-08-24T10:00:35",
+                "date_created": "2014-04-16T14:19:25",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Kitioko",
+                "second_name": "BombBlast",
+                "surname": "Sunderland",
+                "dob": "1981-04-24T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-09-12T11:28:12",
+                "date_created": "2014-04-24T15:56:54",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Wenger",
+                "second_name": "BombBlast",
+                "surname": "Sunderland",
+                "dob": "1974-05-05T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-07-25T15:37:12",
+                "date_created": "2014-05-05T13:11:21",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "WageBill",
+                "second_name": "BombBlast",
+                "surname": "Sunderland",
+                "dob": "1987-05-05T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-05-18T12:21:00",
+                "date_created": "2014-05-05T15:25:33",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Matatu",
+                "second_name": "BombBlast",
+                "surname": "Sunderland",
+                "dob": "1968-12-31T00:00:00",
+                "gender": "F",
+                "date_updated": "2015-01-08T15:08:59",
+                "date_created": "2014-05-05T15:27:38",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Wenger",
+                "second_name": "Budaa",
+                "surname": "Spain",
+                "dob": "1968-12-31T00:00:00",
+                "gender": "F",
+                "date_updated": "2015-01-08T15:08:59",
+                "date_created": "2014-05-05T15:27:38",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Bomber",
+                "second_name": "BombBlast",
+                "surname": "Sunderland",
+                "dob": "1969-05-06T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T10:07:56",
+                "date_created": "2014-05-06T09:58:35",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Gasoline",
+                "second_name": "BombBlast",
+                "surname": "Sunderland",
+                "dob": "1967-05-06T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-03-10T11:03:21",
+                "date_created": "2014-05-06T09:58:39",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Cognitive",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "2012-10-10T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-08-18T12:08:37",
+                "date_created": "2014-05-06T10:31:23",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Kitioko",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1987-05-13T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T11:56:27",
+                "date_created": "2014-05-06T10:43:23",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Testing",
+                "second_name": "Budaa",
+                "surname": "Spain",
+                "dob": "1987-05-13T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T11:56:27",
+                "date_created": "2014-05-06T10:43:23",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Testing",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1985-05-06T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-01-22T13:06:03",
+                "date_created": "2014-05-06T12:11:24",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Blablala",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1971-05-06T00:00:00",
+                "gender": "M",
+                "date_updated": "2016-05-18T13:05:43",
+                "date_created": "2014-05-06T12:51:55",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Wenger",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "2010-05-06T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T13:09:16",
+                "date_created": "2014-05-06T13:04:00",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Kichaka",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1959-05-06T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T13:26:40",
+                "date_created": "2014-05-06T13:24:03",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "WageBill",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1959-05-06T00:00:00",
+                "gender": "M",
+                "date_updated": "2014-05-06T14:05:52",
+                "date_created": "2014-05-06T13:47:29",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Matatu",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1996-05-06T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T14:47:49",
+                "date_created": "2014-05-06T14:29:22",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Bomber",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1948-06-15T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T14:44:14",
+                "date_created": "2014-05-06T14:43:00",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Gasoline",
+                "second_name": "Jambazi",
+                "surname": "Ugali",
+                "dob": "1990-06-15T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T15:24:04",
+                "date_created": "2014-05-06T15:07:37",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Cognitive",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1960-05-06T00:00:00",
+                "gender": "M",
+                "date_updated": "2016-06-16T14:11:32",
+                "date_created": "2014-05-06T15:34:14",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Kitioko",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1972-05-06T00:00:00",
+                "gender": "M",
+                "date_updated": "2016-08-18T12:15:24",
+                "date_created": "2014-05-06T15:41:07",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Testing",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1969-05-06T00:00:00",
+                "gender": "M",
+                "date_updated": "2014-05-06T16:17:59",
+                "date_created": "2014-05-06T16:10:44",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Blablala",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1991-07-12T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-06T16:23:23",
+                "date_created": "2014-05-06T16:20:14",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Wenger",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1963-05-07T00:00:00",
+                "gender": "M",
+                "date_updated": "2016-05-19T12:39:59",
+                "date_created": "2014-05-06T16:39:00",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Kichaka",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1978-05-07T00:00:00",
+                "gender": "F",
+                "date_updated": "2014-05-07T09:19:52",
+                "date_created": "2014-05-07T09:10:40",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "WageBill",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1974-06-15T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-03-14T10:11:36",
+                "date_created": "2014-05-07T09:19:49",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            },
+            {
+                "first_name": "Matatu",
+                "second_name": "Octavio",
+                "surname": "Subaru",
+                "dob": "1946-05-07T00:00:00",
+                "gender": "F",
+                "date_updated": "2016-09-05T10:24:07",
+                "date_created": "2014-05-07T10:22:58",
+                "county": null,
+                "village": null,
+                "ccc_number": null
+            }
+        ]
+}

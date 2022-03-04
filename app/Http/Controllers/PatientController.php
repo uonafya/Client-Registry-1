@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Patient;
-use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
@@ -25,53 +24,51 @@ class PatientController extends Controller
      */
     public function create(Patient $patient, Request $request)
     {
-
+       
 
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
-//        $data = $request->all();
-//        dd($data);
-
-        Patient::create($request->all([
-           'fname',
+        Patient::create($request->only([
+            'fname',
             'mname',
-            'lname',
-            'nemis',
-            'dob',
-            'gender',
+            "lname",
+            'dob', 
+            'gender', 
+            'Geolocation',
             'phone',
             'id_no',
-            'cccno',
-            'residence',
-            'county',
-            'facility',
-        ]));
-
-        return 'created';
-
+            'CCC_Number', 
+            'nemis', 
+            'Resident',
+            'Date_of_Transfer' 
+         ]));
+         
+         return 'created';
+        
     }
-
+    
     public function new_client(Patient $patient)
     {
         $patient = $this->optionCounty();
         $facility = $this->optionFacility();
-        return view('layouts.new_client', compact('patient','facility'));
-
+        
+        return view('layouts.new_client', compact('patient', 'facility'));
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -82,7 +79,7 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -93,130 +90,82 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Patient $patient, Request $req)
     {
-        // name="linked_facility"
+        // name="linked_facility"        
         // name="mfl_code"
         // serial_no
         // name="dot"
         // name="residence"
         // name='county'
-
-
+        
+        
         $data = request()->validate([
             "fname" => "required",
             "mname" => "required",
             "lname" => "required",
-            "dob" => "required",
+            "dob" =>"required",
             "gender" => 'required',
             "Geolocation" => 'required',
             "Phone" => "required",
             "id_no" => "required",
             "CCC_Number" => "required",
-            "Link_facility" => "required",
             "nemis" => '',
             "Resident" => 'required',
-            "Date_of_Transfer" => "required"
+            "Date_of_Transfer" =>  "required"
         ]);
-
-        $patient->where('id', $req->id)->update($data);
-
+        
+        $patient->where('id',$req->id)->update($data);
+        
         // $patient->update($data);
     }
-
+    
     public function merge(Request $reqs)
     {
-        $patient = Patient::find($reqs->id);
-        $patient_exists = Patient::where('ID_Number', $reqs->id_no);
-
-        if ($patient_exists->exists()) {
-            dd($patient[0]);
-        }
-
+      $patient = Patient::find($reqs->id);
+      $patient_exists = Patient::where('ID_Number', $reqs->id_no);
+      
+      if($patient_exists->exists())
+      {
+        dd($patient[0]);
+      }
+      
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
-
+    
     public function optionCounty()
     {
         return [
-            1 => 'Nakuru',
-            2 => 'uasingishu',
-            3 => 'Nairobi',
-            4 => 'Migori'
+        1 =>'Nakuru',
+         2 => 'uasingishu',
+         3 => 'Nairobi',
+         4 => 'Migori'  
         ];
     }
-
+    
     public function optionFacility()
     {
         return [
-            '1' => 'migori_hospital',
-            '1' => 'muranga_hospital',
-            '1' => 'nairobi_hospital',
-            '1  ' => 'kissii_hospital',
+            '12345' => 'migori_hospital' ,
+            '22341' => 'muranga_hospital' ,
+            '32342' => 'nairobi_hospital' ,
+            '62343' => 'kissii_hospital' , 
         ];
     }
-
-    //allcustomers
-    public function allclients()
-    {
-        $users = DB::table('patients')->paginate(10);
-
-        return view('layouts.viewclient', ['users' => $users]);
-    }
-
-    public function showclient($id)
-    {
-        $users = DB::select('select * from patients where id = ?', [$id]);
-        return view('layouts.transferin', ['users' => $users]);
-    }
-    public function editc(Request $request,$id) {
-        $fname = $request->input('fname');
-        $mname = $request->input('mname');
-        $lname = $request->input('lname');
-        $nemis = $request->input('nemis');
-        $dob = $request->input('dob');
-        $gender = $request->input('gender');
-        $phone = $request->input('phone');
-        $id_no= $request->input('id_no');
-        $facility= $request->input('facility');
-        $cccno= $request->input('cccno');
-        $residence= $request->input('residence');
-        $county= $request->input('county');
-        $enddate= $request->input('enddate');
-        $transferin = 1;
-        /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
-        /*DB::table('student')->update($data);*/
-        /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set transferin = ?,enddate=? where id = ?',[$transferin,$enddate,$phone,$id]);
-
-        Patient::create($request->all([
-            'fname',
-            'mname',
-            'lname',
-            'nemis',
-            'dob',
-            'gender',
-            'phone',
-            'id_no',
-            'cccno',
-            'residence',
-            'county',
-            'facility',
-        ]));
-        return view('viewclient');
-    }
+    
+    
 }

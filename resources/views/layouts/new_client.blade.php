@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="background-color: white">
-    <form action="/create_patient" method="post" style="margin-top: 5%; padding:10px;">
+<div class="container">
+    <form action="/create_patient" method="post" style="margin-top: 5%;">
         @csrf
-        <div class="panel-heading">
-            <center>Client Information</center>
-        </div>
-               <hr><br>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="fname">First Name</label>
@@ -54,17 +50,19 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="facility">Select Facility</label>
-                <select name="facility" id="facility" class="form-control">
-                    @foreach ($facility as $countyOPtionsKey => $countyOPtionsValue)
-
-                        <option value='{{ $countyOPtionsKey }}'>{{ $countyOPtionsValue }}</option>
-                    @endforeach
-                </select>
+                <select  name="linked_facility" id="facility" class="form-control">
+                    @foreach ($facility as $facilityOPtionsKey => $facilityOPtionsValue)
+                        <option value="{{ $facilityOPtionsValue }}" {{ $facilityOPtionsValue  ? 'selected' : ''}} >{{ $facilityOPtionsValue }}</option>                                
+                    @endforeach                            
+                 </select>
+                
             </div>
+            
             <div class="form-group col-md-4">
                 <label for="mfl_code">MFL Code</label>
                 <input name="mfl_code" type="text" class="form-control" id="mfl_code" value='' readonly>
             </div>
+            
             <div class="form-group col-md-4">
                 <label for="serial_number">Serial Number</label>
                 <input name="serial_no" type="number" class="form-control" id="serial_number" placeholder="Serial Number">
@@ -78,14 +76,13 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="county">County</label>
-                    <select name="county" id="facility" class="form-control">
+                    <select name="linked_facility" id="facility" class="form-control">
                 @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-
-                        <option value="1" {{ $countyOPtionsValue  ? 'selected' : ''}} >{{ $countyOPtionsValue }}</option>
+                    <option value="{{ $countyOPtionsValue }}" {{ $countyOPtionsValue  ? 'selected' : ''}} >{{ $countyOPtionsValue }}</option>                                
                 @endforeach
-
+                        
                     </select>
-
+            
                 {{-- <input name='county' type="text" class="form-control" id="county"> --}}
             </div>
 
@@ -95,7 +92,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
 @endsection

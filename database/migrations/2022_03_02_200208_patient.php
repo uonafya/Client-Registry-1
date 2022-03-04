@@ -14,30 +14,32 @@ class Patient extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->id();
             $table->string('fname');
             $table->string('mname');
             $table->string('lname');
-            $table->string('dob');
-            $table->string('gender')->nullable();
-            $table->string('county')->nullable() ;
-            $table->string('phone') ;
-            $table->string('id_no') ;
-            $table->string('cccno')->nullable() ;
-            $table->string('nemis') ;
-            $table->Boolean('void')->nullable() ;
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->unsignedBigInteger('facility')->nullable();
-            $table->string('residence')->nullable();
-            $table->integer('transferin')->default(0);
-            $table->string('enddate') ->nullable();
+            $table->string('dob') ;            
+            $table->string('gender')->nullable(); 
+            $table->string('Geolocation')->nullable() ;  
+            $table->string('phone')->nullable();   
+            $table->string('id_no')->nullable();   
+            $table->string('CCC_Number')->nullable() ;   
+            $table->string('Nemis')->nullable();   
+            $table->Boolean('void')->nullable() ;   
+            $table->string('created_by')->nullable();   
+            $table->string('updated_by')->nullable(); 
+            $table->string('date_updated')->nullable(); 
+            $table->string('date_created')->nullable();               
+            $table->unsignedBigInteger('Link_facility') ->nullable();   
+            $table->string('Resident')->nullable();   
+            $table->string('county')->nullable();   
+            $table->string('village')->nullable();
+            $table->string('Date_of_Transfer') ->nullable();         
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
-
-            $table->foreign('facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
-
+            
+            $table->foreign('Link_facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
+            
         });
     }
 
