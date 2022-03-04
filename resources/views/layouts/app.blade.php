@@ -76,6 +76,10 @@
         <!-- Main Footer -->
         <footer class="main-footer">
 
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>  
             <strong>Copyright &copy; 2022 <a href="#">ClientRegistry</a>.</strong> All rights
             reserved.
         </footer>
