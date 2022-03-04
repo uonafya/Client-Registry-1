@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\Facility;
+
 use App\Helpers\Http;
 
 class PatientController extends Controller
@@ -22,22 +24,11 @@ class PatientController extends Controller
     {
         //
     }
+
     public function search()
     {
         return view('search');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Patient $patient, Request $request)
-    {
-
-
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -76,27 +67,8 @@ class PatientController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -145,17 +117,6 @@ class PatientController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function optionCounty()
     {
         return [
@@ -175,30 +136,7 @@ class PatientController extends Controller
             '62343' => 'kissii_hospital' ,
         ];
     }
-<<<<<<< Updated upstream
-    // public function getFacility()
-    // {
 
-    //     //dd($facilities);
-    //     // foreach ($facilities as $facility)
-    //     // {
-    //     //     $facility_name =  $facility->name;
-    //     //     $mfl_code = $facility->mfl_code;
-    //     //     //dd($mfl_code, $facility_name);
-    //     //     return $facility_name;
-    //     // }
-
-
-    //     //dd($name);
-
-
-    //     return view('layouts.new_client', compact('facilities'));
-
-    // }
-
-=======
-    
->>>>>>> Stashed changes
     //allcustomers
     public function allclients()
     {
@@ -220,6 +158,7 @@ class PatientController extends Controller
         $users = DB::select('select * from patients where id = ?', [$id]);
         return view('layouts.transferin', ['users' => $users],compact('facilities','patient'));
     }
+
     public function editc(Request $request,$id) {
         $patient = $this->optionCounty();
         $facility = $this->optionFacility();
@@ -246,18 +185,7 @@ class PatientController extends Controller
 
 
       $pcreate = Patient::create([
-//            'fname',
-//            'mname',
-//            'lname',
-//            'nemis',
-//            'dob',
-//            'gender',s
-//            'phone',
-//            'id_no',
-//            'cccno',
-//            'residence',
-//            'county',
-//            'facility',
+
 
             'fname' => $request->input('fname'),
             'mname' => $request->input('mname'),
@@ -276,4 +204,26 @@ class PatientController extends Controller
         ]);
         return view('layouts.viewclient');
     }
+
+    public function getPatientWithCCC(Patient $patient, Request $req)
+    {
+                // dump($req->ccc_no);
+        $search_obj = $patient->where('CCC_Number', $req->ccc_no)->get();
+        // dump($search_obj);
+        return $search_obj;
+
+
+    }
+
+    public function getAllPatientsInFacility(Patient $facility, Request $req)
+    {
+        // dd($req->mfl_code);
+
+        $search_obj = $facility->where('facility_id', $req->mfl_code)->get();
+        return$search_obj;
+
+    }
+
+
+
 }

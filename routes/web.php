@@ -8,6 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientController;
 
+use Illuminate\Http\Request;
+
+use App\Models\Patient;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,3 +51,20 @@ Route::get('get_all_patients', [FacilityController::class, 'getPatient'] );
 Route::get('get_all_facilities', [FacilityController::class, 'getFacility'] );
 Route::post('add_patient', [FacilityController::class, 'addPatient'] );
 Route::get('/search', [PatientController::class, 'search']);
+
+Route::get('query_patient/{ccc_no}/', [PatientController::class, 'getPatientWithCCC']);
+Route::get('query_facilities_patients/{mfl_code}/', [PatientController::class, 'getAllPatientsInFacility']);
+
+
+// 36104-74927
+Route::get('/get_patient/{api_token}/{name}', function (Request $request) {
+
+    $patient = Patient::where('CCC_Number',$request->name)->get();
+
+    return $patient;
+    // response()->json([
+    //     // 'name' => $request->name,
+    //     $patient
+
+    // ]);
+})->middleware('api_token');
