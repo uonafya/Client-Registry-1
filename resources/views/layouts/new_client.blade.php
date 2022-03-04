@@ -67,7 +67,7 @@
             @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">n
+            <div class="form-group col-md-3">
                 <label for="mfl_code">MFL Code</label>
                 <input name="mfl_code" type="text" class="form-control" id="mfl_code" readonly >
             </div>

@@ -27,7 +27,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="nemis">Nemis</label>
-                    <input name="mname" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->Nemis}}" readonly>
+                    <input name="Nemis" type="text" class="form-control" id="Nemis" placeholder="Nemis" value="{{ $user->Nemis}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="dob">DOB</label>
@@ -58,11 +58,11 @@
 {{--                            <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>--}}
 {{--                        @endforeach--}}
 {{--                    </select>--}}
-                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->mname}}" readonly>
+                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->name}}" readonly>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="mfl_code">MFL Code</label>
-                    <input name="mfl_code1" type="text" class="form-control" id="mfl_code1" readonly >
+                    <input name="mfl_code1" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility_id}}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="ccc_number">CCC Number</label>
@@ -72,7 +72,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="national_id_number">Facility Transferring To</label>
-                    <select name="facility" id="facility" class="form-control" searchable>
+                    <select name="facility_id" id="facility" class="form-control" searchable>
                         <option selected disabled>Select facility</option>
                         @foreach ($facilities as $facilitykey => $facility)
 
@@ -143,6 +143,10 @@
             <div class="form-group">
                 <label for="residence">Residence</label>
                 <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St">
+            </div>
+            <div class="form-group">
+                <label for="residence">Date of Transfer</label>
+                <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer">
             </div>
             <center><button type="submit" class="btn btn-success">TransferIn  </button></center>
         </form>
