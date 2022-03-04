@@ -29,6 +29,7 @@ class Patient extends Migration
             $table->Boolean('void')->nullable() ;
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
+            $table->string('transferred_by')->nullable();
             $table->unsignedBigInteger('facility')->nullable();
             $table->string('residence')->nullable();
             $table->integer('transferin')->default(0);
