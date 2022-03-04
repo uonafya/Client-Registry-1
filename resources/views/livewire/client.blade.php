@@ -75,11 +75,11 @@
 
 
                 {{-- <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
-                    <select wire:model="searchColumns.product_category_id"
+                    <select wire:model="searchColumns.patient_id"
                             class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border border-gray-400 w-full py-1 focus:outline-none focus:border-blue-400">
                         <option value="">-- choose facility --</option>
-                        @foreach($categories as $id => $category)
-                            <option value="{{ $id }}">{{ $category }}</option>
+                        @foreach($patients as $id => $patient)
+                            <option value="{{ $id }}">{{ $patient }}</option>
                         @endforeach
                     </select>
                 </td> --}}

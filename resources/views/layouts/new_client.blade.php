@@ -149,11 +149,19 @@
             $('#CCC_Number').val($('#linked_facility').val() + ' - ' + $('#serial_number').val() );
             $('#mfl_code').val($('#linked_facility').val());
         });
+<<<<<<< HEAD
         $('#county, #residence, #sub_county, #ward, #village').on('change', function() {
 
         $('#residence').val($('#county').val() +',  '
                             + $('#sub_county').val()
                             +',  ' +$('#ward').val()
+=======
+        $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
+        
+        $('#Resident').val($('#county').val() +',  '
+                            + $('#sub_county').val() 
+                            +',  ' +$('#ward').val() 
+>>>>>>> 4bb0b0e7c3c85c9f2a763b1192de63118505ea2c
                             + ',  '+$('#village').val());
         });
 
