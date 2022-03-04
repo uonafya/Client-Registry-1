@@ -37,7 +37,11 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        Patient::create($request->only([
+
+//        $data = $request->all();
+//        dd($data);
+
+        Patient::create($request->all([
            'fname',
             'mname',
             'lname',
@@ -59,7 +63,8 @@ class PatientController extends Controller
     public function new_client(Patient $patient)
     {
         $patient = $this->optionCounty();
-        return view('layouts.new_client', compact('patient'));
+        $facility = $this->optionFacility();
+        return view('layouts.new_client', compact('patient','facility'));
 
     }
 
@@ -158,10 +163,10 @@ class PatientController extends Controller
     public function optionFacility()
     {
         return [
-            '12345' => 'migori_hospital',
-            '22341' => 'muranga_hospital',
-            '32342' => 'nairobi_hospital',
-            '62343' => 'kissii_hospital',
+            '1' => 'migori_hospital',
+            '1' => 'muranga_hospital',
+            '1' => 'nairobi_hospital',
+            '1  ' => 'kissii_hospital',
         ];
     }
 
@@ -198,7 +203,7 @@ class PatientController extends Controller
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
         DB::update('update patients set transferin = ?,enddate=? where id = ?',[$transferin,$enddate,$phone,$id]);
 
-        Patient::create($request->only([
+        Patient::create($request->all([
             'fname',
             'mname',
             'lname',
@@ -212,7 +217,6 @@ class PatientController extends Controller
             'county',
             'facility',
         ]));
-
         return view('viewclient');
     }
 }

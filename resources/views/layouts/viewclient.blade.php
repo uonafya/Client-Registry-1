@@ -26,7 +26,7 @@
                         <tr>
                         @foreach ($users as $user)
                             <tr style="margin-left: 20px;">
-                                <td>{{ $user->CCC_Number }}</td>
+                                <td>{{ $user->cccno }}</td>
                                 <td>{{ $user->fname}}</td>
                                 <td>{{ $user->mname}}</td>
                                 <td>{{ $user->lname }}</td>
