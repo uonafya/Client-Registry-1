@@ -36,6 +36,11 @@ Route::get('/merger_patient/{id}/{id_no}',[PatientController::class, 'merge']);
 
 Route::get('new_client', [PatientController::class, 'new_client']);
 
+Route::get('allclients', [PatientController::class, 'allclients']);
+
+Route::get('edit/{id}',[PatientController::class, 'showclient']);
+Route::post('edit/{id}',[PatientController::class, 'editc']);
+
 //Remote data source
 Route::get('get_all_patients', [FacilityController::class, 'getPatient'] );
 Route::get('get_all_facilities', [FacilityController::class, 'getFacility'] );
