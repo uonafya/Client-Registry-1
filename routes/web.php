@@ -38,6 +38,10 @@ Route::get('new_client', [PatientController::class, 'new_client']);
 
 Route::get('allclients', [PatientController::class, 'allclients']);
 
+Route::get('individual', [PatientController::class, 'individual']);
+
+Route::get('clientapprej', [PatientController::class, 'clientapprej']);
+
 Route::get('edit/{id}',[PatientController::class, 'showclient']);
 Route::post('edit/{id}',[PatientController::class, 'editc']);
 
@@ -46,3 +50,6 @@ Route::get('get_all_patients', [FacilityController::class, 'getPatient'] );
 Route::get('get_all_facilities', [FacilityController::class, 'getFacility'] );
 Route::post('add_patient', [FacilityController::class, 'addPatient'] );
 Route::get('/search', [PatientController::class, 'search']);
+
+
+

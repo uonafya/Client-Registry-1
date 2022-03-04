@@ -198,16 +198,46 @@ class PatientController extends Controller
 
     // }
 
+    //indidual
+    public function clientapprej()
+    {
+        $users = DB::table('patients')
+//            // ->where('void',1)
+            ->paginate(10);
 
 
+//        $users = DB::table('patients')
+//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+//            ->get();
 
-    //allcustomers
+        return view('layouts.incomingtransfers', ['users' => $users]);
+    }
+    //indidual
+    public function individual()
+    {
+        $users = DB::table('patients')
+//            // ->where('void',1)
+            ->paginate(10);
+
+
+//        $users = DB::table('patients')
+//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+//            ->get();
+
+        return view('layouts.viewindividual', ['users' => $users]);
+    }
+
+    //allclients
     public function allclients()
     {
         $users = DB::table('patients')
-            // ->where('void',1)
+//            // ->where('void',1)
             ->paginate(10);
 
+
+//        $users = DB::table('patients')
+//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+//            ->get();
 
         return view('layouts.viewclient', ['users' => $users]);
     }
@@ -219,70 +249,73 @@ class PatientController extends Controller
         $patient = $this->optionCounty();
 
 
-        $users = DB::table('patients')->where('patients.id',[$id])
-            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-            ->get();
+//        $users = DB::table('patients')->where('patients.id',[$id])
+//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+//            ->get();
 
 
-//
-//        $users = DB::select('select * from patients where id = ?', [$id]);
+
+        $users = DB::select('select * from patients where id = ?', [$id]);
 
         return view('layouts.transferin', ['users' => $users],compact('facilities','patient'));
     }
-    public function editc(Request $request,$id) {
+
+    public function editc(Request $request, $id)
+    {
         $fname = $request->input('fname');
         $mname = $request->input('mname');
         $lname = $request->input('lname');
-        $nemis = $request->input('nemis');
+        $Nemis = $request->input('Nemis');
         $dob = $request->input('dob');
         $gender = $request->input('gender');
         $phone = $request->input('phone');
-        $id_no= $request->input('id_no');
-        $facility_id= $request->input('facility_id');
-        $cccno= $request->input('cccno');
-        $residence= $request->input('residence');
-        $county= $request->input('county');
-        $enddate= $request->input('enddate');
-        $transferin = 1;
-        $transferred_by=Auth::user()->name;
+        $id_no = $request->input('id_no');
+        $facility_id = $request->input('facility_id');
+        $cccno = $request->input('cccno');
+        $residence = $request->input('residence');
+        $county = $request->input('county');
+        $enddate = $request->input('enddate');
+        $transferstatus = 1;
+        $transferred_by = Auth::user()->name;
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set enddate=? where id = ?',[$enddate,$id]);
-
-
-      $pcreate = Patient::create([
-//            'fname',
-//            'mname',
-//            'lname',
-//            'nemis',
-//            'dob',
-//            'gender',s
-//            'phone',
-//            'id_no',
-//            'cccno',
-//            'residence',
-//            'county',
-//            'facility',
-
-            'fname' => $request->input('fname'),
-            'mname' => $request->input('mname'),
-            'lname' => $request->input('lname'),
-            'Nemis' => $request->input('Nemis'),
-            'dob' => $request->input('dob'),
-            'gender' => $request->input('gender'),
-            'phone' => $request->input('phone'),
-            'id_no'=> $request->input('id_no'),
-            'facility_id'=> $request->input('facility_id'),
-            'CCC_Number'=> $request->input('CCC_Number'),
-            'Resident'=> $request->input('Resident'),
-            'county'=> $request->input('county'),
-            'transferin' => 1,
-            'transferred_by'=> Auth::user()->name,
-             'created_by'=>Auth::user()->name,
-          'updated_by'=>Auth::user()->name,
-
-        ]);
+        DB::update('update patients set facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+            [$facility_id, $transferstatus, $enddate, $enddate, $id]);
+//
+//
+//        $pcreate = Patient::create([
+////            'fname',
+////            'mname',
+////            'lname',
+////            'nemis',
+////            'dob',
+////            'gender',s
+////            'phone',
+////            'id_no',
+////            'cccno',
+////            'residence',
+////            'county',
+////            'facility',
+//
+//            'fname' => $request->input('fname'),
+//            'mname' => $request->input('mname'),
+//            'lname' => $request->input('lname'),
+//            'Nemis' => $request->input('Nemis'),
+//            'dob' => $request->input('dob'),
+//            'gender' => $request->input('gender'),
+//            'phone' => $request->input('phone'),
+//            'id_no' => $request->input('id_no'),
+//            'facility_id' => $request->input('facility_id'),
+//            'CCC_Number' => $request->input('CCC_Number'),
+//            'Resident' => $request->input('Resident'),
+//            'county' => $request->input('county'),
+//            'transferin' => 1,
+//            'transferred_by' => Auth::user()->name,
+//            'created_by' => Auth::user()->name,
+//            'updated_by' => Auth::user()->name,
+//
+//        ]);
         return view('layouts.viewclient');
     }
 }

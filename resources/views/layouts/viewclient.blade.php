@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     {{--                <a href="referrals" > <button class="btn-primary btn btn-sm" type="button" id="new_appointment"><i class="fa fa-plus"></i> New Referral</button></a>--}}
-                    @livewire('search')
+
                     <br>
                     <table class="table table-bordered" style="border-radius: 12px;">
                         <thead>
@@ -20,6 +20,7 @@
                             <th>DOB</th>
                             <th>ID No.</th>
                             <th>Facility</th>
+{{--                            <th>Transfer Status</th>--}}
                             <center><th colspan="2">Tools</th></center>
                         </tr>
                         </thead>
@@ -33,8 +34,19 @@
                                 <td>{{ $user->lname }}</td>
                                 <td>{{ $user->dob}}</td>
                                 <td>{{ $user->id_no}}</td>
-                                <td>{{$user->facility}}</td>
-                                <td><a href = 'edit/{{ $user->id }}'><button class="btn btn-success">TransferIn this Client</button></a></td>
+                                <td>{{$user->fname}}</td>
+{{--                                <td> <li style="margin-left: 9px;"> <strong >--}}
+{{--                                            <?php--}}
+{{--                                            $account = DB::table('patients')--}}
+{{--                                                ->where('transferin',0)--}}
+{{--                                                ->get();--}}
+{{--                                            if($account ==0):?>--}}
+{{--                                            <span class="badge badge-primary" style="font-size: 15px;">In Facility</span>--}}
+{{--                                            <?php elseif($account ==1):?>--}}
+{{--                                            <span class="badge badge-warning" style="font-size: 15px;">Transferred</span>--}}
+{{--                                            <?php endif ?>--}}
+{{--                                        </strong></li></td>--}}
+                                <td><a href = 'edit/{{ $user->id }}'><button class="btn btn-success">Initiate Transfer</button></a></td>
                                 @endforeach
                             </tr>
                     </table>

@@ -6,7 +6,7 @@
         <form  action = "/edit/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
             @csrf
             <div class="panel-heading">
-                <center style="font-weight: bold"><h2>Client TransferIn</h2></center>
+                <center style="font-weight: bold"><h2>Client Transfer</h2></center>
             </div>
             <hr><br>
             <div class="form-row">
@@ -58,7 +58,7 @@
 {{--                            <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>--}}
 {{--                        @endforeach--}}
 {{--                    </select>--}}
-                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->name}}" readonly>
+                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->fname}}" readonly>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="mfl_code">MFL Code</label>
@@ -145,10 +145,10 @@
                 <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St">
             </div>
             <div class="form-group">
-                <label for="residence">Date of Transfer</label>
+                <label for="residence">Date of Initiation</label>
                 <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer">
             </div>
-            <center><button type="submit" class="btn btn-success">TransferIn  </button></center>
+            <center><button type="submit" class="btn btn-success">Initiate Transfer</button></center>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
