@@ -61,6 +61,11 @@ class PatientController extends Controller
         return view('layouts.new_client', compact('patient'));
         
     }
+    public function search()
+    {
+        return view('layouts.search');
+        
+    }
 
     /**
      * Display the specified resource.

@@ -34,6 +34,7 @@ class Patient extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
             
+            $table->foreignId('patient_category_id')->constrained();
             $table->foreign('Link_facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
             
         });
