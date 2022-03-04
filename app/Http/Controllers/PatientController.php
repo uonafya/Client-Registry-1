@@ -216,15 +216,20 @@ class PatientController extends Controller
     {
         $data = Http::get('http://localhost:3000/facility');
         $facilities = json_decode($data->getBody()->getContents());
-        $facility = (new \App\Models\Facility)->patient();
+        $patient = $this->optionCounty();
 
-        $users = DB::select('select * from patients where id = ?', [$id]);
-        return view('layouts.transferin', ['users' => $users],compact('facilities','facility'));
+
+        $users = DB::table('patients')->where('patients.id',[$id])
+            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->get();
+
+
+//
+//        $users = DB::select('select * from patients where id = ?', [$id]);
+
+        return view('layouts.transferin', ['users' => $users],compact('facilities','patient'));
     }
     public function editc(Request $request,$id) {
-        $patient = $this->optionCounty();
-        $facility = $this->optionFacility();
-
         $fname = $request->input('fname');
         $mname = $request->input('mname');
         $lname = $request->input('lname');
@@ -233,7 +238,7 @@ class PatientController extends Controller
         $gender = $request->input('gender');
         $phone = $request->input('phone');
         $id_no= $request->input('id_no');
-        $facility= $request->input('facility');
+        $facility_id= $request->input('facility_id');
         $cccno= $request->input('cccno');
         $residence= $request->input('residence');
         $county= $request->input('county');
@@ -263,18 +268,19 @@ class PatientController extends Controller
             'fname' => $request->input('fname'),
             'mname' => $request->input('mname'),
             'lname' => $request->input('lname'),
-            'nemis' => $request->input('nemis'),
+            'Nemis' => $request->input('Nemis'),
             'dob' => $request->input('dob'),
             'gender' => $request->input('gender'),
             'phone' => $request->input('phone'),
             'id_no'=> $request->input('id_no'),
-            'facility'=> $request->input('facility'),
+            'facility_id'=> $request->input('facility_id'),
             'CCC_Number'=> $request->input('CCC_Number'),
             'Resident'=> $request->input('Resident'),
             'county'=> $request->input('county'),
             'transferin' => 1,
             'transferred_by'=> Auth::user()->name,
              'created_by'=>Auth::user()->name,
+          'updated_by'=>Auth::user()->name,
 
         ]);
         return view('layouts.viewclient');
