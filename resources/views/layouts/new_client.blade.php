@@ -146,12 +146,12 @@
 <script type="text/javascript">
     $(document).ready(function($){
         $('#mfl_code, #linked_facility, #serial_number').on('change', function() {
-            $('#ccc_number').val($('#linked_facility').val() + ' - ' + $('#serial_number').val() );
+            $('#CCC_Number').val($('#linked_facility').val() + ' - ' + $('#serial_number').val() );
             $('#mfl_code').val($('#linked_facility').val());
         });
-        $('#county, #residence, #sub_county, #ward, #village').on('change', function() {
+        $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
         
-        $('#residence').val($('#county').val() +',  '
+        $('#Resident').val($('#county').val() +',  '
                             + $('#sub_county').val() 
                             +',  ' +$('#ward').val() 
                             + ',  '+$('#village').val());
