@@ -4,10 +4,10 @@
     
     <li class="user-header bg-primary">
 
-        <p>
+        {{-- <p>
             {{ Auth::user()->name }}
             <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
-        </p>
+        </p> --}}
     </li>
     
 </a>

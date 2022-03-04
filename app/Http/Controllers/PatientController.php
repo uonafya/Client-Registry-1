@@ -20,6 +20,10 @@ class PatientController extends Controller
     {
         //
     }
+    public function search()
+    {
+        return view('search');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -170,10 +174,6 @@ class PatientController extends Controller
             '62343' => 'kissii_hospital' , 
         ];
     }
-<<<<<<< HEAD
-    
-    
-=======
 
     //allcustomers
     public function allclients()
@@ -190,7 +190,7 @@ class PatientController extends Controller
     {
 
         $users = DB::select('select * from patients where id = ?', [$id]);
-        return $this->belongsTo('facilites', 'facilities')->view('layouts.transferin', ['users' => $users]);
+        return view('layouts.transferin', ['users' => $users]);
     }
     public function editc(Request $request,$id) {
         $patient = $this->optionCounty();
@@ -248,5 +248,4 @@ class PatientController extends Controller
         ]);
         return view('layouts.viewclient');
     }
->>>>>>> d9b50a945195f12487e855b9380b9f29c6b507ec
 }
