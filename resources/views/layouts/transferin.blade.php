@@ -66,7 +66,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="ccc_number">CCC Number</label>
-                    <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly>
+                    <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly value="{{$user->CCC_Number}}">
                 </div>
             </div>
             <div class="form-row">

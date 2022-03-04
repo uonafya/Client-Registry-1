@@ -269,6 +269,8 @@ class PatientController extends Controller
             'county'=> $request->input('county'),
             'transferin' => 1,
             'transferred_by'=> Auth::user()->name,
+             'created_by'=>Auth::user()->name,
+
         ]);
         return view('layouts.viewclient');
     }
