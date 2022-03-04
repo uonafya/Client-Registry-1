@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Facility;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Patient;
@@ -56,6 +57,7 @@ class PatientController extends Controller
             'phone',
             'id_no',
             'CCC_Number',
+            'facility_id',
             'Nemis',
             'Resident',
          ]));
@@ -214,11 +216,10 @@ class PatientController extends Controller
     {
         $data = Http::get('http://localhost:3000/facility');
         $facilities = json_decode($data->getBody()->getContents());
-        $patient = $this->optionCounty();
-        $facility = $this->optionFacility();
+        $facility = (new \App\Models\Facility)->patient();
 
         $users = DB::select('select * from patients where id = ?', [$id]);
-        return view('layouts.transferin', ['users' => $users],compact('facilities','patient'));
+        return view('layouts.transferin', ['users' => $users],compact('facilities','facility'));
     }
     public function editc(Request $request,$id) {
         $patient = $this->optionCounty();

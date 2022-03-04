@@ -56,18 +56,18 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="facility">Facility</label>
-                <select name="facility" id="facility" class="form-control" searchable>
+                <select name="facility_id" id="facility" class="form-control" searchable>
                     <option selected disabled>Select facility</option>
                     {{-- <option value='Facility1'>Facility 1</option>
                     <option value='Facility2'>Facility 2</option> --}}
 
                     @foreach ($facilities as $facilitykey => $facility)
 
-                    <option value="{{ $facilitykey->id }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>
+                    <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>
             @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3">n
                 <label for="mfl_code">MFL Code</label>
                 <input name="mfl_code" type="text" class="form-control" id="mfl_code" readonly >
             </div>
