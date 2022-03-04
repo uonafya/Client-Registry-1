@@ -45,3 +45,4 @@ Route::post('edit/{id}',[PatientController::class, 'editc']);
 Route::get('get_all_patients', [FacilityController::class, 'getPatient'] );
 Route::get('get_all_facilities', [FacilityController::class, 'getFacility'] );
 Route::post('add_patient', [FacilityController::class, 'addPatient'] );
+Route::get('/search', [PatientController::class, 'search']);
