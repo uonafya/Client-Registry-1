@@ -20,18 +20,18 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="lname">Last Name</label>
-                    <input name="lname" type="text" class="form-control" id="lname" placeholder="Last name" value="{{ $user->lname}}" readonly>
+                    <input name="lname" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->lname}}" readonly>
                 </div>
 
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="nemis">Nemis</label>
-                    <input name="Nemis" type="text" class="form-control" id="nemis" placeholder="Nemis" value="{{ $user->Nemis}}" readonly>
+                    <input name="mname" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->Nemis}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="dob">DOB</label>
-                    <input name="dob" type="date" class="form-control" id="dob" value="{{ $user->dob}}" readonly>
+                    <input name="dob" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->dob}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="gender">Gender</label>
@@ -41,60 +41,127 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="phone_number">Phone Number</label>
-                    <input name="phone" type="number" class="form-control" id="phone_number" placeholder="Phone Number" value="{{ $user->phone}}" readonly>
+                    <input name="phone" type="text" class="form-control" id="gender" value="{{ $user->phone}}" readonly>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="national_id_number">National Id Number</label>
-                    <input name="id_no" type="number" class="form-control" id="national_id_number" placeholder="National Id Number" value="{{ $user->id_no}}" readonly>
+                    <input name="id_no" type="text" class="form-control" id="gender" value="{{ $user->id_no}}" readonly>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4">
-                        <label for="national_id_number">Current Facility</label>
-                        <input name="facilitydisp" type="text" class="form-control" id="facility" placeholder="National Id Number" value="{{ $user->facility}}" readonly>
-                    </div>
-                <div class="form-group col-md-4">
-                    <label for="mfl_code">MFL Code</label>
-                    <input name="mfl_code" type="text" class="form-control" id="mfl_code"  readonly>
+                <div class="form-group col-md-3">
+                    <label for="facility">Current Facility</label>
+{{--                    <select name="facility" id="linked_facility" class="form-control" searchable>--}}
+{{--                        <option selected disabled>Select facility</option>--}}
+{{--                        @foreach ($facilities as $facilitykey => $facility)--}}
+
+{{--                            <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->mname}}" readonly>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="serial_number"> Client CCC Number</label>
-                    <input name="CCC_Number" type="varchar" class="form-control" id="serial_number" placeholder="Serial Number" value="{{ $user->CCC_Number}}" readonly>
+                <div class="form-group col-md-3">
+                    <label for="mfl_code">MFL Code</label>
+                    <input name="mfl_code1" type="text" class="form-control" id="mfl_code1" readonly >
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="ccc_number">CCC Number</label>
+                    <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly value="{{$user->CCC_Number}}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="national_id_number">Facility Transferring To</label>
-                    <input name="facility" type="text" class="form-control" id="facility" placeholder="Facility Transferring To">
+                    <select name="facility" id="facility" class="form-control" searchable>
+                        <option selected disabled>Select facility</option>
+                        @foreach ($facilities as $facilitykey => $facility)
+
+                            <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="mfl_code">MFL Code</label>
-                    <input name="mfl_code" type="text" class="form-control" id="mfl_code"  readonly>
+                    <input name="mfl_code" type="number" class="form-control" id="mfl_code"  readonly>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="county">County</label>
+                    <select name="county" id="county" class="form-control">
+                        <option value="" selected disabled>Select County</option>
+                        @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
+
+                            <option value="{{ $countyOPtionsValue }}" >{{ $countyOPtionsValue }}</option>
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="sub_county">Sub County</label>
+                    <select name="sub_county" id="sub_county" class="form-control">
+                        <option value="" selected disabled>Select Sub County</option>
+                        @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
+
+                            <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="ward">Ward</label>
+                    <select name="ward" id="ward" class="form-control">
+                        <option value="" selected disabled>Select  Ward</option>
+                        @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
+
+                            <option value="{{ $countyOPtionsValue }}" >{{ $countyOPtionsValue }}</option>
+                        @endforeach
+
+                    </select>
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="village">Village</label>
+                    <select name="village" id="village" class="form-control">
+                        <option value="" selected disabled>Select Village</option>
+                        @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
+
+                            <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>
+                        @endforeach
+
+                    </select>
+
                 </div>
             </div>
             <div class="form-group">
                 <label for="residence">Residence</label>
-                <input name="Resident" type="text" class="form-control" id="residence" placeholder="1234 Main St" {{ $user->Resident}}>
+                <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St">
             </div>
-
-            <div class="form-row">
-{{--                <div class="form-group col-md-4">--}}
-{{--                    <label for="county">County</label>--}}
-{{--                    <select name="county" id="facility" class="form-control">--}}
-
-{{--                    </select>--}}
-
-{{--                    --}}{{-- <input name='county' type="text" class="form-control" id="county"> --}}
-{{--                </div>--}}
-                <div class="form-group col-md-4">
-                    <label for="date_of_transfer">Date Of Transfer</label>
-                    <input name="enddate" type="date" class="form-control" id="date_of_transfer">
-                </div>
-
-            </div>
-
             <center><button type="submit" class="btn btn-success">TransferIn  </button></center>
         </form>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        $(document).ready(function($){
+            $('#mfl_code, #facility, #serial_number').on('change', function() {
+                $('#mfl_code').val($('#facility').val());
+            });
+            $('#county, #residence, #sub_county, #ward, #village').on('change', function() {
+
+                $('#residence').val($('#county').val() +',  '
+                    + $('#sub_county').val()
+                    +',  ' +$('#ward').val()
+                    + ',  '+$('#village').val());
+            });
+
+        })
+    </script>
     @endforeach
 @endsection

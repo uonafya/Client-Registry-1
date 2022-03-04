@@ -13,7 +13,7 @@ use App\Helpers\Http;
 
 class PatientController extends Controller
 {
-    /**
+    /**S
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -34,7 +34,7 @@ class PatientController extends Controller
      */
     public function create(Patient $patient, Request $request)
     {
-       
+
 
     }
 
@@ -51,19 +51,19 @@ class PatientController extends Controller
             'fname',
             'mname',
             "lname",
-            'dob', 
+            'dob',
             'gender',
             'phone',
             'id_no',
-            'CCC_Number', 
-            'Nemis', 
+            'CCC_Number',
+            'Nemis',
             'Resident',
          ]));
-         
+
          return 'created';
-        
+
     }
-    
+
     public function new_client(Patient $patient)
     {
         $data = Http::get('http://localhost:3000/facility');
@@ -71,9 +71,9 @@ class PatientController extends Controller
 
         $patient = $this->optionCounty();
         //$this->getFacility();
-        
+
         return view('layouts.new_client', compact('patient', 'facilities'));
-        
+
     }
 
     /**
@@ -107,14 +107,14 @@ class PatientController extends Controller
      */
     public function update(Patient $patient, Request $req)
     {
-        // name="linked_facility"        
+        // name="linked_facility"
         // name="mfl_code"
         // serial_no
         // name="dot"
         // name="residence"
         // name='county'
-        
-        
+
+
         $data = request()->validate([
             "fname" => "required",
             "mname" => "required",
@@ -127,22 +127,22 @@ class PatientController extends Controller
             "Nemis" => '',
             "Resident" => 'required',
         ]);
-        
+
         $patient->where('id',$req->id)->update($data);
-        
+
         // $patient->update($data);
     }
-    
+
     public function merge(Request $reqs)
     {
       $patient = Patient::find($reqs->id);
       $patient_exists = Patient::where('ID_Number', $reqs->id_no);
-      
+
       if($patient_exists->exists())
       {
         dd($patient[0]);
       }
-      
+
     }
 
     /**
@@ -155,26 +155,27 @@ class PatientController extends Controller
     {
         //
     }
-    
+
     public function optionCounty()
     {
         return [
         1 =>'Nakuru',
          2 => 'uasingishu',
          3 => 'Nairobi',
-         4 => 'Migori'  
+         4 => 'Migori'
         ];
     }
-    
+
     public function optionFacility()
     {
         return [
             '12345' => 'migori_hospital' ,
             '22341' => 'muranga_hospital' ,
             '32342' => 'nairobi_hospital' ,
-            '62343' => 'kissii_hospital' , 
+            '62343' => 'kissii_hospital' ,
         ];
     }
+
     // public function getFacility()
     // {
 
@@ -189,12 +190,15 @@ class PatientController extends Controller
 
 
     //     //dd($name);
-        
-        
+
+
     //     return view('layouts.new_client', compact('facilities'));
-        
+
     // }
-    
+
+
+
+
     //allcustomers
     public function allclients()
     {
@@ -208,9 +212,13 @@ class PatientController extends Controller
 
     public function showclient($id)
     {
+        $data = Http::get('http://localhost:3000/facility');
+        $facilities = json_decode($data->getBody()->getContents());
+        $patient = $this->optionCounty();
+        $facility = $this->optionFacility();
 
         $users = DB::select('select * from patients where id = ?', [$id]);
-        return view('layouts.transferin', ['users' => $users]);
+        return view('layouts.transferin', ['users' => $users],compact('facilities','patient'));
     }
     public function editc(Request $request,$id) {
         $patient = $this->optionCounty();
@@ -265,6 +273,8 @@ class PatientController extends Controller
             'county'=> $request->input('county'),
             'transferin' => 1,
             'transferred_by'=> Auth::user()->name,
+             'created_by'=>Auth::user()->name,
+
         ]);
         return view('layouts.viewclient');
     }

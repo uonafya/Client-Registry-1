@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\facility;
+use App\Models\Facility;
 
 class Patient extends Model
 {
@@ -14,7 +14,7 @@ class Patient extends Model
 
     public function facility()
     {
-        $this->belongsTo(facility::class);
+       return $this->belongsTo(Facility::class);
     }
 
     public function scopeActive()

@@ -27,15 +27,15 @@ class Patient extends Migration
             $table->Boolean('void')->nullable() ;   
             $table->string('created_by')->nullable();   
             $table->string('updated_by')->nullable(); 
-            $table->string('date_updated')->nullable(); 
-            $table->string('date_created')->nullable();           
+            $table->date('date_updated')->nullable(); 
+            $table->date('date_created')->nullable();           
             $table->string('Resident')->nullable();   
             $table->string('county')->nullable();   
             $table->string('village')->nullable();
-            $table->string('Date_of_Transfer') ->nullable();         
+            $table->date('Date_of_Transfer') ->nullable();        
             
             $table->string('transferred_by')->nullable();
-            $table->unsignedBigInteger('facility')->nullable();
+            $table->unsignedBigInteger('facility_id')->nullable();
             $table->integer('transferin')->default(0);
             $table->string('enddate') ->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -43,7 +43,7 @@ class Patient extends Migration
             $table->timestamps();
             
             // $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onUpdate('cascade');
-            $table->foreign('facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('facility_id')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
             
         });
     }
