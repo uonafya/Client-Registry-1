@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacilityController;
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
+
 use App\Http\Controllers\PatientController;
 
 /*
@@ -51,5 +52,9 @@ Route::get('get_all_facilities', [FacilityController::class, 'getFacility'] );
 Route::post('add_patient', [FacilityController::class, 'addPatient'] );
 Route::get('/search', [PatientController::class, 'search']);
 
+<<<<<<< HEAD
 
 
+=======
+Route::get('mail/send', [MailController::class, 'send']);
+>>>>>>> 8fb96554117568b6b6e9d2a975a0f2ca365b20f2
