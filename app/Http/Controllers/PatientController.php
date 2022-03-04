@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use App\Helpers\Http;
+
 class PatientController extends Controller
 {
     /**
@@ -50,14 +52,12 @@ class PatientController extends Controller
             'mname',
             "lname",
             'dob', 
-            'gender', 
-            'Geolocation',
+            'gender',
             'phone',
             'id_no',
             'CCC_Number', 
-            'nemis', 
+            'Nemis', 
             'Resident',
-            'Date_of_Transfer' 
          ]));
          
          return 'created';
@@ -66,10 +66,13 @@ class PatientController extends Controller
     
     public function new_client(Patient $patient)
     {
+        $data = Http::get('http://localhost:3000/facility');
+        $facilities = json_decode($data->getBody()->getContents());
+
         $patient = $this->optionCounty();
-        $facility = $this->optionFacility();
+        //$this->getFacility();
         
-        return view('layouts.new_client', compact('patient', 'facility'));
+        return view('layouts.new_client', compact('patient', 'facilities'));
         
     }
 
@@ -118,13 +121,11 @@ class PatientController extends Controller
             "lname" => "required",
             "dob" =>"required",
             "gender" => 'required',
-            "Geolocation" => 'required',
             "Phone" => "required",
             "id_no" => "required",
             "CCC_Number" => "required",
-            "nemis" => '',
+            "Nemis" => '',
             "Resident" => 'required',
-            "Date_of_Transfer" =>  "required"
         ]);
         
         $patient->where('id',$req->id)->update($data);
@@ -174,12 +175,31 @@ class PatientController extends Controller
             '62343' => 'kissii_hospital' , 
         ];
     }
+    // public function getFacility()
+    // {
 
+    //     //dd($facilities);
+    //     // foreach ($facilities as $facility)
+    //     // {
+    //     //     $facility_name =  $facility->name;
+    //     //     $mfl_code = $facility->mfl_code;
+    //     //     //dd($mfl_code, $facility_name);
+    //     //     return $facility_name;
+    //     // }
+
+
+    //     //dd($name);
+        
+        
+    //     return view('layouts.new_client', compact('facilities'));
+        
+    // }
+    
     //allcustomers
     public function allclients()
     {
         $users = DB::table('patients')
-            ->where('void',1)
+            // ->where('void',1)
             ->paginate(10);
 
 
@@ -231,20 +251,20 @@ class PatientController extends Controller
 //            'county',
 //            'facility',
 
-        'fname' => $request->input('fname'),
-        'mname' => $request->input('mname'),
-        'lname' => $request->input('lname'),
-        'nemis' => $request->input('nemis'),
-        'dob' => $request->input('dob'),
-        'gender' => $request->input('gender'),
-        'phone' => $request->input('phone'),
-        'id_no'=> $request->input('id_no'),
-        'facility'=> $request->input('facility'),
-        'cccno'=> $request->input('cccno'),
-        'residence'=> $request->input('residence'),
-        'county'=> $request->input('county'),
-        'transferin' => 1,
-        'transferred_by'=> Auth::user()->name,
+            'fname' => $request->input('fname'),
+            'mname' => $request->input('mname'),
+            'lname' => $request->input('lname'),
+            'nemis' => $request->input('nemis'),
+            'dob' => $request->input('dob'),
+            'gender' => $request->input('gender'),
+            'phone' => $request->input('phone'),
+            'id_no'=> $request->input('id_no'),
+            'facility'=> $request->input('facility'),
+            'CCC_Number'=> $request->input('CCC_Number'),
+            'Resident'=> $request->input('Resident'),
+            'county'=> $request->input('county'),
+            'transferin' => 1,
+            'transferred_by'=> Auth::user()->name,
         ]);
         return view('layouts.viewclient');
     }

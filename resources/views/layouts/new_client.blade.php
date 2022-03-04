@@ -28,7 +28,7 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="nemis">Nemis</label>
-                <input name="nemis" type="nemis" class="form-control" id="nemis" placeholder="Nemis">
+                <input name="Nemis" type="text" class="form-control" id="Nemis" placeholder="Nemis">
             </div>
             <div class="form-group col-md-4">
                 <label for="dob">DOB</label>
@@ -58,8 +58,13 @@
                 <label for="facility">Facility</label>
                 <select name="linked_facility" id="linked_facility" class="form-control" searchable>
                     <option selected disabled>Select facility</option>
-                    <option value='Facility1'>Facility 1</option>
-                    <option value='Facility2'>Facility 2</option>
+                    {{-- <option value='Facility1'>Facility 1</option>
+                    <option value='Facility2'>Facility 2</option> --}}
+
+                    @foreach ($facilities as $facilitykey => $facility)
+                        
+                    <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>                                
+            @endforeach
                 </select>
             </div>
             <div class="form-group col-md-3">
@@ -72,7 +77,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="ccc_number">CCC Number</label>
-                <input name="ccc_number" type="text" class="form-control" id="ccc_number" readonly>
+                <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly>
             </div>
         </div>
        
@@ -132,7 +137,7 @@
         </div>
         <div class="form-group">
             <label for="residence">Residence</label>
-            <input name="residence" type="text" class="form-control" id="residence" placeholder="1234 Main St">
+            <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St">
         </div>
         <button type="submit" class="btn btn-success">Save</button>
     </form>

@@ -27,7 +27,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="nemis">Nemis</label>
-                    <input name="nemis" type="text" class="form-control" id="nemis" placeholder="Nemis" value="{{ $user->nemis}}" readonly>
+                    <input name="Nemis" type="text" class="form-control" id="nemis" placeholder="Nemis" value="{{ $user->Nemis}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="dob">DOB</label>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="serial_number"> Client CCC Number</label>
-                    <input name="cccno" type="varchar" class="form-control" id="serial_number" placeholder="Serial Number" value="{{ $user->cccno}}" readonly>
+                    <input name="CCC_Number" type="varchar" class="form-control" id="serial_number" placeholder="Serial Number" value="{{ $user->CCC_Number}}" readonly>
                 </div>
             </div>
             <div class="form-row">
@@ -74,7 +74,7 @@
             </div>
             <div class="form-group">
                 <label for="residence">Residence</label>
-                <input name="residence" type="text" class="form-control" id="residence" placeholder="1234 Main St" {{ $user->residence}}>
+                <input name="Resident" type="text" class="form-control" id="residence" placeholder="1234 Main St" {{ $user->Resident}}>
             </div>
 
             <div class="form-row">
