@@ -6,11 +6,6 @@
     <div>
         <br>
     </div>
-    <style>
-        table{
-            background-color: white;
-        }
-    </style>
     <table class="table min-w-full mb-4">
         <thead>
         <tr>

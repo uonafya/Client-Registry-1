@@ -15,10 +15,14 @@ class Facility extends Migration
     {
         Schema::create('facilities', function (Blueprint $table) {
             $table->id();
-            $table->string('facility_name');
-            $table->string('MFL_CODE')->unique();
+            $table->string('name');
+            $table->string('mfl_code')->unique()->nullable(); 
+            $table->string('county'); 
+            $table->string('sub_county'); 
+            $table->string('ward'); 
+            $table->string('facility_type'); 
             $table->timestamps();
-
+            
         });
     }
 

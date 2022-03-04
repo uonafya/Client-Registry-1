@@ -18,32 +18,33 @@ class Patient extends Migration
             $table->string('fname');
             $table->string('mname');
             $table->string('lname');
-            $table->string('dob') ;
-            $table->string('gender')->nullable();
-            $table->string('Geolocation')->nullable() ;
-            $table->string('phone') ;
-            $table->string('id_no') ;
-            $table->string('cccno')->nullable() ;
-            $table->string('nemis') ;
-            $table->Boolean('void')->nullable() ;
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->string('dob') ;            
+            $table->string('gender')->nullable(); 
+            $table->string('phone')->nullable();   
+            $table->string('id_no')->nullable();   
+            $table->string('CCC_Number')->nullable() ;   
+            $table->string('Nemis')->nullable();   
+            $table->Boolean('void')->nullable() ;   
+            $table->string('created_by')->nullable();   
+            $table->string('updated_by')->nullable(); 
+            $table->string('date_updated')->nullable(); 
+            $table->string('date_created')->nullable();           
+            $table->string('Resident')->nullable();   
+            $table->string('county')->nullable();   
+            $table->string('village')->nullable();
+            $table->string('Date_of_Transfer') ->nullable();         
+            
+            $table->string('transferred_by')->nullable();
             $table->unsignedBigInteger('facility')->nullable();
-            $table->string('Resident')->nullable();
             $table->integer('transferin')->default(0);
             $table->string('enddate') ->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            // $table->unsignedBigInteger('patient_category_id');
             $table->timestamps();
-<<<<<<< HEAD
             
-            $table->foreignId('patient_category_id')->constrained();
-            $table->foreign('Link_facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
-            
-=======
-
+            // $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onUpdate('cascade');
             $table->foreign('facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
-
->>>>>>> 15c61e32c8d64f74ac6e4be3cfd960f63309f115
+            
         });
     }
 

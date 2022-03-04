@@ -65,7 +65,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="national_id_number">Facility Transferring To</label>
-                    <input name="facility" type="text" class="form-control" id="facility" placeholder="National Id Number" value="11" readonly>
+                    <input name="facility" type="text" class="form-control" id="facility" placeholder="Facility Transferring To">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="mfl_code">MFL Code</label>
@@ -74,18 +74,18 @@
             </div>
             <div class="form-group">
                 <label for="residence">Residence</label>
-                <input name="residence" type="text" class="form-control" id="residence" placeholder="1234 Main St" {{ $user->fname}}>
+                <input name="residence" type="text" class="form-control" id="residence" placeholder="1234 Main St" {{ $user->residence}}>
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="county">County</label>
-                    <select name="county" id="facility" class="form-control">
+{{--                <div class="form-group col-md-4">--}}
+{{--                    <label for="county">County</label>--}}
+{{--                    <select name="county" id="facility" class="form-control">--}}
 
-                    </select>
+{{--                    </select>--}}
 
-                    {{-- <input name='county' type="text" class="form-control" id="county"> --}}
-                </div>
+{{--                    --}}{{-- <input name='county' type="text" class="form-control" id="county"> --}}
+{{--                </div>--}}
                 <div class="form-group col-md-4">
                     <label for="date_of_transfer">Date Of Transfer</label>
                     <input name="enddate" type="date" class="form-control" id="date_of_transfer">

@@ -11,11 +11,16 @@ class Patient extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    
+
     public function facility()
     {
         $this->belongsTo(facility::class);
-    }    
+    }
 
-    
+    public function scopeActive()
+    {
+        return where('void',1);
+    }
+
+
 }
