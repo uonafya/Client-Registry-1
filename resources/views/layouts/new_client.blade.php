@@ -54,10 +54,10 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="facility">Facility</label>
-                <select name="linked_facility" id="facility" class="form-control">
+                <select name="facility" id="facility" class="form-control">
                     <option selected disabled>Select facility</option>
-                    <option value='Facility1'>Facility 1</option>
-                    <option value='facility2'>Facility 2</option>
+                    <option value='12345'>Facility 1</option>
+                    <option value='54321'>Facility 2</option>
                 </select>
             </div>
             <div class="form-group col-md-4">
@@ -79,12 +79,12 @@
                 <label for="county">County</label>
                     <select name="linked_facility" id="facility" class="form-control">
                 @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-                        
-                        <option value="{{ $countyOPtionsValue }}" {{ $countyOPtionsValue  ? 'selected' : ''}} >{{ $countyOPtionsValue }}</option>                                
+
+                        <option value="{{ $countyOPtionsValue }}" {{ $countyOPtionsValue  ? 'selected' : ''}} >{{ $countyOPtionsValue }}</option>
                 @endforeach
-                        
+
                     </select>
-            
+
                 {{-- <input name='county' type="text" class="form-control" id="county"> --}}
             </div>
 

@@ -16,9 +16,9 @@ class Facility extends Migration
         Schema::create('facilities', function (Blueprint $table) {
             $table->id();
             $table->string('facility_name');
-            $table->string('MFL_CODE')->unique(); 
+            $table->string('MFL_CODE')->unique();
             $table->timestamps();
-            
+
         });
     }
 
