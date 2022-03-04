@@ -14,30 +14,27 @@
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                 <select class="form-control search-slt">
                                     <option>Choose Criteria</option>
-                                    <!--                               4 stars and up -->
                                     <option>
                                         <a>
-                                            <p>Id Number</p>
-                                        </a href="#">
-                                    </option>
-                                    <!--                               3 stars and up -->
-                                    <option>
-                                        <a>
-                                            <p>&#9733; &#9733; &#9733; &#x2606; &#x2606;</p>
-                                        </a href="#">
-                                    </option>
-                                    <!--                               2 stars and up -->
-                                    <option>
-                                        <a>
-                                            <p>&#9733; &#9733; &#x2606; &#x2606; &#x2606;</p>
+                                            <p>Client Name</p>
                                         </a href="#">
                                     </option>
                                     <!--                               1 star and up -->
                                     <option>
                                         <a>
-                                            <p>&#9733; &#x2606; &#x2606; &#x2606; &#x2606;</p>
+                                            <p>Facility</p>
                                         </a href="#">
                                     </option>
+                                    <option>
+                                        <a>
+                                            <p>Id Number</p>
+                                        </a href="#">
+                                    </option>
+                                    <option>
+                                        <a>
+                                            <p>CCC Number</p>
+                                        </a href="#">
+                                    </option>                                
                                 </select>
                             </div>
                             &nbsp;
