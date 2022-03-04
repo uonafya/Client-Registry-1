@@ -33,17 +33,12 @@ class Patient extends Migration
             $table->integer('transferin')->default(0);
             $table->string('enddate') ->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->unsignedBigInteger('patient_category_id');
             $table->timestamps();
-<<<<<<< HEAD
             
-            $table->foreignId('patient_category_id')->constrained();
-            $table->foreign('Link_facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
-            
-=======
-
+            $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onUpdate('cascade');
             $table->foreign('facility')->references('id')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
-
->>>>>>> 15c61e32c8d64f74ac6e4be3cfd960f63309f115
+            
         });
     }
 
