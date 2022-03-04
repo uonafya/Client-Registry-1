@@ -13,7 +13,7 @@ use App\Helpers\Http;
 
 class PatientController extends Controller
 {
-    /**
+    /**S
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -175,6 +175,7 @@ class PatientController extends Controller
             '62343' => 'kissii_hospital' ,
         ];
     }
+<<<<<<< Updated upstream
     // public function getFacility()
     // {
 
@@ -195,6 +196,9 @@ class PatientController extends Controller
 
     // }
 
+=======
+    
+>>>>>>> Stashed changes
     //allcustomers
     public function allclients()
     {

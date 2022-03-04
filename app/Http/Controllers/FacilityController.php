@@ -9,6 +9,7 @@ use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
 
 use App\Helpers\Http;
+use Illuminate\Support\Carbon;
 
 class FacilityController extends Controller
 {
@@ -90,6 +91,8 @@ class FacilityController extends Controller
     
     public function pullUpdates()
     {
+        
+        
         //check the last date in local
         $data = Http::get('http://localhost:3000/patients');
         $patients = json_decode($data->getBody()->getContents());
@@ -98,16 +101,20 @@ class FacilityController extends Controller
         $pt = Patient::orderBy('id','DESC')->first();
         $local_instance__date = $pt->date_created;
         
-        $date2 = Carbon::createFromFormat('m/d/Y H:i:s', $local_instance__date);
+        $date2 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2020 10:20:00');
         
-        foreach($patients as $patient)
-        {
+        // foreach($patients as $patient)
+        // {
             // dump($patient->date_created);
-            $date1 = Carbon::createFromFormat('m/d/Y H:i:s', $patient->date_created);
-            $result = $date1->eq($date2);
-            var_dump($result);
+            $date1 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2020 10:20:00');
             
-        }
+            $result = $date1->eq($date2);
+            if($result){
+            //    event(new )
+            }
+            // $this->getPatient();
+           
+        // }
         
         //compare with last date in remote
         
