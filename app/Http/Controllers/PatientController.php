@@ -175,7 +175,7 @@ class PatientController extends Controller
             '62343' => 'kissii_hospital' ,
         ];
     }
-<<<<<<< Updated upstream
+
     // public function getFacility()
     // {
 
@@ -196,9 +196,9 @@ class PatientController extends Controller
 
     // }
 
-=======
-    
->>>>>>> Stashed changes
+
+
+
     //allcustomers
     public function allclients()
     {
