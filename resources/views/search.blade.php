@@ -1,12 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card">
-        <img src="/public/img/log.svg" alt="National Logo"/>
+<div style="width:auto%; margin-left:auto; margin-right:auto;" class="align-middle">
+    <div>
+        <img class="logo" style="display: block; margin-left:auto; margin-right:auto; width:30% background-color:whitesmoke;" src="img/Kenya-logo.webp" alt="National Logo"/>
     </div>
-    <div style="width:auto%; margin:30%; padding-left:8%" class="align-middle">
+    <br>
+    <br>
         <section class="search-sec">
             <div class="container">
-                <form action="#" method="post" novalidate="novalidate">
+                <form action="#" style="padding-left:25%" method="post" novalidate="novalidate">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
@@ -31,7 +33,7 @@
                                         </option>
                                         <option>
                                             <a>
-                                                <p>Id Number</p>
+                                                <p>National ID Number</p>
                                             </a href="#">
                                         </option>
                                         <option>
