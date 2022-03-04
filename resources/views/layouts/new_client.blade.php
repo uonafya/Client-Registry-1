@@ -52,110 +52,50 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="facility">Facility</label>
-                <select name="linked_facility" id="linked_facility" class="form-control" searchable>
-                    <option selected disabled>Select facility</option>
-                    <option value='Facility1'>Facility 1</option>
-                    <option value='Facility2'>Facility 2</option>
+            <div class="form-group col-md-4">
+                <label for="facility">Select Facility</label>
+                <select name="facility" id="facility" class="form-control">
+                    @foreach ($facility as $countyOPtionsKey => $countyOPtionsValue)
+
+                        <option value='{{ $countyOPtionsKey }}'>{{ $countyOPtionsValue }}</option>
+                    @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <label for="mfl_code">MFL Code</label>
-                <input name="mfl_code" type="text" class="form-control" id="mfl_code" readonly >
+                <input name="mfl_code" type="text" class="form-control" id="mfl_code" value='' readonly>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <label for="serial_number">Serial Number</label>
                 <input name="serial_no" type="number" class="form-control" id="serial_number" placeholder="Serial Number">
-            </div>
-            <div class="form-group col-md-3">
-                <label for="ccc_number">CCC Number</label>
-                <input name="ccc_number" type="text" class="form-control" id="ccc_number" readonly>
-            </div>
-        </div>
-       
-
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="county">County</label>
-                    <select name="county" id="county" class="form-control">
-                        <option value="" selected disabled>Select County</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-                        
-                        <option value="{{ $countyOPtionsValue }}" >{{ $countyOPtionsValue }}</option>                                
-                @endforeach
-
-                    </select>
-            
-            </div>
-
-            <div class="form-group col-md-3">
-                <label for="sub_county">Sub County</label>
-                    <select name="sub_county" id="sub_county" class="form-control">
-                        <option value="" selected disabled>Select Sub County</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-                        
-                        <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>                                
-                @endforeach
-                        
-                    </select>
-            
-            </div>
-
-            <div class="form-group col-md-3">
-                <label for="ward">Ward</label>
-                    <select name="ward" id="ward" class="form-control">
-                        <option value="" selected disabled>Select  Ward</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-                        
-                        <option value="{{ $countyOPtionsValue }}" >{{ $countyOPtionsValue }}</option>                                
-                @endforeach
-                        
-                    </select>
-            
-            </div>
-
-            <div class="form-group col-md-3">
-                <label for="village">Village</label>
-                    <select name="village" id="village" class="form-control">
-                        <option value="" selected disabled>Select Village</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-                        
-                        <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>                                
-                @endforeach
-                        
-                    </select>
-            
             </div>
         </div>
         <div class="form-group">
             <label for="residence">Residence</label>
             <input name="residence" type="text" class="form-control" id="residence" placeholder="1234 Main St">
         </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="county">County</label>
+                    <select name="county" id="facility" class="form-control">
+                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
+
+                        <option value="1" {{ $countyOPtionsValue  ? 'selected' : ''}} >{{ $countyOPtionsValue }}</option>
+                @endforeach
+
+                    </select>
+
+                {{-- <input name='county' type="text" class="form-control" id="county"> --}}
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="date_of_transfer">Date Of Transfer</label>
+                <input name="dot" type="date" class="form-control" id="date_of_transfer">
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-success">Save</button>
     </form>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript">
-
-    $(document).ready(function($){
-
-        $('#mfl_code, #linked_facility, #serial_number').on('change', function() {
-            $('#ccc_number').val($('#linked_facility').val() + ' - ' + $('#serial_number').val() );
-            $('#mfl_code').val($('#linked_facility').val());
-        });
-
-        $('#county, #residence, #sub_county, #ward, #village').on('change', function() {
-        
-        $('#residence').val($('#county').val() +',  '
-                            + $('#sub_county').val() 
-                            +',  ' +$('#ward').val() 
-                            + ',  '+$('#village').val());
-
-        });
-      
-       
-  
-    })
-</script>
 @endsection
