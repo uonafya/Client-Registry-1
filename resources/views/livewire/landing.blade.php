@@ -15,16 +15,32 @@
         <thead>
         <tr>
             <th wire:click="sortByColumn('name')" class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">
-                Patient Name
-                @if ($sortColumn == 'name')
+                Patient First Name
+                @if ($sortColumn == 'fname')
+                    <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
+                @else
+                    <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
+                @endif
+            </th>
+            <th wire:click="sortByColumn('name')" class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">
+                Patient Middle Name
+                @if ($sortColumn == 'mname')
+                    <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
+                @else
+                    <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
+                @endif
+            </th>
+            <th wire:click="sortByColumn('name')" class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">
+                Patient Last Name
+                @if ($sortColumn == 'lname')
                     <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
                 @else
                     <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
                 @endif
             </th>
             <th wire:click="sortByColumn('price')" class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">
-                Dates
-                @if ($sortColumn == 'price')
+                DOB
+                @if ($sortColumn == 'dob')
                     <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
                 @else
                     <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
@@ -32,7 +48,7 @@
             </th>
             <th wire:click="sortByColumn('description')" class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">
                 Residency
-                @if ($sortColumn == 'description')
+                @if ($sortColumn == 'residency')
                     <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
                 @else
                     <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
@@ -40,7 +56,7 @@
             </th>
             <th wire:click="sortByColumn('category_name')" class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 tracking-wider">
                 Facility
-                @if ($sortColumn == 'category_name')
+                @if ($sortColumn == 'facility')
                     <i class="fa fa-fw fa-sort-{{ $sortDirection }}"></i>
                 @else
                     <i class="fa fa-fw fa-sort" style="color:#DCDCDC"></i>
@@ -49,18 +65,22 @@
         </tr>
         <tr>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
-                <input wire:model="searchColumns.name" type="text" placeholder="Search..."
+                <input wire:model="searchColumns.fname" type="text" placeholder="Search..."
                        class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border border-gray-400 w-full py-1 focus:outline-none focus:border-blue-400" />
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
-                From
-                <input wire:model="searchColumns.price.0" type="number"
+                <input wire:model="searchColumns.mname" type="text" placeholder="Search..."
+                       class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border border-gray-400 w-full py-1 focus:outline-none focus:border-blue-400" />
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
+                <input wire:model="searchColumns.lname" type="text" placeholder="Search..."
+                       class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border border-gray-400 w-full py-1 focus:outline-none focus:border-blue-400" 
+                       style="width: 105px" />
+            </td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
+                <input wire:model="searchColumns.dob" type="number"
                        class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border border-gray-400 w-full py-1 focus:outline-none focus:border-blue-400"
-                       style="width: 75px" />
-                to
-                <input wire:model="searchColumns.price.1" type="number"
-                       class="mt-2 text-sm sm:text-base pl-2 pr-4 rounded-lg border border-gray-400 w-full py-1 focus:outline-none focus:border-blue-400"
-                       style="width: 75px" />
+                       style="width: 85px" />
             </td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
                 <input wire:model="searchColumns.description" type="text" placeholder="Search..."

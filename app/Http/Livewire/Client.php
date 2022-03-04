@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Patient;
-use App\Models\PatientCategory;
 use Livewire\WithPagination;
 
 
@@ -12,7 +11,7 @@ class Client extends Component
 {
     use WithPagination;
 
-    public $categories = [];
+    public $patients = [];
     public $sortColumn = 'name';
     public $sortDirection = 'asc';
     public $searchColumns = [
@@ -25,7 +24,7 @@ class Client extends Component
 
     public function mount()
     {
-        $this->categories = PatientCategory::pluck('name', 'id');
+        $this->patient = Patient::pluck('fname', 'id');
     }
 
     //sort table Column
@@ -56,15 +55,15 @@ class Client extends Component
         'patients.lname',
         'patients..id_no',
         'patients.CCC_Number',
-        'patient_categories.name as category_name',
+        'patient.name as category_name',
        ])
-            ->leftJoin('patients_categories',
-                'patients.patient_category_id',
+            ->leftJoin('patients',
+                'patients.patient_id',
                 '=',
-                'patient_category.id');
+                'patient.id');
         foreach($this->searchColumns as $column =>$value) {
             if (!empty($value)){
-                if ($column == 'patient-category_id') {
+                if ($column == 'patient-id') {
                     $patient->where($column, $value);
                 }
                 else{
