@@ -63,17 +63,18 @@ class PatientController extends Controller
             // return 'search by fc';
 
 
-            $client_name = $request->actual_search;
+            // $client_name = $request->actual_search;
 
-            $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
+            // $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
             
             
 
 
-            $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
-            //dd($id_no);
-            //return $id_no;
-            return view('layouts.search_patient_name', compact('client_name'));
+            // $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
+            // //dd($id_no);
+            // //return $id_no;
+            $clientName = Patient::where('fname', $request->actual_search)->get();
+            return view('layouts.search_patient_name', compact('clientName'));
         }
 
         

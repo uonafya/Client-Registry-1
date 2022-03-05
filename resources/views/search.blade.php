@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div style="width:auto%; margin-left:auto; margin-right:auto;" class="align-middle">
-    <div>
+    {{-- <div>
         <img class="logo" style="display: block; margin-left:auto; margin-right:auto; width:30% background-color:whitesmoke;" src="img/Kenya-logo.webp" alt="National Logo"/>
-    </div>
+    </div> --}}
     <br>
     <br>
         <section class="search-sec"> 

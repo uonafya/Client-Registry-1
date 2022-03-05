@@ -25,7 +25,7 @@
                         </thead>
 
                         <tr>
-                        @foreach ($client_name as $user)
+                        @foreach ($clientName as $user)
                             <tr style="margin-left: 20px;">
                                 <td>{{ $user->CCC_Number }}</td>
                                 <td>{{ $user->fname}}</td>
