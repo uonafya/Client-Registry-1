@@ -56,7 +56,7 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="facility">Facility</label>
-                <select name="facility" id="facility" class="form-control" searchable>
+                <select name="facility_id" id="facility_id" class="form-control" searchable>
                     <option selected disabled>Select facility</option>
                     {{-- <option value='Facility1'>Facility 1</option>
                     <option value='Facility2'>Facility 2</option> --}}
@@ -138,9 +138,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $(document).ready(function($){
-        $('#mfl_code, #CCC_Number, #facility, #serial_number').on('change', function() {
-            $('#CCC_Number').val($('#facility').val() + ' - ' + $('#serial_number').val() );
-            $('#mfl_code').val($('#facility').val());
+        $('#mfl_code, #CCC_Number, #facility_id, #serial_number').on('change', function() {
+            $('#CCC_Number').val($('#facility_id').val() + ' - ' + $('#serial_number').val() );
+            $('#mfl_code').val($('#facility_id').val());
         });
         $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
