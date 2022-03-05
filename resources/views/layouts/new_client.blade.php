@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container" style="background-color: white">
+
     <form action="/create_patient" method="post" style="margin-top: 5%; padding:10px;">
         @csrf
         <div class="panel-heading">

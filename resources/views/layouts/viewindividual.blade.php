@@ -6,7 +6,7 @@
             <form  method = "post" style="margin-top: 5%; padding:10px;">
                 @csrf
                 <div class="panel-heading">
-                    <center style="font-weight: bold"><h2>Client View</h2></center>
+                    <center style="font-weight: bold"><h2>Client Details</h2></center>
                 </div>
                 <hr><br>
                 <div class="form-row">
@@ -58,7 +58,7 @@
                         {{--                            <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>--}}
                         {{--                        @endforeach--}}
                         {{--                    </select>--}}
-                        <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->fname}}" readonly>
+                        <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->name}}" readonly>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="mfl_code">MFL Code</label>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="mfl_code">MFL Code</label>
-                        <input name="mfl_code1" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility_id}}">
+                        <input name="mfl_code1" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->mflcode2}}">
                     </div>
                 </div>
 
@@ -95,9 +95,14 @@
                         </label>
                         @endif
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="residence">Reason For Transfer</label>
+                        <input name="rtransfer" type="text" class="form-control" id="rtransfer" placeholder="Reason"
+                               style="height: 100px; font-weight: bold;"value="{{$user->rtransfer}}" readonly>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="residence">Date of Transfer Initiation</label>
+                    <label for="residence">Date Transfer was Initiated</label>
                     <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer" value="{{$user->dot}}" readonly>
                 </div>
                 <center><button type="submit" class="btn btn-primary">Close</button></center>

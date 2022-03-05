@@ -3,7 +3,7 @@
 @section('content')
     @foreach ($users as $user)
     <div class="container" style="background-color: white">
-        <form  action = "/edit/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
+        <form  action = "/editc/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
             @csrf
             <div class="panel-heading">
                 <center style="font-weight: bold"><h2>Client Transfer</h2></center>
@@ -51,13 +51,6 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="facility">Current Facility</label>
-{{--                    <select name="facility" id="linked_facility" class="form-control" searchable>--}}
-{{--                        <option selected disabled>Select facility</option>--}}
-{{--                        @foreach ($facilities as $facilitykey => $facility)--}}
-
-{{--                            <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
                     <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->fname}}" readonly>
                 </div>
                 <div class="form-group col-md-3">
@@ -140,9 +133,17 @@
 
                 </div>
             </div>
-            <div class="form-group">
-                <label for="residence">Residence</label>
-                <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="residence">Residence</label>
+                    <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="residence">Reason For Transfer</label>
+                    <input name="rtransfer" type="text" class="form-control" id="rtransfer" placeholder="Reason"
+                    style="height: 100px;">
+                </div>
             </div>
             <div class="form-group">
                 <label for="residence">Date of Initiation</label>

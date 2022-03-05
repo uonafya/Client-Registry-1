@@ -23,7 +23,7 @@ class LoginController extends Controller
                 // view('index');
             }else{
                 // return redirect()->route('home');
-                return 'normal user';
+                return redirect()->intended('allclients');
             }
         }else{
             return redirect()->route('login')
