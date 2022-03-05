@@ -108,10 +108,10 @@ class PatientController extends Controller
         $cccno = $request->input('CCC_Number');
         $residence = $request->input('Resident');
         $county = $request->input('county');
-        
+
        DB::table('patients')
         ->where('id', $id)
-        ->update(['fname'=>$fname,'mname'=>$mname, 'lname'=>$lname, 'dob'=>$dob, 
+        ->update(['fname'=>$fname,'mname'=>$mname, 'lname'=>$lname, 'dob'=>$dob,
         'gender'=>$gender, 'Nemis'=>$nemis,
         'phone'=>$phone, 'id_no'=>$id_no,'facility_id'=>$facility_id, 'CCC_Number'=>$cccno,
         'Resident'=>$residence]);
@@ -205,7 +205,7 @@ class PatientController extends Controller
                             ->get(['patients.*','facilities.name'])
                             ->where('id',$id);
 
-        
+
 
         return view('layouts.edit_client', compact('patient', 'users', 'facilities'));
     }
@@ -281,7 +281,8 @@ class PatientController extends Controller
         $gender = $request->input('gender');
         $phone = $request->input('phone');
         $id_no = $request->input('id_no');
-        $facility_id = $request->input('facility');
+        $facility_id = $request->input('facility_id');
+        $mfl_code = $request->input('mfl_code');
         $cccno = $request->input('CCC_Number');
         $residence = $request->input('Resident');
         $county = $request->input('county');
@@ -293,8 +294,7 @@ class PatientController extends Controller
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
         DB::update('update patients set facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
             [$facility_id, $transferstatus, $enddate, $enddate, $id]);
-//
-//
+
 //        $pcreate = Patient::create([
 ////            'fname',
 ////            'mname',
@@ -327,6 +327,65 @@ class PatientController extends Controller
 //            'updated_by' => Auth::user()->name,
 //
 //        ]);
-        return view('layouts.viewclient');
+        return 'success....Client Transfer has been iniated';
+    }
+    public function transferup(Request $request, $id)
+    {
+        $fname = $request->input('fname');
+        $mname = $request->input('mname');
+        $lname = $request->input('lname');
+        $Nemis = $request->input('Nemis');
+        $dob = $request->input('dob');
+        $gender = $request->input('gender');
+        $phone = $request->input('phone');
+        $id_no = $request->input('id_no');
+        $facility_id = $request->input('facility_id');
+        $cccno = $request->input('cccno');
+        $residence = $request->input('residence');
+        $county = $request->input('county');
+        $enddate = $request->input('enddate');
+        $rtransfer = $request->input('rtransfer');
+        $transferred_by = Auth::user()->name;
+        $transferstatus = $request->input('transferstatus');
+        $mfl_code = $request->input('mflcode2');
+        $rject = $request->input('rject');
+
+        $check = 0;
+
+
+        if ($transferstatus = 0) {
+            DB::update('update patients set rject=?, rtransfer=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+                [$rject, $rtransfer, 0, $transferstatus, 0, 0, $id]);
+        } elseif ($transferstatus =2) {
+
+            DB::update('update patients set rtransfer=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+                [$rtransfer, 0, $transferstatus, $enddate, $enddate, $id]);
+
+            $pcreate = Patient::create([
+
+                'fname' => $request->input('fname'),
+                'mname' => $request->input('mname'),
+                'lname' => $request->input('lname'),
+                'Nemis' => $request->input('Nemis'),
+                'dob' => $request->input('dob'),
+                'gender' => $request->input('gender'),
+                'phone' => $request->input('phone'),
+                'id_no' => $request->input('id_no'),
+                'facility_id' => $request->input('facility_id'),
+                'CCC_Number' => $request->input('CCC_Number'),
+                'Resident' => $request->input('Resident'),
+                'county' => $request->input('county'),
+                'rtransfer' => $request->input('rtransfer'),
+                'transferstatus' => 2,
+                'transferred_by' => Auth::user()->name,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+
+            ]);
+            return ('Sucess...');
+
+        } else {
+            return ('Error');
+        }
     }
 }
