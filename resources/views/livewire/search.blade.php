@@ -7,7 +7,7 @@
     <ul>
         @foreach ($patients as $patient)
         <li>
-            <p>{{$patient->name}}</p>
+            <p>{{$patient->fname}}</p>
         </li>
         @endforeach
     </ul>

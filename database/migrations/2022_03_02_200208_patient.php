@@ -32,11 +32,12 @@ class Patient extends Migration
             $table->string('Resident')->nullable();
             $table->string('county')->nullable();
             $table->string('village')->nullable();
-            $table->date('Date_of_Transfer') ->nullable();
-
+            $table->date('dot') ->nullable();
             $table->string('transferred_by')->nullable();
             $table->unsignedBigInteger('facility_id')->nullable();
-            $table->integer('transferin')->default(0);
+            $table->integer('transferstatus')->default(0);
+            $table->string('facility2') ->nullable();
+            $table->string('mflcode2') ->nullable();
             $table->string('enddate') ->nullable();
             $table->timestamp('email_verified_at')->nullable();
             // $table->unsignedBigInteger('patient_category_id');

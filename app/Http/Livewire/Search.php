@@ -10,16 +10,16 @@ class Search extends Component
     public $searchPatient;
     public $patient;
 
-    public function render()
-    {
-        //$searchClient = '%'.$this->$searchPatient.'%';
+//     public function render()
+//     {
+//         $searchPatient = '%' . $this->$searchPatient . '%';
 
-        $allPatients = Patient::all();
-        dd($allPatients);
+//         // $allPatients = Patient::all();
+//         // dd($allPatients);
 
-        //$this->patient=Patient::all();
+//         $this->patient=Patient::all();
 
-        $this->patient = Patient::where('name', 'ilike', $searchPatient)->get();
-        return view('livewire.search');
-    }
-}
+//         $this->patient = Patient::where('fname', 'ilike', $searchPatient)->get();
+//         return view('livewire.search');
+//     }
+ }
