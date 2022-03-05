@@ -2,8 +2,8 @@
 
 @section('content')
     @foreach ($users as $user)
-    <div class="container" style="background-color: white">
-        <form  action = "/editc/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
+    <div class="container" style="background-color: white; margin-top:10%;">
+        <form  action = "/editc/{{ $user->id }}" method = "post" >
             @csrf
             <div class="panel-heading">
                 <center style="font-weight: bold"><h2>Client Transfer</h2></center>
@@ -49,21 +49,21 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="facility">Current Facility</label>
                     <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->fname}}" readonly>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="mfl_code">MFL Code</label>
                     <input name="mfl_code1" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility_id}}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="ccc_number">CCC Number</label>
                     <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly value="{{$user->CCC_Number}}">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="national_id_number">Facility Transferring To</label>
                     <select name="facility_id" id="facility" class="form-control" searchable>
                         <option selected disabled>Select facility</option>
@@ -73,7 +73,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="mfl_code">MFL Code</label>
                     <input name="mfl_code" type="number" class="form-control" id="mfl_code"  readonly>
                 </div>
@@ -122,14 +122,7 @@
 
                 <div class="form-group col-md-3">
                     <label for="village">Village</label>
-                    <select name="village" id="village" class="form-control">
-                        <option value="" selected disabled>Select Village</option>
-                        @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-
-                            <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>
-                        @endforeach
-
-                    </select>
+                    <input name="village" type="text" class="form-control" id="village">
 
                 </div>
             </div>
@@ -158,12 +151,12 @@
             $('#mfl_code, #facility, #serial_number').on('change', function() {
                 $('#mfl_code').val($('#facility').val());
             });
-            $('#county, #residence, #sub_county, #ward, #village').on('change', function() {
+            $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
-                $('#residence').val($('#county').val() +',  '
+                $('#Resident').val($('#county').val() +'/'
                     + $('#sub_county').val()
-                    +',  ' +$('#ward').val()
-                    + ',  '+$('#village').val());
+                    +'/' +$('#ward').val()
+                    + '/'+$('#village').val());
             });
 
         })
