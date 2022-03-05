@@ -48,6 +48,6 @@ class DBUpdatesCron extends Command
 
         event(new AutoUpdateCREvent($patients));
 
-        $this->info('Successfully update db.');
+        return 'Successfully update db.';
     }
 }

@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use Carbon\Carbon;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,8 +26,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $date1 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2030 10:20:00');
+        $date2 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2020 10:20:00');
         //
-        $schedule->command('DBUpdates:cron')->everyMinute();
+        if($date1->gt($date2)){
+          $schedule->command('DBUpdates:cron')->everyMinute();
+        }else{
+            return 'Not Update Found';
+        }
+
         // ->hourly();
     }
 
