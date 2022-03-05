@@ -8,17 +8,18 @@
     <br>
         <section class="search-sec"> 
             <div class="container">
-                <form action="#" style="padding-left:25%" method="post" novalidate="novalidate">
+                <form method="post" action="{{ url('/search-query/') }}" style="padding-left:25%" novalidate="novalidate">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <input type="text" class="form-control search-slt" placeholder="Enter Search">
+                                    <input name="actual_search" type="text" class="form-control search-slt" placeholder="Enter Search">
                                 </div>
                                 &nbsp;
                                 &nbsp;
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <select class="form-control search-slt">
+                                    <select name="search_criteria" class="form-control search-slt">
                                         <option>Choose Criteria</option>
                                         <option>
                                             <a>
@@ -46,7 +47,8 @@
                                 &nbsp;
                                 &nbsp;
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <a href="{{ url('/allclients') }}" class="btn btn-success wrn-btn">Search</a>
+                                    {{-- <a href="{{ url('/allclients') }}" class="btn btn-success wrn-btn">Search</a> --}}
+                                    <button class="btn btn-success wrn-btn" type="submit"> Search </button>
                                 </div>
                             </div>
                         </div>

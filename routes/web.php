@@ -53,10 +53,8 @@ Route::get('get_all_patients', [FacilityController::class, 'getPatient'] );
 Route::get('get_all_facilities', [FacilityController::class, 'getFacility'] );
 Route::post('add_patient', [FacilityController::class, 'addPatient'] );
 Route::get('/search', [PatientController::class, 'search']);
+Route::post('search-query', [PatientController::class, 'searchClient']);
 
-<<<<<<< HEAD
+// Route::get()
 
-
-=======
 Route::get('mail/send', [MailController::class, 'send']);
->>>>>>> 8fb96554117568b6b6e9d2a975a0f2ca365b20f2
