@@ -35,6 +35,7 @@
                                 <td>{{ $user->id_no}}</td>
                                 <td>{{$user->name}}</td>
                                 <td><a href = 'edit/{{ $user->id }}'><button class="btn btn-success">Initiate Transfer</button></a></td>
+                                <td><a href = 'update_client/{{ $user->id }}'><button class="btn btn-success">Edit</button></a></td>
                                 @endforeach
                             </tr>
                         </tbody>

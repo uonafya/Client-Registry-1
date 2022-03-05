@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\LoginController;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FacilityController;
-
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MailController;
 
@@ -37,6 +37,7 @@ Route::patch('patient/{id}',[PatientController::class, 'update']);
 Route::get('/merger_patient/{id}/{id_no}',[PatientController::class, 'merge']);
 
 Route::get('new_client', [PatientController::class, 'new_client']);
+Route::get('register_user', [UserController::class, 'new_user']);
 
 Route::get('allclients', [PatientController::class, 'allclients']);
 

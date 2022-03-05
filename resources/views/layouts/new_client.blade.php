@@ -3,11 +3,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="background-color: white">
-
-    <form action="/create_patient" method="post" style="margin-top: 5%; padding:10px;">
+<div class="container" style="background-color: white; margin-top:10%;">
+    <form action="/create_patient" method="post" >
         @csrf
-        <div class="panel-heading">
+        <div class="panel-heading" style="padding-top:2%">
             <center>Client Information</center>
         </div>
                <hr><br>
@@ -57,7 +56,7 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="facility">Facility</label>
-                <select name="facility_id" id="facility" class="form-control" searchable>
+                <select name="facility" id="facility" class="form-control" searchable>
                     <option selected disabled>Select facility</option>
                     {{-- <option value='Facility1'>Facility 1</option>
                     <option value='Facility2'>Facility 2</option> --}}
@@ -112,7 +111,7 @@
 
             <div class="form-group col-md-3">
                 <label for="ward">Ward</label>
-                    <select name="ward" id="ward" class="form-control">
+                    <select name="ward" id="ward" value=""class="form-control">
                         <option value="" selected disabled>Select  Ward</option>
                 @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
 
@@ -124,16 +123,9 @@
             </div>
 
             <div class="form-group col-md-3">
-                <label for="village">Village</label>
-                    <select name="village" id="village" class="form-control">
-                        <option value="" selected disabled>Select Village</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-
-                        <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>
-                @endforeach
-
-                    </select>
-
+                
+                    <label for="village">Village</label>
+                    <input name="village" type="text" class="form-control" id="village" placeholder="Village">
             </div>
         </div>
         <div class="form-group">
@@ -152,11 +144,16 @@
         });
         $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
-        $('#Resident').val($('#county').val() +',  '
+        $('#Resident').val(
+                            // if($('#county').val() =="" || $('#sub_county').val()== ""||$('#ward').val()==""){
+                            //     $('#county').val()="",
+                            //     $('#sub_county').val()="",
+                            //     $('#ward').val()="",
+                            // }
+                            $('#county').val() +'/'
                             + $('#sub_county').val()
-                            +',  ' +$('#ward').val()
-
-                            + ',  '+$('#village').val());
+                            +'/' +$('#ward').val()
+                            + '/'+$('#village').val());
         });
 
     })
