@@ -2,11 +2,11 @@
 
 @section('content')
     @foreach ($users as $user)
-    <div class="container" style="background-color: white">
+    <div class="container" style="background-color: white; margin-top:10%; ">
         <form  action = "/update_client/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
             @csrf
             <div class="panel-heading">
-                <center style="font-weight: bold"><h2>Edit Client Information</h2></center>
+                <center ><h4>Edit Client Information</h4></center>
             </div>
             <hr><br>
             <div class="form-row">
@@ -55,7 +55,7 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="national_id_number">Facility</label>
-                    <select name="facility" id="facility" class="form-control" searchable>
+                    <select name="facility" id="facility" class="form-control" value="{{$user->facility_id}}">
                         <option value="{{ $user->facility_id }}" selected disabled>{{$user->facility_id}}  {{$user->name  }}</option>
                         @foreach ($facilities as $facilitykey => $facility)
 

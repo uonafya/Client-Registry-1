@@ -33,19 +33,9 @@
                                 <td>{{ $user->lname }}</td>
                                 <td>{{ $user->dob}}</td>
                                 <td>{{ $user->id_no}}</td>
-                                <td>{{$user->fname}}</td>
-{{--                                <td> <li style="margin-left: 9px;"> <strong >--}}
-{{--                                            <?php--}}
-{{--                                            $account = DB::table('patients')--}}
-{{--                                                ->where('transferin',0)--}}
-{{--                                                ->get();--}}
-{{--                                            if($account ==0):?>--}}
-{{--                                            <span class="badge badge-primary" style="font-size: 15px;">In Facility</span>--}}
-{{--                                            <?php elseif($account ==1):?>--}}
-{{--                                            <span class="badge badge-warning" style="font-size: 15px;">Transferred</span>--}}
-{{--                                            <?php endif ?>--}}
-{{--                                        </strong></li></td>--}}
+                                <td>{{$user->name}}</td>
                                 <td><a href = 'edit/{{ $user->id }}'><button class="btn btn-success">Initiate Transfer</button></a></td>
+                                <td><a href = 'update_client/{{ $user->id }}'><button class="btn btn-success">Edit</button></a></td>
                                 @endforeach
                             </tr>
                         </tbody>

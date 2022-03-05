@@ -3,7 +3,7 @@
 @section('content')
     @foreach ($users as $user)
         <div class="container" style="background-color: white">
-            <form  method = "post" style="margin-top: 5%; padding:10px;">
+            <form action = "/transferup/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
                 @csrf
                 <div class="panel-heading">
                     <center style="font-weight: bold"><h2>Client Transfer</h2></center>
@@ -58,7 +58,7 @@
                         {{--                            <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>--}}
                         {{--                        @endforeach--}}
                         {{--                    </select>--}}
-                        <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->fname}}" readonly>
+                        <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->name}}" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="mfl_code">MFL Code</label>
@@ -72,14 +72,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="national_id_number">Facility Transferring To</label>
-                        <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly value="{{$user->facility2}}">
+                        <input name="facility2" type="number" class="form-control" id="CCC_Number" readonly value="{{$user->facility2}}">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="mfl_code">MFL Code</label>
-                        <input name="mfl_code1" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility_id}}">
+                        <input name="mfl_code" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->mflcode2}}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="residence">Date Transfer was Initiated</label>
+                        <label for="dot">Date Transfer was Initiated</label>
                         <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer" value="{{$user->dot}}" readonly>
                     </div>
                 </div>
@@ -101,15 +101,18 @@
                             @endif
                             <br>
                             <br>
-                            <select  name="affiliateacc" class="input--style-5 zmdi-airplanemode-inactive" style="color: maroon; font-weight: bold;">
-                                <option value="0" <?php echo isset($user->transferstatus) == 0  ?>>Reject Transfer</option>
-                                <option value="2" <?php echo isset($user->transferstatus)  == 1  ?>>Approve Transfer</option>
+                            <select onchange="showDiv('reject', this)"  name="transferstatus" class="input--style-5 zmdi-airplanemode-inactive" style="color: #0420c6; font-weight: bold;">
+                                <option>Please Approve/Reject</option>
+                                <option id="rej"  value="0" <?php echo isset($user->transferstatus) == 0  ?>>Reject Transfer</option>
+                                <option id="approve" value="2" <?php echo isset($user->transferstatus)  == 1  ?>>Approve Transfer</option>
                             </select>
                     </div>
+
                 </div>
-                    <div class="form-group col-md-6">
-                        <label for="residence">Date Transfer is Approved/Rejected</label>
-                        <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer" value="{{$user->dot}}" readonly>
+                    <div class="form-group col-md-6" id="reject" style="display: none;">
+                        <label for="residence" style="color: red;">Please give a reason for rejection</label>
+                        <input name="rject" type="text" class="form-control" id="rject" placeholder="Reason"
+                               style="height: 90px;">
                     </div>
                 </div>
 
@@ -131,6 +134,12 @@
                 });
 
             })
+        </script>
+        <script>
+            function showDiv(divId, element)
+            {
+                document.getElementById(divId).style.display = element.value == 0 ? 'block' : 'none';
+            }
         </script>
     @endforeach
 @endsection

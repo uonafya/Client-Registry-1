@@ -1,11 +1,15 @@
 @extends('layouts.app')
 @section('content')
+<<<<<<< HEAD
 <div style="width:auto%; margin-left:auto; margin-right:auto;" class="align-middle">
     {{-- <div>
         <img class="logo" style="display: block; margin-left:auto; margin-right:auto; width:30% background-color:whitesmoke;" src="img/Kenya-logo.webp" alt="National Logo"/>
     </div> --}}
     <br>
     <br>
+=======
+<div class="container" style="width:auto%; margin-left:auto; margin-right:auto; padding-top:15%;">
+>>>>>>> 2034bf6764100580db7cbd5fdb7a4759e7b8405d
         <section class="search-sec"> 
             <div class="container">
                 <form method="post" action="{{ url('/search-query/') }}" style="padding-left:25%" novalidate="novalidate">
@@ -44,11 +48,10 @@
                                         </option>                                
                                     </select>
                                 </div>
-                                &nbsp;
-                                &nbsp;
-                                <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    {{-- <a href="{{ url('/allclients') }}" class="btn btn-success wrn-btn">Search</a> --}}
-                                    <button class="btn btn-success wrn-btn" type="submit"> Search </button>
+                                {{-- &nbsp;
+                                &nbsp; --}}
+                                <div class="col-lg-2 col-md-2 col-sm-12">
+                                    <a href="{{ url('/allclients') }}" class="btn btn-success wrn-btn">Search</a>
                                 </div>
                             </div>
                         </div>

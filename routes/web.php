@@ -1,9 +1,10 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FacilityController;
-
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MailController;
 
@@ -36,17 +37,21 @@ Route::patch('patient/{id}',[PatientController::class, 'update']);
 Route::get('/merger_patient/{id}/{id_no}',[PatientController::class, 'merge']);
 
 Route::get('new_client', [PatientController::class, 'new_client']);
+Route::get('register_user', [UserController::class, 'new_user']);
 
 Route::get('allclients', [PatientController::class, 'allclients']);
 
-Route::get('individual', [PatientController::class, 'individual']);
+Route::get('individual/{id}', [PatientController::class, 'individual']);
 
-Route::get('clientapprej', [PatientController::class, 'clientapprej']);
+Route::get('clientapprej/{id}', [PatientController::class, 'clientapprej']);
 
 Route::get('edit/{id}',[PatientController::class, 'showclient']);
+
 Route::post('edit/{id}',[PatientController::class, 'editc']);
 Route::get('update_client/{id}',[PatientController::class, 'updateclient']);
 Route::post('update_client/{id}',[PatientController::class, 'edit']);
+Route::post('editc/{id}',[PatientController::class, 'editc']);
+
 
 //Remote data source
 Route::get('get_all_patients', [FacilityController::class, 'getPatient'] );
@@ -55,6 +60,10 @@ Route::post('add_patient', [FacilityController::class, 'addPatient'] );
 Route::get('/search', [PatientController::class, 'search']);
 Route::post('search-query', [PatientController::class, 'searchClient']);
 
-// Route::get()
 
-Route::get('mail/send', [MailController::class, 'send']);
+
+Route::get('/mail/send', [MailController::class, 'send']);
+
+Route::post('transferup/{id}',[PatientController::class, 'transferup']);
+
+

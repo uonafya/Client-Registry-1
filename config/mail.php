@@ -42,14 +42,14 @@ return [
 
     'mailers' => [
         'smtp' => [
-            'driver' => env('MAIL_DRIVER', 'smtp'),
-            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-            'port' => env('MAIL_PORT', 587),
-            'from' => ['address' => 'philipmatunda@gmail.com', 'name' => 'Philip Matunda'],
+            'driver' => env('MAIL_DRIVER', ''),
+            'host' => env('MAIL_HOST', ''),
+            'port' => env('MAIL_PORT', ),
+            'from' => ['address' => '', 'name' => ''],
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => 'philipmatunda@gmail.com',
-            'password' => 'go@popIt@@007.',
-            'sendmail' => '/usr/sbin/sendmail -bs',
+            'username' => '',
+            'password' => '',
+            'sendmail' => '',
             'pretend' => false,
         ],
 
@@ -67,7 +67,7 @@ return [
 
         'sendmail' => [
             'transport' => 'sendmail',
-            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -t -i'),
+            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs'),
         ],
 
         'log' => [
