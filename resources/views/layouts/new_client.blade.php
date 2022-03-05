@@ -63,11 +63,11 @@
 
                     @foreach ($facilities as $facilitykey => $facility)
 
-                    <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>
+                    <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}}  - {{ $facility->name }}</option>
             @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">n
+            <div class="form-group col-md-3">
                 <label for="mfl_code">MFL Code</label>
                 <input name="mfl_code" type="text" class="form-control" id="mfl_code" readonly >
             </div>
@@ -145,11 +145,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $(document).ready(function($){
-        $('#mfl_code, #facility, #serial_number').on('change', function() {
+        $('#mfl_code, #CCC_Number, #facility, #serial_number').on('change', function() {
             $('#CCC_Number').val($('#facility').val() + ' - ' + $('#serial_number').val() );
             $('#mfl_code').val($('#facility').val());
         });
-
         $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
         $('#Resident').val($('#county').val() +',  '

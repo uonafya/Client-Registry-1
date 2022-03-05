@@ -6,7 +6,7 @@
     </div>
     <br>
     <br>
-        <section class="search-sec">
+        <section class="search-sec"> 
             <div class="container">
                 <form action="#" style="padding-left:25%" method="post" novalidate="novalidate">
                     <div class="row">
@@ -46,7 +46,7 @@
                                 &nbsp;
                                 &nbsp;
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <button type="button" class="btn btn-danger wrn-btn">Search</button>
+                                    <a href="{{ url('/allclients') }}" class="btn btn-success wrn-btn">Search</a>
                                 </div>
                             </div>
                         </div>

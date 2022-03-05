@@ -35,8 +35,6 @@ class PatientController extends Controller
      */
     public function create(Patient $patient, Request $request)
     {
-
-
     }
 
 
@@ -60,10 +58,9 @@ class PatientController extends Controller
             'facility_id',
             'Nemis',
             'Resident',
-         ]));
+        ]));
 
-         return 'created';
-
+        return 'created';
     }
 
     public function new_client(Patient $patient)
@@ -75,7 +72,6 @@ class PatientController extends Controller
         //$this->getFacility();
 
         return view('layouts.new_client', compact('patient', 'facilities'));
-
     }
 
     /**
@@ -95,9 +91,30 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $patient = $this->optionCounty();
+        $facility = $this->optionFacility();
+
+        $fname = $request->input('fname');
+        $mname = $request->input('mname');
+        $lname = $request->input('lname');
+        $nemis = $request->input('nemis');
+        $dob = $request->input('dob');
+        $gender = $request->input('gender');
+        $phone = $request->input('phone');
+        $id_no = $request->input('id_no');
+        $facility_id = $request->input('facility');
+        $cccno = $request->input('CCC_Number');
+        $residence = $request->input('Resident');
+        $county = $request->input('county');
+        
+       DB::table('patients')
+        ->where('id', $id)
+        ->update(['fname'=>$fname,'mname'=>$mname, 'lname'=>$lname, 'dob'=>$dob, 
+        'gender'=>$gender, 'Nemis'=>$nemis,
+        'phone'=>$phone, 'id_no'=>$id_no,'facility_id'=>$facility_id, 'CCC_Number'=>$cccno,
+        'Resident'=>$residence]);
     }
 
     /**
@@ -137,14 +154,13 @@ class PatientController extends Controller
 
     public function merge(Request $reqs)
     {
-      $patient = Patient::find($reqs->id);
-      $patient_exists = Patient::where('ID_Number', $reqs->id_no);
+        $patient = Patient::find($reqs->id);
+        $patient_exists = Patient::where('ID_Number', $reqs->id_no);
 
-      if($patient_exists->exists())
-      {
-        dd($patient[0]);
-      }
-
+        if($patient_exists->exists())
+        {
+            dd($patient[0]);
+        }
     }
 
     /**
@@ -161,42 +177,38 @@ class PatientController extends Controller
     public function optionCounty()
     {
         return [
-        1 =>'Nakuru',
-         2 => 'uasingishu',
-         3 => 'Nairobi',
-         4 => 'Migori'
+            1 => 'Nakuru',
+            2 => 'uasingishu',
+            3 => 'Nairobi',
+            4 => 'Migori'
         ];
     }
 
     public function optionFacility()
     {
         return [
-            '12345' => 'migori_hospital' ,
-            '22341' => 'muranga_hospital' ,
-            '32342' => 'nairobi_hospital' ,
-            '62343' => 'kissii_hospital' ,
+            '12345' => 'migori_hospital',
+            '22341' => 'muranga_hospital',
+            '32342' => 'nairobi_hospital',
+            '62343' => 'kissii_hospital',
         ];
     }
 
-    // public function getFacility()
-    // {
+    //update client_details
+    public function updateclient($id)
+    {
+        $data = Http::get('http://localhost:3000/facility');
+        $facilities = json_decode($data->getBody()->getContents());
+        $patient = $this->optionCounty();
 
-    //     //dd($facilities);
-    //     // foreach ($facilities as $facility)
-    //     // {
-    //     //     $facility_name =  $facility->name;
-    //     //     $mfl_code = $facility->mfl_code;
-    //     //     //dd($mfl_code, $facility_name);
-    //     //     return $facility_name;
-    //     // }
+        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+                            ->get(['patients.*','facilities.name'])
+                            ->where('id',$id);
 
+        
 
-    //     //dd($name);
-
-
-    //     return view('layouts.new_client', compact('facilities'));
-
-    // }
+        return view('layouts.edit_client', compact('patient', 'users', 'facilities'));
+    }
 
 
 
@@ -216,12 +228,13 @@ class PatientController extends Controller
     {
         $data = Http::get('http://localhost:3000/facility');
         $facilities = json_decode($data->getBody()->getContents());
-        $facility = (new \App\Models\Facility)->patient();
+        $patient = $this->optionCounty();
 
         $users = DB::select('select * from patients where id = ?', [$id]);
-        return view('layouts.transferin', ['users' => $users],compact('facilities','facility'));
+        return view('layouts.transferin', ['users' => $users],compact('facilities', 'patient'));
     }
-    public function editc(Request $request,$id) {
+    public function editc(Request $request, $id)
+    {
         $patient = $this->optionCounty();
         $facility = $this->optionFacility();
 
@@ -232,33 +245,33 @@ class PatientController extends Controller
         $dob = $request->input('dob');
         $gender = $request->input('gender');
         $phone = $request->input('phone');
-        $id_no= $request->input('id_no');
-        $facility= $request->input('facility');
-        $cccno= $request->input('cccno');
-        $residence= $request->input('residence');
-        $county= $request->input('county');
-        $enddate= $request->input('enddate');
+        $id_no = $request->input('id_no');
+        $facility_id = $request->input('facility');
+        $cccno = $request->input('CCC_Number');
+        $residence = $request->input('Resident');
+        $county = $request->input('county');
+        $enddate = $request->input('enddate');
         $transferin = 1;
-        $transferred_by=Auth::user()->name;
+        $transferred_by = Auth::user()->name;
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set enddate=? where id = ?',[$enddate,$id]);
+        DB::update('update patients set enddate=? where id = ?', [$enddate, $id]);
 
 
-      $pcreate = Patient::create([
-//            'fname',
-//            'mname',
-//            'lname',
-//            'nemis',
-//            'dob',
-//            'gender',s
-//            'phone',
-//            'id_no',
-//            'cccno',
-//            'residence',
-//            'county',
-//            'facility',
+        $pcreate = Patient::create([
+            //            'fname',
+            //            'mname',
+            //            'lname',
+            //            'nemis',
+            //            'dob',
+            //            'gender',s
+            //            'phone',
+            //            'id_no',
+            //            'cccno',
+            //            'residence',
+            //            'county',
+            //            'facility',
 
             'fname' => $request->input('fname'),
             'mname' => $request->input('mname'),
@@ -267,11 +280,11 @@ class PatientController extends Controller
             'dob' => $request->input('dob'),
             'gender' => $request->input('gender'),
             'phone' => $request->input('phone'),
-            'id_no'=> $request->input('id_no'),
-            'facility'=> $request->input('facility'),
-            'CCC_Number'=> $request->input('CCC_Number'),
-            'Resident'=> $request->input('Resident'),
-            'county'=> $request->input('county'),
+            'id_no' => $request->input('id_no'),
+            'facility_id' => $request->input('facility'),
+            'CCC_Number' => $request->input('CCC_Number'),
+            'Resident' => $request->input('Resident'),
+            'county' => $request->input('county'),
             'transferin' => 1,
             'transferred_by'=> Auth::user()->name,
              'created_by'=>Auth::user()->name,

@@ -40,6 +40,8 @@ Route::get('allclients', [PatientController::class, 'allclients']);
 
 Route::get('edit/{id}',[PatientController::class, 'showclient']);
 Route::post('edit/{id}',[PatientController::class, 'editc']);
+Route::get('update_client/{id}',[PatientController::class, 'updateclient']);
+Route::post('update_client/{id}',[PatientController::class, 'edit']);
 
 //Remote data source
 Route::get('get_all_patients', [FacilityController::class, 'getPatient'] );
