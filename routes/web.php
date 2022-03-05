@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Patient;
 
+use App\Http\Controllers\EventController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +58,8 @@ Route::get('/search', [PatientController::class, 'search']);
 Route::get('query_patient/{ccc_no}/', [PatientController::class, 'getPatientWithCCC']);
 Route::get('query_facilities_patients/{mfl_code}/', [PatientController::class, 'getAllPatientsInFacility']);
 
+Route::get('/event', [PatientController::class, 'updateEvent'])->name('event.index');
+
 
 // 36104-74927
 Route::get('/get_patient/{api_token}/{name}', function (Request $request) {
@@ -68,3 +73,7 @@ Route::get('/get_patient/{api_token}/{name}', function (Request $request) {
 
     // ]);
 })->middleware('api_token');
+
+Route::get('notify', function () {
+    return view('welcome');
+});

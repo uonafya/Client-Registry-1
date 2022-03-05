@@ -8,6 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     {{--                <a href="referrals" > <button class="btn-primary btn btn-sm" type="button" id="new_appointment"><i class="fa fa-plus"></i> New Referral</button></a>--}}
+                    @livewire('search')
                     <br>
                     <table class="table table-bordered" style="border-radius: 12px;">
                         <thead>

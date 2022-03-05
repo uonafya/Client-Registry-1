@@ -56,7 +56,7 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="facility">Facility</label>
-                <select name="linked_facility" id="linked_facility" class="form-control" searchable>
+                <select name="facility_id" id="facility" class="form-control" searchable>
                     <option selected disabled>Select facility</option>
                     {{-- <option value='Facility1'>Facility 1</option>
                     <option value='Facility2'>Facility 2</option> --}}
@@ -145,23 +145,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $(document).ready(function($){
-        $('#mfl_code, #linked_facility, #serial_number').on('change', function() {
-            $('#CCC_Number').val($('#linked_facility').val() + ' - ' + $('#serial_number').val() );
-            $('#mfl_code').val($('#linked_facility').val());
+        $('#mfl_code, #facility, #serial_number').on('change', function() {
+            $('#CCC_Number').val($('#facility').val() + ' - ' + $('#serial_number').val() );
+            $('#mfl_code').val($('#facility').val());
         });
-<<<<<<< HEAD
-        $('#county, #residence, #sub_county, #ward, #village').on('change', function() {
 
-        $('#residence').val($('#county').val() +',  '
+        $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
+
+        $('#Resident').val($('#county').val() +',  '
                             + $('#sub_county').val()
                             +',  ' +$('#ward').val()
-=======
-        $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
-        
-        $('#Resident').val($('#county').val() +',  '
-                            + $('#sub_county').val() 
-                            +',  ' +$('#ward').val() 
->>>>>>> 4bb0b0e7c3c85c9f2a763b1192de63118505ea2c
+
                             + ',  '+$('#village').val());
         });
 

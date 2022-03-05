@@ -5,7 +5,9 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ListenforupdatesListener
+use App\Models\User;
+
+class SendNewTransferNotification
 {
     /**
      * Create the event listener.
@@ -25,6 +27,10 @@ class ListenforupdatesListener
      */
     public function handle($event)
     {
-        //
+        $admins = User::whereHas('is_admin', function ($query) {
+            $query->where('id', 1);
+        })->get();
+
+        // Notification::send($admins, new NewUserNotification($event->user));
     }
 }

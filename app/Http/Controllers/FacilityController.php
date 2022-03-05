@@ -7,6 +7,7 @@ use App\Models\facility;
 use App\Models\Patient;
 
 use Illuminate\Support\Facades\Route;
+use  App\Events\PullUpdatesEvent;
 
 use App\Helpers\Http;
 use Illuminate\Support\Carbon;
@@ -24,36 +25,43 @@ class FacilityController extends Controller
        return view('Facility.index', compact('patient'));
 
     }
-    
+
     public function getFacility()
     {
         $data = Http::get('http://localhost:3000/facility');
         $facility = json_decode($data->getBody()->getContents());
-        
+
+
+
+
         foreach($facility as $facility)
         {
             // dump($facility);
+            sleep(100);
+
             facility::create([
-                 "name" => $facility->name,
-                 "mfl_code" => $facility->mfl_code,
-                 "county" => $facility->county,
-                 "sub_county" => $facility->sub_county,
-                 "ward" => $facility->ward,
-                 "facility_type" => $facility->facility_type
-            ]);            
+                    "name" => $facility->name,
+                    "mfl_code" => $facility->mfl_code,
+                    "county" => $facility->county,
+                    "sub_county" => $facility->sub_county,
+                    "ward" => $facility->ward,
+                    "facility_type" => $facility->facility_type
+            ]);
         }
-        
+
+
         // $table->string('facility_name');
-        // $table->string('MFL_CODE')->unique(); 
-        
+        // $table->string('MFL_CODE')->unique();
+
     }
-    
+
     public function getPatient()
     {
+        // event(new PullUpdatesEvent($user));
         $data = Http::get('http://localhost:3000/patients');
         $patients = json_decode($data->getBody()->getContents());
         // dd($patients);
-        
+
         foreach($patients as $patient)
         {
             Patient::create([
@@ -69,8 +77,10 @@ class FacilityController extends Controller
                  "CCC_Number" => rand(10000,90000).'-'.rand(10000,90000)
             ]);
         }
+
+        return $patient;
     }
-    
+
     public function addPatient(Request $req)
     {
         $data = Http::post('http://localhost:3000/patients', [
@@ -88,38 +98,38 @@ class FacilityController extends Controller
         $post = json_decode($data->getBody()->getContents());
         dd($post);
     }
-    
+
     public function pullUpdates()
     {
-        
-        
+
+
         //check the last date in local
         $data = Http::get('http://localhost:3000/patients');
         $patients = json_decode($data->getBody()->getContents());
         // dump($patients);
-        
+
         $pt = Patient::orderBy('id','DESC')->first();
         $local_instance__date = $pt->date_created;
-        
+
         $date2 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2020 10:20:00');
-        
+
         // foreach($patients as $patient)
         // {
             // dump($patient->date_created);
             $date1 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2020 10:20:00');
-            
+
             $result = $date1->eq($date2);
             if($result){
             //    event(new )
             }
             // $this->getPatient();
-           
+
         // }
-        
+
         //compare with last date in remote
-        
+
         //pull all data with a date greater than local date
-        
+
     }
 
 
