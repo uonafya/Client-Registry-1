@@ -13,7 +13,6 @@
                                 <input id="queryData" name="actual_search" type="text" class="form-control search-slt"
                                     placeholder="Enter Search">
                             </div>
-<<<<<<< HEAD
                             &nbsp;
                             &nbsp;
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
@@ -86,9 +85,6 @@
                                 </tbody>
                             </table>
                         </div>
-=======
-                        </form>
->>>>>>> 42d807c07451126c1de05c40415dfe4c2773daa9
                     </div>
                 </div>
             </form>
