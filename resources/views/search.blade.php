@@ -4,7 +4,7 @@
 <div class="container" style="width:auto%; margin-left:auto; margin-right:auto; padding-top:15%;">
     <section class="search-sec">
         <div class="container">
-            <form method="post" action="{{ url('/search-query/') }}" style="padding-left:25%" novalidate="novalidate">
+            <form method="post" action="{{ url('/search-query/') }}" style="" novalidate="novalidate">
                 @csrf
                 <div class="row">
                     <div class="col-lg-12">
@@ -13,7 +13,6 @@
                                 <input id="queryData" name="actual_search" type="text" class="form-control search-slt"
                                     placeholder="Enter Search">
                             </div>
-<<<<<<< HEAD
                             &nbsp;
                             &nbsp;
                             <div class="col-lg-3 col-md-3 col-sm-12 p-0">
@@ -86,9 +85,6 @@
                                 </tbody>
                             </table>
                         </div>
-=======
-                        </form>
->>>>>>> 42d807c07451126c1de05c40415dfe4c2773daa9
                     </div>
                 </div>
             </form>
@@ -104,6 +100,15 @@
             });
         });
     });
+//     $(document).mouseup(function(e)
+//         {
+//             var container = $(".textInput");
+//             if (!container.is(e.target) && container.has(e.target).length === 3)
+//         {
+//             container.hide();
+//             }
+//         });
+// });
     // $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     // $(function() {
     // $("#example1").DataTable({
