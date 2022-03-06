@@ -37,11 +37,10 @@ class PatientController extends Controller
     {
     }
 
-<<<<<<< HEAD
-    public function search()
-    {    
-        return view('search');
-    }
+//    public function search()
+//    {
+//        return view('search');
+//    }
 
     public function searchClient(Request $request){
 
@@ -53,12 +52,12 @@ class PatientController extends Controller
             $pt = Patient::where('CCC_Number',$ccc_no   )->get();
             return $pt;
 
-            
+
         }elseif($request->search_criteria == 'Facility'){
             // return 'search by fc';
 
             $facilityPatients = Patient::   where('facility_id', $request->actual_search)->get();
-            
+
             //dd($facilityPatients);
 
             //return $facilityPatients;
@@ -77,8 +76,8 @@ class PatientController extends Controller
             // $client_name = $request->actual_search;
 
             // $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
-            
-            
+
+
 
 
             // $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
@@ -88,7 +87,7 @@ class PatientController extends Controller
             return view('layouts.search_patient_name', compact('clientName'));
         }
 
-        
+
         $searchQuery = $request->searchQuery;
     }
 
@@ -103,8 +102,6 @@ class PatientController extends Controller
     // {
     //     dd($cccno);
     // }
-=======
->>>>>>> 2034bf6764100580db7cbd5fdb7a4759e7b8405d
 
     /**
      * Store a newly created resource in storage.
@@ -281,16 +278,33 @@ class PatientController extends Controller
     //indidual
     public function clientapprej(Request $request, $id)
     {
-        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+        $users = DB::table('patients')
+            ->join('facilities', 'patients.facility_id' , '=' , 'facilities.mfl_code')
+            ->get(['patients.*','facilities.name'])
+            ->where('id',$id);
+
+//        return $users;
+
+
+
+        $facilityto = Patient::join('facilities', 'patients.facility2' , '=' , 'facilities.mfl_code')
         ->get(['patients.*','facilities.name'])
         ->where('id',$id);
+
+        $facilityobj = $facilityto[0];
+
+//        return $facilityobj->name;
+
+//        dd($facilityto);
+//        $facilityname = $facilityto[0]->name;
+//        return $facilityname;
 
 
 //        $users = DB::table('patients')
 //            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
 //            ->get();
 
-        return view('layouts.incomingtransfers', ['users' => $users]);
+        return view('layouts.incomingtransfers', ['users' => $users], compact('facilityobj'));
     }
     //indidual
     public function individual(Request $request, $id)
@@ -342,13 +356,12 @@ class PatientController extends Controller
         $patient = $this->optionCounty();
 
 
-//        $users = DB::table('patients')->where('patients.id',[$id])
-//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-//            ->get();
+        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+            ->where('patients.id',[$id])
+            ->get(['patients.*','facilities.name']);
 
-
-
-        $users = DB::select('select * from patients where id = ?', [$id]);
+//
+//        $users = DB::select('select * from patients where id = ?', [$id]);
 
         return view('layouts.transferin', ['users' => $users],compact('facilities','patient'));
     }

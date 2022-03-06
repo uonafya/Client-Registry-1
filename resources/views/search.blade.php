@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
-<<<<<<< HEAD
+
 <div style="width:auto%; margin-left:auto; margin-right:auto;" class="align-middle">
     {{-- <div>
         <img class="logo" style="display: block; margin-left:auto; margin-right:auto; width:30% background-color:whitesmoke;" src="img/Kenya-logo.webp" alt="National Logo"/>
     </div> --}}
     <br>
     <br>
-=======
+
 <div class="container" style="width:auto%; margin-left:auto; margin-right:auto; padding-top:15%;">
->>>>>>> 2034bf6764100580db7cbd5fdb7a4759e7b8405d
-        <section class="search-sec"> 
+
+        <section class="search-sec">
             <div class="container">
                 <form method="post" action="{{ url('/search-query/') }}" style="padding-left:25%" novalidate="novalidate">
                     @csrf
@@ -45,7 +45,7 @@
                                             <a>
                                                 <p>CCC Number</p>
                                             </a href="#">
-                                        </option>                                
+                                        </option>
                                     </select>
                                 </div>
                                 {{-- &nbsp;

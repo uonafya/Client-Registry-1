@@ -69,20 +69,7 @@
                         <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly value="{{$user->CCC_Number}}">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="national_id_number">Facility Transferring To</label>
-                        <input name="facility2" type="number" class="form-control" id="CCC_Number" readonly value="{{$user->facility2}}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="mfl_code">MFL Code</label>
-                        <input name="mfl_code" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->mflcode2}}">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="dot">Date Transfer was Initiated</label>
-                        <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer" value="{{$user->dot}}" readonly>
-                    </div>
-                </div>
+
 
 
                 <div class="form-row">
@@ -116,6 +103,28 @@
                     </div>
                 </div>
 
+                <div class="form-group col-md-4">
+                    <label for="dot">Date Transfer was Initiated</label>
+                    <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer" value="{{$user->dot}}" readonly>
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="national_id_number">Facility Transferring To</label>
+                        <input name="facility2" type="text" class="form-control" id="CCC_Number" readonly value="{{  $facilityobj["name"] }}">
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="mfl_code">MFL Code</label>
+                        <input name="mfl_code" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility2}}">
+                    </div>
+
+
+                </div>
+            @endforeach
+
                 <center><button type="submit" class="btn btn-primary">Save</button></center>
             </form>
         </div>
@@ -141,5 +150,4 @@
                 document.getElementById(divId).style.display = element.value == 0 ? 'block' : 'none';
             }
         </script>
-    @endforeach
 @endsection

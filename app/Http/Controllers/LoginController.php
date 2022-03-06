@@ -23,7 +23,7 @@ class LoginController extends Controller
                 // view('index');
             }else{
                 // return redirect()->route('home');
-                return redirect()->intended('allclients');
+                return redirect()->intended('search');
             }
         }else{
             return redirect()->route('login')

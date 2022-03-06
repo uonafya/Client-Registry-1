@@ -35,7 +35,7 @@ class Patient extends Migration
             $table->string('transferred_by')->nullable();
             $table->unsignedBigInteger('facility_id')->nullable();
             $table->integer('transferstatus')->default(0);
-            $table->unsignedBigInteger('facility2') ->nullable();
+            $table->unsignedBigInteger('facility2')->nullable();
             $table->string('rtransfer')->nullable();
             $table->string('mflcode2') ->nullable();
             $table->string('enddate') ->nullable();
@@ -46,7 +46,7 @@ class Patient extends Migration
 
             // $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onUpdate('cascade');
             $table->foreign('facility_id')->references('mfl_code')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
-
+            $table->foreign('facility2')->references('mfl_code')->on('facilities')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

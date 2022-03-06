@@ -51,7 +51,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="facility">Current Facility</label>
-                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->fname}}" readonly>
+                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->name}}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="mfl_code">MFL Code</label>
