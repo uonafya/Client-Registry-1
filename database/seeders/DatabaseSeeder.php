@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $user = [
             [
                'name'=>'Admin',
-               'email'=>'admin@test.com',
+               'email'=>'   ',
                 'is_admin'=>'1',
                'password'=> bcrypt('admin123'),
             ],

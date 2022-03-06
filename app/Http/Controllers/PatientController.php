@@ -25,7 +25,13 @@ class PatientController extends Controller
     }
     public function search()
     {
-        return view('search');
+        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->where('patients.void', 0)
+            ->get(['patients.*', 'facilities.name']);
+
+
+        return view('search', ['users' => $users]);
+        //return view('search');
     }
 
 
@@ -33,6 +39,19 @@ class PatientController extends Controller
     //    {
     //        return view('search');
     //    }
+
+    function cleanName($str) {
+  
+        // Using str_replace() function 
+        // to replace the word 
+        $res = str_replace( array( '\'', '"',
+        '\'' , ';', '<', '>' ), ' ', $str);
+    
+        // Returning the result 
+        return $res;
+        }
+
+
     public function searchClient(Request $request)
     {
 
@@ -49,12 +68,13 @@ class PatientController extends Controller
 
 
             $ccc_no = Patient::query()
+                ->where('patients.void', 0)
                 ->where('CCC_Number', 'LIKE', "%{$request->actual_search}%")->get();
-                // ->orWhere('mname', 'LIKE', "%{$request->actual_search}%")
-                // ->orWhere('lname', 'LIKE', "%{$request->actual_search}%")
-                // ->get();
+            // ->orWhere('mname', 'LIKE', "%{$request->actual_search}%")
+            // ->orWhere('lname', 'LIKE', "%{$request->actual_search}%")
+            // ->get();
 
-                return view('layouts.search_patient_no', compact('ccc_no'));
+            return view('layouts.search_patient_no', compact('ccc_no'));
         } elseif ($request->search_criteria == 'Facility') {
             // return 'search by fc';
             // $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
@@ -74,22 +94,25 @@ class PatientController extends Controller
 
             $id_no = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
                 ->where('patients.void', 0)
-                ->where('id_no', $request->actual_search)->get(['patients.*', 'facilities.name']);
+                ->orWhere('id_no', $request->actual_search)->get(['patients.*', 'facilities.name']);
 
             //dd($id_no);
             //return $id_no;
             return view('layouts.search_patient_id', compact('id_no'));
         } elseif ($request->search_criteria == 'Client Name') {
             // return 'search by fc';
-
-
-
-
             $client_name = Patient::query()
                 ->where('fname', 'LIKE', "%{$request->actual_search}%")
                 ->orWhere('mname', 'LIKE', "%{$request->actual_search}%")
                 ->orWhere('lname', 'LIKE', "%{$request->actual_search}%")
+                //->orWhere('patients.void', 0)
                 ->get();
+            
+            //dd($clientName);
+            //$client_name = $this->cleanName($clientName);
+
+            //dd($client_name);
+
             //dd($clients);
 
             // $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();

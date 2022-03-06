@@ -2,20 +2,11 @@
 
 @section('content')
 
-<<<<<<< Updated upstream
     <div class="container" style="margin-top:10%;">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     {{--                <a href="referrals" > <button class="btn-primary btn btn-sm" type="button" id="new_appointment"><i class="fa fa-plus"></i> New Referral</button></a>--}}
-=======
-<div class="container">
-    <div class="col-md-12">
-        <div >
-            <div class="card-body col-md-12">
-                {{-- <a href="referrals"> <button class="btn-primary btn btn-sm" type="button" id="new_appointment"><i
-                            class="fa fa-plus"></i> New Referral</button></a>--}}
->>>>>>> Stashed changes
 
                 <br>
                 <br>
@@ -47,7 +38,7 @@
                         <td>{{ $user->lname }}</td>
                         <td>{{ $user->dob}}</td>
                         <td>{{ $user->id_no}}</td>
-                        <td>{{$user->name}}</td>
+                        <td>{{$user->facility_id}}</td>
                         <td><a href='edit/{{ $user->id }}'><button class="btn btn-success">Initiate
                                     Transfer</button></a></td>
                         <td><a href='update_client/{{ $user->id }}'><button class="btn btn-success">Edit</button></a>
