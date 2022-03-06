@@ -72,8 +72,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="national_id_number">Facility Transferring To</label>
-                        <input name="facility2" type="text" class="form-control" id="CCC_Number" readonly value="{{  $facilityobj["name"] }}">
-
+                        <input name="facility_name" type="text" class="form-control" id="CCC_Number" readonly value="{{  $facilityobj["name"] }}">
+                        <input style="display: none;" name="facility_id" type="text" class="form-control" id="CCC_Number" readonly value="{{  $user->facility2}}">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="mfl_code">MFL Code</label>

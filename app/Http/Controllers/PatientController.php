@@ -315,6 +315,7 @@ class PatientController extends Controller
     public function allclients()
     {
         $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+                            ->where('patients.void',0)
                             ->get(['patients.*','facilities.name']);
 
 

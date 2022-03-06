@@ -57,16 +57,16 @@
                 >
                   <i class="fas fa-home fa-fw me-3"></i><span>Home</span>
                 </a>
-                <a href="search" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="/search" class="list-group-item list-group-item-action py-2 ripple">
                   <i class="fas fa-search fa-fw me-3"></i><span>Search Client</span>
                 </a>
-                <a href="new_client" class="list-group-item list-group-item-action py-2 ripple"
+                <a href="/new_client" class="list-group-item list-group-item-action py-2 ripple"
                   ><i class="fas fa-plus fa-fw me-3"></i><span>Add new Client</span></a
                 >
-                <a href="register_user" class="list-group-item list-group-item-action py-2 ripple"
+                <a href="/register_user" class="list-group-item list-group-item-action py-2 ripple"
                   ><i class="fas fa-users fa-fw me-3"></i><span> Register User</span></a
                 >
-                  <a href="transfers" class="list-group-item list-group-item-action py-2 ripple"
+                  <a href="/transfers" class="list-group-item list-group-item-action py-2 ripple"
                   ><i class="fas fa-list fa-fw me-3"></i><span> Transfers
 
                       <label class="badge badge-danger" style="font-size: 15px;">{{ DB::table('patients')->where('transferstatus',[1])->count() }}</label>
