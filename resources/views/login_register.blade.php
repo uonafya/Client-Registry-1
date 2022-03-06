@@ -453,9 +453,10 @@ form.sign-in-form {
             <p>
               Welcome to client rigestry national data Ware House. You can find more information here.
             </p>
-            <button  class="btn transparent" id="sign-in-btn">
+            <a href="{{ url('/documentation/') }}" class="btn btn-xs btn-info pull-right">Documentation</a>
+            {{-- <button  class="btn transparent" id="sign-in-btn">
               Documentation
-            </button>
+            </button> --}}
           <div class="logo">
 
           <img src="img/kenya-logo.png" class="image" alt="" style="width:300px; height:300px;"/>

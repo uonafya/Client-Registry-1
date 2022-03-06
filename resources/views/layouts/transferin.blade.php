@@ -16,7 +16,7 @@
             <div class="panel-heading">
                 <center style="font-weight: bold"><h2>Client Transfer</h2></center>
             </div>
-            <hr><br>
+            <hr>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="fname">First Name</label>
@@ -73,7 +73,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="national_id_number">Facility Transferring To</label>
-                    <select name="facility_id" id="facility" class="form-control" searchable>
+                    <select name="facility_id" id="facility" class="form-control">
                         <option selected disabled>Select facility</option>
                         @foreach ($facilities as $facilitykey => $facility)
 
@@ -154,8 +154,12 @@
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
     <script type="text/javascript">
         $(document).ready(function($){
+            $("#facility").select2();
             $('#mfl_code, #facility, #serial_number').on('change', function() {
                 $('#mfl_code').val($('#facility').val());
             });

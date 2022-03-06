@@ -30,4 +30,7 @@ class LoginController extends Controller
                 ->with('error','Email-Address And Password Are Wrong.');
         }
     }
+    public function documentation(){
+        return view('layouts.documentation');
+    }
 }

@@ -1,7 +1,7 @@
 
 
 @extends('layouts.app')
-gfg
+
 @section('content')
 <div class="container" style="background-color: white; margin-top:10%; margin-bottom:30%;">
     @if (Session::has('success'))
@@ -64,15 +64,15 @@ gfg
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="facility">Facility</label>
-                <select name="facility_id" id="facility_id" class="form-control" searchable>
-                    <option selected disabled>Select facility</option>
+                <select name="facility_id" id="facility_id" class="form-control">
+                    <option value="" selected disabled>Select facility</option>
                     {{-- <option value='Facility1'>Facility 1</option>
                     <option value='Facility2'>Facility 2</option> --}}
 
                     @foreach ($facilities as $facilitykey => $facility)
 
                     <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}}  - {{ $facility->name }}</option>
-            @endforeach
+                    @endforeach
                 </select>
             </div>
             <div class="form-group col-md-3">
@@ -143,9 +143,14 @@ gfg
         <button type="submit" class="btn btn-success">Save</button>
     </form>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
 <script type="text/javascript">
     $(document).ready(function($){
+        $("#facility_id").select2();
         $('#mfl_code, #CCC_Number, #facility_id, #serial_number').on('change', function() {
             $('#CCC_Number').val($('#facility_id').val() + ' - ' + $('#serial_number').val() );
             $('#mfl_code').val($('#facility_id').val());
