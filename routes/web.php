@@ -66,4 +66,6 @@ Route::get('/mail/send', [MailController::class, 'send']);
 
 Route::post('transferup/{id}',[PatientController::class, 'transferup']);
 
+Route::get('transfers',[PatientController::class, 'transfers']);
+
 

@@ -320,6 +320,20 @@ class PatientController extends Controller
 
         return view('layouts.viewclient', ['users' => $users]);
     }
+    //transfers
+    public function transfers()
+    {
+        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+            ->where('patients.transferstatus',1)
+            ->get(['patients.*','facilities.name']);
+
+
+//        $users = DB::table('patients')
+//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+//            ->get();
+
+        return view('layouts.transfers', ['users' => $users]);
+    }
 
     public function showclient($id)
     {

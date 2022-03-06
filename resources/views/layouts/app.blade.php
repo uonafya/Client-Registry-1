@@ -66,7 +66,13 @@
                 <a href="register_user" class="list-group-item list-group-item-action py-2 ripple"
                   ><i class="fas fa-users fa-fw me-3"></i><span> Register User</span></a
                 >
-               
+                  <a href="transfers" class="list-group-item list-group-item-action py-2 ripple"
+                  ><i class="fas fa-list fa-fw me-3"></i><span> Transfers
+
+                      <label class="badge badge-danger" style="font-size: 15px;">{{ DB::table('patients')->where('transferstatus',[1])->count() }}</label>
+
+                     </span></a>
+
               </div>
             </div>
           </nav>
@@ -81,8 +87,8 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" tabindex="-1">
-                    
-  
+
+
                     {{-- right side --}}
                     {{-- <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" > --}}
                         <ul class="navbar-nav ml-auto">
@@ -93,7 +99,7 @@
                                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                     </li>
                                 @endif
-    
+
                                 @if (Route::has('register'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -104,14 +110,14 @@
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre >
                                         {{ Auth::user()->name }}
                                     </a>
-    
+
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
-    
+
                                         <form id="logout-form" action="#" method="POST" class="d-none">
                                             @csrf
                                         </form>
@@ -129,8 +135,8 @@
                 @yield('content')
             </section>
         </div>
-        
-   
+
+
 
     @include('layouts.footer')
 </body>
