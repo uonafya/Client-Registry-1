@@ -48,46 +48,45 @@
                             </div>
                             <br>
                             <br>
-                            <table style="width: 100%" id="example3" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr style="color: green;">
-                                        <th style="width: 20%">CCC No.</th>
-                                        <th style="width: 20%">Firstname</th>
-                                        <th style="width: 20%">Midlename</th>
-                                        <th style="width: 20%">Lastname</th>
-                                        <th style="width: 20%">DOB</th>
-                                        <th style="width: 20%">ID No.</th>
-                                        <th style="width: 20%">Facility</th>
-                                        {{-- <th>Transfer Status</th>--}}
-                                        <center>
-                                            <th colspan="2">Tools</th>
-                                        </center>
-                                    </tr>
-                                </thead>
-
-                                <tr>
-                                    @foreach ($users as $user)
-                                <tr style="margin-left: 20px;">
-                                    <td>{{ $user->CCC_Number }}</td>
-                                    <td>{{ $user->fname}}</td>
-                                    <td>{{ $user->mname}}</td>
-                                    <td>{{ $user->lname }}</td>
-                                    <td>{{ $user->dob}}</td>
-                                    <td>{{ $user->id_no}}</td>
-                                    <td>{{$user->facility_id}}{{$user->name}}</td>
-                                    <td><a href='edit/{{ $user->id }}'><button class="btn btn-success">Initiate
-                                                Transfer</button></a></td>
-                                    <td><a href='update_client/{{ $user->id }}'><button
-                                                class="btn btn-success">Edit</button></a>
-                                    </td>
-                                    @endforeach
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
             </form>
+            <table style="width: 100%" id="example3" class="table table-bordered table-striped">
+                <thead>
+                    <tr style="color: green;">
+                        <th style="width: 20%">CCC No.</th>
+                        <th style="width: 20%">Firstname</th>
+                        <th style="width: 20%">Midlename</th>
+                        <th style="width: 20%">Lastname</th>
+                        <th style="width: 20%">DOB</th>
+                        <th style="width: 20%">ID No.</th>
+                        <th style="width: 20%">Facility</th>
+                        {{-- <th>Transfer Status</th>--}}
+                        <center>
+                            <th colspan="2">Tools</th>
+                        </center>
+                    </tr>
+                </thead>
+
+                <tr>
+                    @foreach ($users as $user)
+                <tr style="margin-left: 20px;">
+                    <td>{{ $user->CCC_Number }}</td>
+                    <td>{{ $user->fname}}</td>
+                    <td>{{ $user->mname}}</td>
+                    <td>{{ $user->lname }}</td>
+                    <td>{{ $user->dob}}</td>
+                    <td>{{ $user->id_no}}</td>
+                    <td>{{$user->facility_id}}{{$user->name}}</td>
+                    <td><a href='edit/{{ $user->id }}'><button class="btn btn-success">Initiate
+                                Transfer</button></a></td>
+                    <td><a href='update_client/{{ $user->id }}'><button
+                                class="btn btn-success">Edit</button></a>
+                        @endforeach
+                </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 </div>
