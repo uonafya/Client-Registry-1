@@ -41,7 +41,7 @@ public function searchClient(Request $request){
         // dd($ccc_no);
         // "31001-20571"
         $pt = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                        ->where('patients.void', 0) 
+                        ->where('patients.void', 0)
                         ->where('CCC_Number', $request->actual_search)->get(['patients.*','facilities.name']);
 
         return $pt;
@@ -54,7 +54,7 @@ public function searchClient(Request $request){
         // ->where('id',$id);
 
         $facilityPatients = Patient::  join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                                           ->where('patients.void', 0) 
+                                           ->where('patients.void', 0)
                                         ->where('facility_id', $request->actual_search)->get(['patients.*','facilities.name']);
 
         //dd($facilityPatients);
@@ -65,7 +65,7 @@ public function searchClient(Request $request){
         // return 'search by fc';
 
         $id_no = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                        ->where('patients.void', 0) 
+                        ->where('patients.void', 0)
                         ->where('id_no', $request->actual_search)->get(['patients.*','facilities.name']);
 
         //dd($id_no);
@@ -398,13 +398,12 @@ public function searchClient(Request $request){
         $county = $request->input('county');
         $enddate = $request->input('enddate');
         $transferstatus = 1;
-        $void=1;
         $transferred_by = Auth::user()->name;
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set void=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-            [$void, $facility_id, $transferstatus, $enddate, $enddate, $id]);
+        DB::update('update patients set  facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+            [ $facility_id, $transferstatus, $enddate, $enddate, $id]);
 
 //        $pcreate = Patient::create([
 ////            'fname',
@@ -461,17 +460,19 @@ public function searchClient(Request $request){
         $transferstatus = $request->input('transferstatus');
         $mfl_code = $request->input('mflcode2');
         $rject = $request->input('rject');
-
+        $void=1;
+        $trs=$transferstatus;
         $check = 0;
 
 
-        if ($transferstatus = 0) {
+        if ($check == $trs) {
             DB::update('update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rject, $rtransfer, $transferstatus, 0, 0, $id]);
-        } elseif ($transferstatus =2) {
+                [$rject, $rtransfer, $transferstatus, "2022-03-06 12:01:07","2022-03-06 12:01:07" , $id]);
 
-            DB::update('update patients set rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rtransfer, $transferstatus, $enddate, $enddate, $id]);
+        } else{
+
+            DB::update('update patients set void=?, rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
+                [$void, $rtransfer, $transferstatus, $enddate, $enddate, $id]);
 
             $pcreate = Patient::create([
 
@@ -496,8 +497,6 @@ public function searchClient(Request $request){
             ]);
             return back()->with(['success' => 'Client Transfer completed successfully']);
 
-        } else {
-            return ('Error');
         }
     }
 }
