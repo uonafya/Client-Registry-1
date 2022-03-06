@@ -2,7 +2,15 @@
 
 @section('content')
     @foreach ($users as $user)
-    <div class="container" style="background-color: white; margin-top:10%;">
+    <div class="container" style="background-color: white; margin-top:10%; margin-bottom:20%;">
+        @if (Session::has('success'))
+        <div class="col-sm-12">
+            <div class="alert alert-success " role="alert">
+                {{ Session::get('success') }}
+                <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+            </div>
+        </div>
+        @endif        
         <form  action = "/editc/{{ $user->id }}" method = "post" >
             @csrf
             <div class="panel-heading">
@@ -51,7 +59,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="facility">Current Facility</label>
-                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->name}}" readonly>
+                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{$user->facility_id}}  {{$user->name }}" readonly>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="mfl_code">MFL Code</label>
@@ -130,7 +138,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="residence">Residence</label>
-                    <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St">
+                    <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St"  value="{{$user->Resident}}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="residence">Reason For Transfer</label>
@@ -158,6 +166,17 @@
                     +'/' +$('#ward').val()
                     + '/'+$('#village').val());
             });
+
+            var residence=$('#Resident').val();
+            var array= residence.split("/");
+            var county = array[0];
+            var subcounty = array[1];
+            var ward = array[2];
+            var village = array[3];
+            $('#county').val(county);
+            $('#sub_county').val(subcounty);
+            $('#ward').val(ward);
+            $('#village').val(village);
 
         })
     </script>

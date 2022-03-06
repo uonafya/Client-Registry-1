@@ -2,7 +2,15 @@
 
 @section('content')
     @foreach ($users as $user)
-        <div class="container" style="background-color: white; margin-top: 6%; border-radius: 12px;%">
+        <div class="container" style="background-color: white; margin-top:10%; margin-bottom:30%;">
+            @if (Session::has('success'))
+            <div class="col-sm-12">
+                <div class="alert alert-success " role="alert">
+                    {{ Session::get('success') }}
+                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                </div>
+            </div>
+            @endif
             <form action = "/transferup/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
                 @csrf
                 <div class="panel-heading">

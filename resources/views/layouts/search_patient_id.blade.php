@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container" style="margin-top:10%;">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
+            {{-- <div class="card">
+                <div class="card-body"> --}}
                     {{--                <a href="referrals" > <button class="btn-primary btn btn-sm" type="button" id="new_appointment"><i class="fa fa-plus"></i> New Referral</button></a>--}}
 
                     <br>
-                    <table class="table table-bordered" style="border-radius: 12px;">
+                    <table class="table table-striped" style="border-radius: 12px;">
                         <thead>
                         <tr style="color: blue;">
                             <th>CCC No.</th>
@@ -46,13 +46,14 @@
 {{--                                            <?php endif ?>--}}
 {{--                                        </strong></li></td>--}}
                                 <td><a href = 'edit/{{ $user->id }}'><button class="btn btn-success">Initiate Transfer</button></a></td>
+                                <td><a href = 'update_client/{{ $user->id }}'><button class="btn btn-success">Edit</button></a></td>
                                 @endforeach
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                </div>
-            </div>
+                {{-- </div>
+            </div> --}}
         </div>
     </div>
 

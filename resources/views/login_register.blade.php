@@ -145,7 +145,7 @@ form.sign-in-form {
 
 .btn {
   width: 150px;
-  background-color: #5995fd;
+  background-color:green;
   border: none;
   outline: none;
   height: 49px;
@@ -159,7 +159,8 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-color: #4d84e2;
+  background-color: green;
+  opacity: 0.5;
 }
 .panels-container {
   position: absolute;
@@ -179,7 +180,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+  background-image: linear-gradient(-45deg, green 0%, #b8c0c2 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -391,6 +392,10 @@ form.sign-in-form {
 
   .image {
     display: none;
+    /* margin-right: 50%; */
+    /* left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); */
   }
   .panel .content {
     padding: 0.5rem 1rem;
@@ -408,6 +413,7 @@ form.sign-in-form {
     bottom: 28%;
     left: 50%;
   }
+
 }
 
 
@@ -450,8 +456,11 @@ form.sign-in-form {
             <button  class="btn transparent" id="sign-in-btn">
               Documentation
             </button>
+          <div class="logo">
+
+          <img src="img/kenya-logo.png" class="image" alt="" style="width:300px; height:300px;"/>
+        </div>
           </div>
-          <img src="img/register.svg" class="image" alt="" />
         </div>
       </div>
     </div>
