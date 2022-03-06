@@ -48,7 +48,7 @@
                             </div>
                             <br>
                             <br>
-                            <table id="example3" class="display dataTable table-responsive  table-striped">
+                            <table style="width: 100%" id="example3" class="table table-bordered table-striped">
                                 <thead>
                                     <tr style="color: green;">
                                         <th style="width: 20%">CCC No.</th>
@@ -74,7 +74,7 @@
                                     <td>{{ $user->lname }}</td>
                                     <td>{{ $user->dob}}</td>
                                     <td>{{ $user->id_no}}</td>
-                                    <td>{{$user->facility_id}}</td>
+                                    <td>{{$user->facility_id}}{{$user->name}}</td>
                                     <td><a href='edit/{{ $user->id }}'><button class="btn btn-success">Initiate
                                                 Transfer</button></a></td>
                                     <td><a href='update_client/{{ $user->id }}'><button
@@ -100,49 +100,49 @@
             });
         });
     });
-    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
-    $(function() {
-    $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-    $('#quickForm').validate({
-      rules: {
-        name: {
-          required: true,
-          name: true,
-        },
-      },
-      messages: {
-        name: {
-          required: "Please enter a client name ",
-          email: "Please enter a vaild client name "
-        },
-      },
-      errorElement: 'span',
-      errorPlacement: function(error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function(element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function(element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-    });
-    });
+    // $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    // $(function() {
+    // $("#example1").DataTable({
+    //   "responsive": true,
+    //   "lengthChange": false,
+    //   "autoWidth": false,
+    //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    // $('#example2').DataTable({
+    //   "paging": true,
+    //   "lengthChange": false,
+    //   "searching": false,
+    //   "ordering": true,
+    //   "info": true,
+    //   "autoWidth": false,
+    //   "responsive": true,
+    // });
+    // $('#quickForm').validate({
+    //   rules: {
+    //     name: {
+    //       required: true,
+    //       name: true,
+    //     },
+    //   },
+    //   messages: {
+    //     name: {
+    //       required: "Please enter a client name ",
+    //       email: "Please enter a vaild client name "
+    //     },
+    //   },
+    //   errorElement: 'span',
+    //   errorPlacement: function(error, element) {
+    //     error.addClass('invalid-feedback');
+    //     element.closest('.form-group').append(error);
+    //   },
+    //   highlight: function(element, errorClass, validClass) {
+    //     $(element).addClass('is-invalid');
+    //   },
+    //   unhighlight: function(element, errorClass, validClass) {
+    //     $(element).removeClass('is-invalid');
+    //   }
+    // });
+    // });
+    // });
 </script>
 @endsection
