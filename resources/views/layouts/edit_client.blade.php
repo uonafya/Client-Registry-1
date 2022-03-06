@@ -1,14 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
     @foreach ($users as $user)
-    <div class="container" style="background-color: white; margin-top:10%; ">
-        <form  action = "/update_client/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
+    <div class="container" style="background-color: white; margin-top:10%; margin-bottom:30%; ">
+
+        @if (Session::has('success'))
+            <div class="col-sm-12">
+                <div class="alert alert-success " role="alert">
+                    {{ Session::get('success') }}
+                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                </div>
+            </div>
+        @endif
+
+        <form  action = "/update_client/{{ $user->id }}" method = "post" style="margin-top: 5%; ">
             @csrf
             <div class="panel-heading">
                 <center ><h4>Edit Client Information</h4></center>
             </div>
-            <hr><br>
+            <hr>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="fname">First Name</label>
@@ -55,8 +66,8 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="national_id_number">Facility</label>
-                    <select name="facility" id="facility" class="form-control" value="{{$user->facility_id}}">
-                        <option value="{{ $user->facility_id }}" selected disabled>{{$user->facility_id}}  {{$user->name  }}</option>
+                    <select name="facility_id" id="facility_id" class="form-control">
+                        <option defaultValue="{{ $user->facility_id }}" selected disabled>{{$user->facility_id}}  {{$user->name  }}</option>
                         @foreach ($facilities as $facilitykey => $facility)
 
                             <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>
@@ -122,14 +133,7 @@
 
                 <div class="form-group col-md-3">
                     <label for="village">Village</label>
-                    <select name="village" id="village" class="form-control">
-                        <option value="" selected disabled>Select Village</option>
-                        @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-
-                            <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>
-                        @endforeach
-
-                    </select>
+                    <input name="village" type="text" class="form-control" id="village" >
 
                 </div>
             </div>
@@ -137,23 +141,25 @@
                 <label for="residence">Residence</label>
                 <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St" value="{{$user->Resident}}">
             </div>
-            <center><button type="submit" class="btn btn-success">Edit  </button></center>
+            <button type="submit" class="btn btn-success">Edit  </button>
         </form>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function($){
-            $('#mfl_code, #CCC_Number, #facility, #serial_number').on('change', function() {
-                $('#mfl_code').val($('#facility').val());
-                $('#CCC_Number').val($('#facility').val()+ ' - '+$('#serial_number').val());
+
+            $('#mfl_code, #CCC_Number, #facility_id, #serial_number').on('change', function() {
+                $('#mfl_code').val($('#facility_id').val());
+                $('#CCC_Number').val($('#facility_id').val()+ ' - '+$('#serial_number').val());
             });
             
             $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
-                $('#Resident').val($('#county').val() +',  '
+                $('#Resident').val($('#county').val() +'/'
                     + $('#sub_county').val()
-                    +',  ' +$('#ward').val()
-                    + ',  '+$('#village').val());
+                    +'/' +$('#ward').val()
+                    + '/'+$('#village').val());
             });
 
             //extract serial number
@@ -164,7 +170,7 @@
 
             //extract residence
             var residence=$('#Resident').val();
-            var array= residence.split(",  ");
+            var array= residence.split("/");
             var county = array[0];
             var subcounty = array[1];
             var ward = array[2];

@@ -1,9 +1,17 @@
 
 
 @extends('layouts.app')
-
+gfg
 @section('content')
-<div class="container" style="background-color: white; margin-top:10%;">
+<div class="container" style="background-color: white; margin-top:10%; margin-bottom:30%;">
+    @if (Session::has('success'))
+    <div class="col-sm-12">
+        <div class="alert alert-success " role="alert">
+            {{ Session::get('success') }}
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    </div>
+    @endif
     <form action="/create_patient" method="post" >
         @csrf
         <div class="panel-heading" style="padding-top:2%">

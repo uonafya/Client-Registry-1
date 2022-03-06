@@ -2,7 +2,15 @@
 
 @section('content')
     @foreach ($users as $user)
-        <div class="container" style="background-color: white; margin-top: 6%; border-radius: 12px;%">
+        <div class="container" style="background-color: white; margin-top:10%; margin-bottom:30%;">
+            @if (Session::has('success'))
+            <div class="col-sm-12">
+                <div class="alert alert-success " role="alert">
+                    {{ Session::get('success') }}
+                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                </div>
+            </div>
+            @endif
             <form action = "/transferup/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
                 @csrf
                 <div class="panel-heading">
@@ -72,8 +80,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="national_id_number">Facility Transferring To</label>
-                        <input name="facility2" type="text" class="form-control" id="CCC_Number" readonly value="{{  $facilityobj["name"] }}">
-
+                        <input name="facility_name" type="text" class="form-control" id="CCC_Number" readonly value="{{  $facilityobj["name"] }}">
+                        <input style="display: none;" name="facility_id" type="text" class="form-control" id="CCC_Number" readonly value="{{  $user->facility2}}">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="mfl_code">MFL Code</label>

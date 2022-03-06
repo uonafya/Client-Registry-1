@@ -28,6 +28,71 @@ class PatientController extends Controller
         return view('search');
     }
 
+
+//    public function search()
+//    {
+//        return view('search');
+//    }
+public function searchClient(Request $request){
+
+    if($request->search_criteria == 'CCC Number'){
+        // return 'searching by ccc';
+        $ccc_no = (String) $request->actual_search;
+        // dd($ccc_no);
+        // "31001-20571"
+        $pt = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+                        ->where('patients.void', 0)
+                        ->where('CCC_Number', $request->actual_search)->get(['patients.*','facilities.name']);
+
+        return $pt;
+
+
+    }elseif($request->search_criteria == 'Facility'){
+        // return 'search by fc';
+        // $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+        // ->get(['patients.*','facilities.name'])
+        // ->where('id',$id);
+
+        $facilityPatients = Patient::  join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+                                           ->where('patients.void', 0)
+                                        ->where('facility_id', $request->actual_search)->get(['patients.*','facilities.name']);
+
+        //dd($facilityPatients);
+
+        //return $facilityPatients;
+        return view('layouts.search_facility_patient', compact('facilityPatients'));
+    }elseif($request->search_criteria == 'National ID Number'){
+        // return 'search by fc';
+
+        $id_no = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+                        ->where('patients.void', 0)
+                        ->where('id_no', $request->actual_search)->get(['patients.*','facilities.name']);
+
+        //dd($id_no);
+        //return $id_no;
+        return view('layouts.search_patient_id', compact('id_no'));
+    }
+    // elseif($request->search_criteria == 'Client Name'){
+    //     // return 'search by fc';
+
+
+            // $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
+
+
+    //     $client_name = $request->actual_search;
+
+    //     $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
+
+    //     $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
+    //     //dd($id_no);
+    //     //return $id_no;
+    //     return view('layouts.search_patient_name', compact('client_name'));
+    // }
+
+
+    $searchQuery = $request->searchQuery;
+}
+
     /**
      * Show the form for creating a new resource.
      *
@@ -35,57 +100,6 @@ class PatientController extends Controller
      */
     public function create(Patient $patient, Request $request)
     {
-    }
-
-//    public function search()
-//    {
-//        return view('search');
-//    }
-
-    public function searchClient(Request $request){
-
-        if($request->search_criteria == 'CCC Number'){
-            // return 'searching by ccc';
-            $ccc_no = (String) $request->actual_search;
-            // dd($ccc_no);
-            // "31001-20571"
-            $pt = Patient::where('CCC_Number',$ccc_no   )->get();
-            return $pt;
-
-
-        }elseif($request->search_criteria == 'Facility'){
-            // return 'search by fc';
-
-            $facilityPatients = Patient::   where('facility_id', $request->actual_search)->get();
-
-            //dd($facilityPatients);
-
-            //return $facilityPatients;
-            return view('layouts.search_facility_patient', compact('facilityPatients'));
-        }elseif($request->search_criteria == 'National ID Number'){
-            // return 'search by fc';
-
-            $id_no = Patient::where('id_no', $request->actual_search)->get();
-            //dd($id_no);
-            //return $id_no;
-            return view('layouts.search_patient_id', compact('id_no'));
-        }elseif($request->search_criteria == 'Client Name'){
-            // return 'search by fc';
-
-
-            // $client_name = $request->actual_search;
-
-            // $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
-
-
-
-
-            // $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
-            // //dd($id_no);
-            // //return $id_no;
-            $clientName = Patient::where('fname', $request->actual_search)->get();
-            return view('layouts.search_patient_name', compact('clientName'));
-        }
 
 
         $searchQuery = $request->searchQuery;
@@ -125,8 +139,19 @@ class PatientController extends Controller
             'Resident',
         ]));
 
-        return 'created';
+        return back()->with(['success' => 'Client created successfully' ]);
     }
+
+    // public function patient_facility(Patient $patient)
+    // {
+    //     // $data = Http::get('http://localhost:3000/facility');
+    //     // $facilities = json_decode($data->getBody()->getContents());
+
+    //     // $patient = $this->optionCounty();
+    //     //$this->getFacility();
+
+    //     return view('layouts.search_facility_patient'));
+    // }
 
     public function new_client(Patient $patient)
     {
@@ -169,7 +194,7 @@ class PatientController extends Controller
         $gender = $request->input('gender');
         $phone = $request->input('phone');
         $id_no = $request->input('id_no');
-        $facility_id = $request->input('facility');
+        $facility_id = $request->input('mfl_code');
         $cccno = $request->input('CCC_Number');
         $residence = $request->input('Resident');
         $county = $request->input('county');
@@ -180,6 +205,9 @@ class PatientController extends Controller
         'gender'=>$gender, 'Nemis'=>$nemis,
         'phone'=>$phone, 'id_no'=>$id_no,'facility_id'=>$facility_id, 'CCC_Number'=>$cccno,
         'Resident'=>$residence]);
+
+
+        return back()->with(['success' => 'Details updated successfully' ]);
     }
 
     /**
@@ -315,6 +343,7 @@ class PatientController extends Controller
     public function allclients()
     {
         $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+                            ->where('patients.void',0)
                             ->get(['patients.*','facilities.name']);
 
 
@@ -369,13 +398,12 @@ class PatientController extends Controller
         $county = $request->input('county');
         $enddate = $request->input('enddate');
         $transferstatus = 1;
-        $void=1;
         $transferred_by = Auth::user()->name;
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set void=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-            [$void, $facility_id, $transferstatus, $enddate, $enddate, $id]);
+        DB::update('update patients set  facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+            [ $facility_id, $transferstatus, $enddate, $enddate, $id]);
 
 //        $pcreate = Patient::create([
 ////            'fname',
@@ -409,7 +437,8 @@ class PatientController extends Controller
 //            'updated_by' => Auth::user()->name,
 //
 //        ]);
-        return 'success....Client Transfer has been iniated';
+        // return 'success....Client Transfer has been iniated';
+        return back()->with(['success' => 'Client Transfer has been initiated successfully']);
     }
     public function transferup(Request $request, $id)
     {
@@ -431,17 +460,19 @@ class PatientController extends Controller
         $transferstatus = $request->input('transferstatus');
         $mfl_code = $request->input('mflcode2');
         $rject = $request->input('rject');
-
+        $void=1;
+        $trs=$transferstatus;
         $check = 0;
 
 
-        if ($transferstatus = 0) {
+        if ($check == $trs) {
             DB::update('update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rject, $rtransfer, $transferstatus, 0, 0, $id]);
-        } elseif ($transferstatus =2) {
+                [$rject, $rtransfer, $transferstatus, "2022-03-06 12:01:07","2022-03-06 12:01:07" , $id]);
 
-            DB::update('update patients set rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rtransfer, $transferstatus, $enddate, $enddate, $id]);
+        } else{
+
+            DB::update('update patients set void=?, rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
+                [$void, $rtransfer, $transferstatus, $enddate, $enddate, $id]);
 
             $pcreate = Patient::create([
 
@@ -464,10 +495,8 @@ class PatientController extends Controller
                 'updated_by' => Auth::user()->name,
 
             ]);
-            return ('Sucess...');
+            return back()->with(['success' => 'Client Transfer completed successfully']);
 
-        } else {
-            return ('Error');
         }
     }
 }
