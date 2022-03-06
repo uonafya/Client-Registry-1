@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
+
+    //constructor
+
     public function login(Request $reqs)
     {
         // dd(request('email'), request('password'));

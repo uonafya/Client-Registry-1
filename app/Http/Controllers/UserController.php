@@ -64,19 +64,24 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request   User::create($request->only([
-    
+
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         // $pwd = $request->input('password');
         // dd($pwd);
+    //    $hash = Hash::make();
+
+       $req_user = $request->only("name","email","password","facility_id");
+        // dd($req_user);
+
         User::create($request->only([
-           
+
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->password),
-            'facility' => $request->input('facility'),
+            'facility_id' => $request->input('facility_id'),
 
         ]));
         // dd($request->only());

@@ -27,7 +27,11 @@
                 <label for="email">Email</label>
                 <input name="email" type="email" class="form-control" id="email" placeholder="Enter email">
             </div>
-           
+            <div class="form-group col-md-6">
+                <label for="email">Facility MFL_CODE</label>
+                <input name="facility_id" type="number class="form-control" id="email" placeholder="Enter Facility MFL_CODE">
+            </div>
+
 
         </div>
         <div class="form-row">
@@ -35,11 +39,11 @@
                 <label for="password">Password</label>
                 <input name="password" type="password" class="form-control" id="password" placeholder="Enter password">
             </div>
-            
+
         </div>
 
         <button type="submit" class="btn btn-success">Save</button>
-        
+
     </form>
 </div>
 @endsection

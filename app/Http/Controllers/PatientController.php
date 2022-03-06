@@ -80,16 +80,15 @@ class PatientController extends Controller
     //    }
 
     function cleanName($str) {
-  
-        // Using str_replace() function 
-        // to replace the word 
+
+        // Using str_replace() function
+        // to replace the word
         $res = str_replace( array( '\'', '"',
         '\'' , ';', '<', '>' ), ' ', $str);
-    
-        // Returning the result 
+
+        // Returning the result
         return $res;
         }
-
 
     public function searchClient(Request $request)
     {
@@ -120,9 +119,11 @@ class PatientController extends Controller
             // ->get(['patients.*','facilities.name'])
             // ->where('id',$id);
 
-            $facilityPatients = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-                ->where('patients.void', 0)
-                ->where('facility_id', $request->actual_search)->get(['patients.*', 'facilities.name']);
+            $facilityPatients = Patient::where("facility_id", Auth::user()->facility_id )->get();
+
+            // $facilityPatients = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            //     ->where('patients.void', 0)
+            //     ->where('facility_id', $request->actual_search)->get(['patients.*', 'facilities.name']);
 
             //dd($facilityPatients);
 
@@ -146,7 +147,7 @@ class PatientController extends Controller
                 ->orWhere('lname', 'LIKE', "%{$request->actual_search}%")
                 //->orWhere('patients.void', 0)
                 ->get();
-            
+
             //dd($clientName);
             //$client_name = $this->cleanName($clientName);
 
@@ -397,9 +398,12 @@ class PatientController extends Controller
     //allclients
     public function allclients()
     {
-        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-            ->where('patients.void', 0)
-            ->get(['patients.*', 'facilities.name']);
+        $current_you = auth()->user()->facility_id;
+
+        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+                            ->where('patients.void',0)
+                            ->where('patients.facility_id', $current_you)
+                            ->get(['patients.*','facilities.name']);
 
 
         return view('layouts.viewclient', ['users' => $users]);
@@ -407,9 +411,12 @@ class PatientController extends Controller
     //transfers
     public function transfers()
     {
-        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-            ->where('patients.transferstatus', 1)
-            ->get(['patients.*', 'facilities.name']);
+        $current_you = auth()->user()->facility_id;
+
+        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+            ->where('patients.transferstatus',1)
+            ->where('patients.facility2', $current_you)
+            ->get(['patients.*','facilities.name']);
 
 
         //        $users = DB::table('patients')

@@ -17,12 +17,14 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->boolean('is_admin')->default(0);
+            $table->boolean('is_admin')->nullable();
+            $table->unsignedBigInteger('facility_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('facility_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            // $table->foreign("facility_id")->references("id")->on("facilities")->onDelete("cascade")->onUpdate("cascade");
         });
     }
 
