@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\Patient;
 
 use App\Http\Controllers\EventController;
-
+use App\Http\Controllers\AccessAPIController;
 
 
 /*
@@ -61,19 +61,9 @@ Route::get('query_facilities_patients/{mfl_code}/', [PatientController::class, '
 
 Route::get('/event', [PatientController::class, 'updateEvent'])->name('event.index');
 
-
-// 36104-74927
-Route::get('/get_patient/{api_token}/{name}', function (Request $request) {
-
-    $patient = Patient::where('CCC_Number',$request->name)->get();
-
-    return $patient;
-    // response()->json([
-    //     // 'name' => $request->name,
-    //     $patient
-
-    // ]);
-})->middleware('api_token');
+Route::get('/get_access/', [AccessAPIController::class, 'getToken']);
+Route::get('/get_patient/{api_token}/{name}',[AccessAPIController::class, 'getPatientWithCCC'])->middleware('api_token');
+Route::get('/get_facility/{api_token}/{mflcode}',[AccessAPIController::class, 'getFacilityByMfl'])->middleware('api_token');
 
 Route::get('notify', function () {
     return view('welcome');

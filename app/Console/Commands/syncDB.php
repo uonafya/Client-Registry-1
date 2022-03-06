@@ -7,6 +7,7 @@ use App\Helpers\Http;
 
 use App\Events\AutoUpdateCREvent;
 use App\Events\SycDataApiEvent;
+use App\Events\syncFacilityEvent;
 
 
 class syncDB extends Command
@@ -45,8 +46,14 @@ class syncDB extends Command
         $data = Http::get('http://localhost:3000/patients');
         $patients = json_decode($data->getBody()->getContents());
 
+        $data = Http::get('http://localhost:3000/facility');
+        $facility = json_decode($data->getBody()->getContents());
+
+        event(new syncFacilityEvent($facility));
+
         // event(new AutoUpdateCREvent($patients));
         event(new SycDataApiEvent($patients));
+
 
         // return 0;
         $this->info('Syncing db with data from remote source');

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 use App\Models\Patient;
+use App\Models\Facility;
 
 
 class SycDataApiListener implements ShouldQueue
@@ -29,13 +30,13 @@ class SycDataApiListener implements ShouldQueue
     public function handle($event)
     {
 
-        // dd($event->patients);
+        // dd($event->facilities);
         // sleep(10);
 
         foreach($event->patients as $patient)
         {
 
-            if (Patient::where('CCC_Number', $patient->ccc_number)->exists()) {
+            if (Patient::where('CCC_Number', $patient->ccc_number)->exists() && $patient->ccc_number == null) {
                 // patients with the same ccc_no already exists
                 continue;
                 // dump('user with ccc_number'.$patient->ccc_number);
@@ -56,5 +57,6 @@ class SycDataApiListener implements ShouldQueue
                 ]);
             }
         }
+
     }
 }

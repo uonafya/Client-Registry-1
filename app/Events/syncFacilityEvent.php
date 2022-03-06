@@ -10,20 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SycDataApiEvent
+class syncFacilityEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $patients;
+    public $facilities;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($patients)
+    public function __construct($facilities)
     {
-        $this->patients = $patients;
+        $this->facilities = $facilities;
         // dd($facilities);
     }
 
