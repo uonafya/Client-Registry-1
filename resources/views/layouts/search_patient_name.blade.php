@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container" style="margin-top: 10%">
         <div class="col-md-12">
             {{-- <div class="card">
                 <div class="card-body"> --}}
@@ -25,7 +25,7 @@
                         </thead>
 
                         <tr>
-                        @foreach ($clientName as $user)
+                        @foreach ($client_name as $user)
                             <tr style="margin-left: 20px;">
                                 <td>{{ $user->CCC_Number }}</td>
                                 <td>{{ $user->fname}}</td>

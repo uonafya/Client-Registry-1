@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facility;
+use App\Models\Transfers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Patient;
@@ -64,30 +65,16 @@ public function searchClient(Request $request){
     }elseif($request->search_criteria == 'National ID Number'){
         // return 'search by fc';
 
-        $id_no = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                        ->where('patients.void', 0)
-                        ->where('id_no', $request->actual_search)->get(['patients.*','facilities.name']);
+        $id_no = Patient::where('id_no', $request->actual_search)->get();
 
         //dd($id_no);
         //return $id_no;
         return view('layouts.search_patient_id', compact('id_no'));
     }
-    // elseif($request->search_criteria == 'Client Name'){
-    //     // return 'search by fc';
-
-
-            // $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
-
-
-    //     $client_name = $request->actual_search;
-
-    //     $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
-
-    //     $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
-    //     //dd($id_no);
-    //     //return $id_no;
-    //     return view('layouts.search_patient_name', compact('client_name'));
-    // }
+     elseif($request->search_criteria == 'Client Name'){
+         $client_name= Patient::where('fname', $request->actual_search)->get();
+         return view('layouts.search_patient_name', compact('client_name'));
+     }
 
 
     $searchQuery = $request->searchQuery;
@@ -495,6 +482,25 @@ public function searchClient(Request $request){
                 'transferred_by' => Auth::user()->name,
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
+
+            ]);
+            $pcreate = Transfers::create([
+
+                'fname' => $request->input('fname'),
+                'mname' => $request->input('mname'),
+                'lname' => $request->input('lname'),
+                'Nemis' => $request->input('Nemis'),
+                'dob' => $request->input('dob'),
+                'gender' => $request->input('gender'),
+                'phone' => $request->input('phone'),
+                'id_no' => $request->input('id_no'),
+                'facility_id' => $request->input('facility_id'),
+                'CCC_Number' => $request->input('CCC_Number'),
+                'Resident' => $request->input('Resident'),
+                'rtransfer' => $request->input('rtransfer'),
+                'ifacility' => $request->input('ifacility'),
+                'transferstatus' => 2,
+                'transferred_by' => Auth::user()->name,
 
             ]);
             return back()->with(['success' => 'Client Transfer completed successfully']);
