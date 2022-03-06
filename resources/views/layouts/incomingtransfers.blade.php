@@ -2,7 +2,7 @@
 
 @section('content')
     @foreach ($users as $user)
-        <div class="container" style="background-color: white">
+        <div class="container" style="background-color: white; margin-top: 6%; border-radius: 12px;%">
             <form action = "/transferup/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
                 @csrf
                 <div class="panel-heading">
@@ -69,7 +69,24 @@
                         <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly value="{{$user->CCC_Number}}">
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="national_id_number">Facility Transferring To</label>
+                        <input name="facility2" type="text" class="form-control" id="CCC_Number" readonly value="{{  $facilityobj["name"] }}">
 
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="mfl_code">MFL Code</label>
+                        <input name="mfl_code" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility2}}">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="dot">Date Transfer was Initiated</label>
+                        <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer" value="{{$user->dot}}" readonly>
+                    </div>
+
+
+                </div>
 
 
                 <div class="form-row">
@@ -103,26 +120,6 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-4">
-                    <label for="dot">Date Transfer was Initiated</label>
-                    <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer" value="{{$user->dot}}" readonly>
-                </div>
-
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="national_id_number">Facility Transferring To</label>
-                        <input name="facility2" type="text" class="form-control" id="CCC_Number" readonly value="{{  $facilityobj["name"] }}">
-
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="mfl_code">MFL Code</label>
-                        <input name="mfl_code" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility2}}">
-                    </div>
-
-
-                </div>
             @endforeach
 
                 <center><button type="submit" class="btn btn-primary">Save</button></center>

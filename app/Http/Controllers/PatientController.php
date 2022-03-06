@@ -293,16 +293,6 @@ class PatientController extends Controller
 
         $facilityobj = $facilityto[0];
 
-//        return $facilityobj->name;
-
-//        dd($facilityto);
-//        $facilityname = $facilityto[0]->name;
-//        return $facilityname;
-
-
-//        $users = DB::table('patients')
-//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-//            ->get();
 
         return view('layouts.incomingtransfers', ['users' => $users], compact('facilityobj'));
     }
@@ -327,10 +317,6 @@ class PatientController extends Controller
         $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
                             ->get(['patients.*','facilities.name']);
 
-
-//        $users = DB::table('patients')
-//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-//            ->get();
 
         return view('layouts.viewclient', ['users' => $users]);
     }
@@ -383,12 +369,13 @@ class PatientController extends Controller
         $county = $request->input('county');
         $enddate = $request->input('enddate');
         $transferstatus = 1;
+        $void=1;
         $transferred_by = Auth::user()->name;
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-            [$facility_id, $transferstatus, $enddate, $enddate, $id]);
+        DB::update('update patients set void=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+            [$void, $facility_id, $transferstatus, $enddate, $enddate, $id]);
 
 //        $pcreate = Patient::create([
 ////            'fname',
@@ -449,12 +436,12 @@ class PatientController extends Controller
 
 
         if ($transferstatus = 0) {
-            DB::update('update patients set rject=?, rtransfer=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rject, $rtransfer, 0, $transferstatus, 0, 0, $id]);
+            DB::update('update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
+                [$rject, $rtransfer, $transferstatus, 0, 0, $id]);
         } elseif ($transferstatus =2) {
 
-            DB::update('update patients set rtransfer=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rtransfer, 0, $transferstatus, $enddate, $enddate, $id]);
+            DB::update('update patients set rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
+                [$rtransfer, $transferstatus, $enddate, $enddate, $id]);
 
             $pcreate = Patient::create([
 
