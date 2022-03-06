@@ -10,8 +10,8 @@
 
                     <br>
                     <table class="table table-striped" style="border-radius: 12px;">
-                        <thead>
-                        <tr style="color: blue;">
+                        <thead class="thead-light">
+                        <tr>
                             <th>CCC No.</th>
                             <th>Firstname</th>
                             <th>Midlename</th>
