@@ -11,7 +11,8 @@
                 "date_created": "2014-07-15T15:45:17",
                 "county": null,
                 "village": null,
-                "ccc_number": "24675-48090"
+                "ccc_number": "24675-48090",
+                "facility_id": "24675"
             },
             {
                 "first_name": "Kichaka",
@@ -23,7 +24,8 @@
                 "date_created": "2014-04-16T14:19:25",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Kitioko",
@@ -35,7 +37,8 @@
                 "date_created": "2014-04-24T15:56:54",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Wenger",
@@ -47,7 +50,8 @@
                 "date_created": "2014-05-05T13:11:21",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "WageBill",
@@ -59,7 +63,8 @@
                 "date_created": "2014-05-05T15:25:33",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Matatu",
@@ -71,7 +76,8 @@
                 "date_created": "2014-05-05T15:27:38",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Wenger",
@@ -83,7 +89,8 @@
                 "date_created": "2014-05-05T15:27:38",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Bomber",
@@ -95,7 +102,8 @@
                 "date_created": "2014-05-06T09:58:35",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Gasoline",
@@ -119,7 +127,8 @@
                 "date_created": "2014-05-06T10:31:23",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Kitioko",
@@ -131,7 +140,8 @@
                 "date_created": "2014-05-06T10:43:23",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Testing",
@@ -143,7 +153,8 @@
                 "date_created": "2014-05-06T10:43:23",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Testing",
@@ -155,7 +166,8 @@
                 "date_created": "2014-05-06T12:11:24",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Blablala",
@@ -167,7 +179,8 @@
                 "date_created": "2014-05-06T12:51:55",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Wenger",
@@ -179,7 +192,8 @@
                 "date_created": "2014-05-06T13:04:00",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Kichaka",
@@ -191,7 +205,8 @@
                 "date_created": "2014-05-06T13:24:03",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "WageBill",
@@ -203,7 +218,8 @@
                 "date_created": "2014-05-06T13:47:29",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Matatu",
@@ -215,7 +231,8 @@
                 "date_created": "2014-05-06T14:29:22",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Bomber",
@@ -227,7 +244,8 @@
                 "date_created": "2014-05-06T14:43:00",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Gasoline",
@@ -239,7 +257,8 @@
                 "date_created": "2014-05-06T15:07:37",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Cognitive",
@@ -251,7 +270,8 @@
                 "date_created": "2014-05-06T15:34:14",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Kitioko",
@@ -263,7 +283,8 @@
                 "date_created": "2014-05-06T15:41:07",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Testing",
@@ -275,7 +296,8 @@
                 "date_created": "2014-05-06T16:10:44",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Blablala",
@@ -287,7 +309,8 @@
                 "date_created": "2014-05-06T16:20:14",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Wenger",
@@ -299,7 +322,8 @@
                 "date_created": "2014-05-06T16:39:00",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Kichaka",
@@ -311,7 +335,8 @@
                 "date_created": "2014-05-07T09:10:40",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "WageBill",
@@ -323,7 +348,8 @@
                 "date_created": "2014-05-07T09:19:49",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             },
             {
                 "first_name": "Matatu",
@@ -335,7 +361,8 @@
                 "date_created": "2014-05-07T10:22:58",
                 "county": null,
                 "village": null,
-                "ccc_number": "22892-39234"
+                "ccc_number": "22892-39234",
+                "facility_id": "22892"
             }
         ]
     ]

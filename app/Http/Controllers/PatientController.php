@@ -29,69 +29,82 @@ class PatientController extends Controller
     }
 
 
-//    public function search()
-//    {
-//        return view('search');
-//    }
-public function searchClient(Request $request){
+    //    public function search()
+    //    {
+    //        return view('search');
+    //    }
+    public function searchClient(Request $request)
+    {
 
-    if($request->search_criteria == 'CCC Number'){
-        // return 'searching by ccc';
-        $ccc_no = (String) $request->actual_search;
-        // dd($ccc_no);
-        // "31001-20571"
-        $pt = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                        ->where('patients.void', 0)
-                        ->where('CCC_Number', $request->actual_search)->get(['patients.*','facilities.name']);
+        if ($request->search_criteria == 'CCC Number') {
+            // return 'searching by ccc';
+            // $ccc_no = (string) $request->actual_search;
+            // // dd($ccc_no);
+            // // "31001-20571"
+            // $pt = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            //     ->where('patients.void', 0)
+            //     ->where('CCC_Number', $request->actual_search)->get(['patients.*', 'facilities.name']);
 
-        return $pt;
+            // return $pt;
 
 
-    }elseif($request->search_criteria == 'Facility'){
-        // return 'search by fc';
-        // $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-        // ->get(['patients.*','facilities.name'])
-        // ->where('id',$id);
+            $ccc_no = Patient::query()
+                ->where('CCC_Number', 'LIKE', "%{$request->actual_search}%")->get();
+                // ->orWhere('mname', 'LIKE', "%{$request->actual_search}%")
+                // ->orWhere('lname', 'LIKE', "%{$request->actual_search}%")
+                // ->get();
 
-        $facilityPatients = Patient::  join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                                           ->where('patients.void', 0)
-                                        ->where('facility_id', $request->actual_search)->get(['patients.*','facilities.name']);
+                return view('layouts.search_patient_no', compact('ccc_no'));
+        } elseif ($request->search_criteria == 'Facility') {
+            // return 'search by fc';
+            // $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
+            // ->get(['patients.*','facilities.name'])
+            // ->where('id',$id);
 
-        //dd($facilityPatients);
+            $facilityPatients = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+                ->where('patients.void', 0)
+                ->where('facility_id', $request->actual_search)->get(['patients.*', 'facilities.name']);
 
-        //return $facilityPatients;
-        return view('layouts.search_facility_patient', compact('facilityPatients'));
-    }elseif($request->search_criteria == 'National ID Number'){
-        // return 'search by fc';
+            //dd($facilityPatients);
 
-        $id_no = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                        ->where('patients.void', 0)
-                        ->where('id_no', $request->actual_search)->get(['patients.*','facilities.name']);
+            //return $facilityPatients;
+            return view('layouts.search_facility_patient', compact('facilityPatients'));
+        } elseif ($request->search_criteria == 'National ID Number') {
+            // return 'search by fc';
 
-        //dd($id_no);
-        //return $id_no;
-        return view('layouts.search_patient_id', compact('id_no'));
+            $id_no = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+                ->where('patients.void', 0)
+                ->where('id_no', $request->actual_search)->get(['patients.*', 'facilities.name']);
+
+            //dd($id_no);
+            //return $id_no;
+            return view('layouts.search_patient_id', compact('id_no'));
+        } elseif ($request->search_criteria == 'Client Name') {
+            // return 'search by fc';
+
+
+
+
+            $client_name = Patient::query()
+                ->where('fname', 'LIKE', "%{$request->actual_search}%")
+                ->orWhere('mname', 'LIKE', "%{$request->actual_search}%")
+                ->orWhere('lname', 'LIKE', "%{$request->actual_search}%")
+                ->get();
+            //dd($clients);
+
+            // $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
+            // //dd($id_no);
+            // //return $id_no;
+            //$ccc_no = (string) $request->actual_search;
+            // $client_name = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            //     ->where('patients.void', 0)
+            //     ->where('fname', $request->actual_search)->get(['patients.*', 'fname']);
+            return view('layouts.search_patient_name', compact('client_name'));
+        }
+
+
+        $searchQuery = $request->searchQuery;
     }
-    // elseif($request->search_criteria == 'Client Name'){
-    //     // return 'search by fc';
-
-
-            // $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
-
-
-    //     $client_name = $request->actual_search;
-
-    //     $clients = DB::table('patients')->where('fname', '=', $fname)->orWhere('mname', '=', $mname)->orWhere('lname', '=', $lname)->get();
-
-    //     $client_name = Patient::where('fname','mname','lname', $request->actual_search)->get();
-    //     //dd($id_no);
-    //     //return $id_no;
-    //     return view('layouts.search_patient_name', compact('client_name'));
-    // }
-
-
-    $searchQuery = $request->searchQuery;
-}
 
     /**
      * Show the form for creating a new resource.
@@ -139,7 +152,7 @@ public function searchClient(Request $request){
             'Resident',
         ]));
 
-        return back()->with(['success' => 'Client created successfully' ]);
+        return back()->with(['success' => 'Client created successfully']);
     }
 
     // public function patient_facility(Patient $patient)
@@ -199,15 +212,17 @@ public function searchClient(Request $request){
         $residence = $request->input('Resident');
         $county = $request->input('county');
 
-       DB::table('patients')
-        ->where('id', $id)
-        ->update(['fname'=>$fname,'mname'=>$mname, 'lname'=>$lname, 'dob'=>$dob,
-        'gender'=>$gender, 'Nemis'=>$nemis,
-        'phone'=>$phone, 'id_no'=>$id_no,'facility_id'=>$facility_id, 'CCC_Number'=>$cccno,
-        'Resident'=>$residence]);
+        DB::table('patients')
+            ->where('id', $id)
+            ->update([
+                'fname' => $fname, 'mname' => $mname, 'lname' => $lname, 'dob' => $dob,
+                'gender' => $gender, 'Nemis' => $nemis,
+                'phone' => $phone, 'id_no' => $id_no, 'facility_id' => $facility_id, 'CCC_Number' => $cccno,
+                'Resident' => $residence
+            ]);
 
 
-        return back()->with(['success' => 'Details updated successfully' ]);
+        return back()->with(['success' => 'Details updated successfully']);
     }
 
     /**
@@ -231,7 +246,7 @@ public function searchClient(Request $request){
             "fname" => "required",
             "mname" => "required",
             "lname" => "required",
-            "dob" =>"required",
+            "dob" => "required",
             "gender" => 'required',
             "Phone" => "required",
             "id_no" => "required",
@@ -240,7 +255,7 @@ public function searchClient(Request $request){
             "Resident" => 'required',
         ]);
 
-        $patient->where('id',$req->id)->update($data);
+        $patient->where('id', $req->id)->update($data);
 
         // $patient->update($data);
     }
@@ -250,8 +265,7 @@ public function searchClient(Request $request){
         $patient = Patient::find($reqs->id);
         $patient_exists = Patient::where('ID_Number', $reqs->id_no);
 
-        if($patient_exists->exists())
-        {
+        if ($patient_exists->exists()) {
             dd($patient[0]);
         }
     }
@@ -294,9 +308,9 @@ public function searchClient(Request $request){
         $facilities = json_decode($data->getBody()->getContents());
         $patient = $this->optionCounty();
 
-        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                            ->get(['patients.*','facilities.name'])
-                            ->where('id',$id);
+        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->get(['patients.*', 'facilities.name'])
+            ->where('id', $id);
 
 
 
@@ -307,17 +321,17 @@ public function searchClient(Request $request){
     public function clientapprej(Request $request, $id)
     {
         $users = DB::table('patients')
-            ->join('facilities', 'patients.facility_id' , '=' , 'facilities.mfl_code')
-            ->get(['patients.*','facilities.name'])
-            ->where('id',$id);
+            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->get(['patients.*', 'facilities.name'])
+            ->where('id', $id);
 
-//        return $users;
+        //        return $users;
 
 
 
-        $facilityto = Patient::join('facilities', 'patients.facility2' , '=' , 'facilities.mfl_code')
-        ->get(['patients.*','facilities.name'])
-        ->where('id',$id);
+        $facilityto = Patient::join('facilities', 'patients.facility2', '=', 'facilities.mfl_code')
+            ->get(['patients.*', 'facilities.name'])
+            ->where('id', $id);
 
         $facilityobj = $facilityto[0];
 
@@ -327,14 +341,14 @@ public function searchClient(Request $request){
     //indidual
     public function individual(Request $request, $id)
     {
-       $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                             ->where('patients.id',[$id])
-                            ->get(['patients.*','facilities.name']);
+        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->where('patients.id', [$id])
+            ->get(['patients.*', 'facilities.name']);
 
 
-//        $users = DB::table('patients')
-//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-//            ->get();
+        //        $users = DB::table('patients')
+        //            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+        //            ->get();
 
         return view('layouts.viewindividual', ['users' => $users]);
     }
@@ -342,9 +356,9 @@ public function searchClient(Request $request){
     //allclients
     public function allclients()
     {
-        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-                            ->where('patients.void',0)
-                            ->get(['patients.*','facilities.name']);
+        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->where('patients.void', 0)
+            ->get(['patients.*', 'facilities.name']);
 
 
         return view('layouts.viewclient', ['users' => $users]);
@@ -352,14 +366,14 @@ public function searchClient(Request $request){
     //transfers
     public function transfers()
     {
-        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-            ->where('patients.transferstatus',1)
-            ->get(['patients.*','facilities.name']);
+        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->where('patients.transferstatus', 1)
+            ->get(['patients.*', 'facilities.name']);
 
 
-//        $users = DB::table('patients')
-//            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
-//            ->get();
+        //        $users = DB::table('patients')
+        //            ->join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+        //            ->get();
 
         return view('layouts.transfers', ['users' => $users]);
     }
@@ -371,14 +385,14 @@ public function searchClient(Request $request){
         $patient = $this->optionCounty();
 
 
-        $users = Patient::join('facilities', 'patients.facility_id', '=' , 'facilities.mfl_code')
-            ->where('patients.id',[$id])
-            ->get(['patients.*','facilities.name']);
+        $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
+            ->where('patients.id', [$id])
+            ->get(['patients.*', 'facilities.name']);
 
-//
-//        $users = DB::select('select * from patients where id = ?', [$id]);
+        //
+        //        $users = DB::select('select * from patients where id = ?', [$id]);
 
-        return view('layouts.transferin', ['users' => $users],compact('facilities','patient'));
+        return view('layouts.transferin', ['users' => $users], compact('facilities', 'patient'));
     }
 
     public function editc(Request $request, $id)
@@ -402,41 +416,43 @@ public function searchClient(Request $request){
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set  facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-            [ $facility_id, $transferstatus, $enddate, $enddate, $id]);
+        DB::update(
+            'update patients set  facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+            [$facility_id, $transferstatus, $enddate, $enddate, $id]
+        );
 
-//        $pcreate = Patient::create([
-////            'fname',
-////            'mname',
-////            'lname',
-////            'nemis',
-////            'dob',
-////            'gender',s
-////            'phone',
-////            'id_no',
-////            'cccno',
-////            'residence',
-////            'county',
-////            'facility',
-//
-//            'fname' => $request->input('fname'),
-//            'mname' => $request->input('mname'),
-//            'lname' => $request->input('lname'),
-//            'Nemis' => $request->input('Nemis'),
-//            'dob' => $request->input('dob'),
-//            'gender' => $request->input('gender'),
-//            'phone' => $request->input('phone'),
-//            'id_no' => $request->input('id_no'),
-//            'facility_id' => $request->input('facility_id'),
-//            'CCC_Number' => $request->input('CCC_Number'),
-//            'Resident' => $request->input('Resident'),
-//            'county' => $request->input('county'),
-//            'transferin' => 1,
-//            'transferred_by' => Auth::user()->name,
-//            'created_by' => Auth::user()->name,
-//            'updated_by' => Auth::user()->name,
-//
-//        ]);
+        //        $pcreate = Patient::create([
+        ////            'fname',
+        ////            'mname',
+        ////            'lname',
+        ////            'nemis',
+        ////            'dob',
+        ////            'gender',s
+        ////            'phone',
+        ////            'id_no',
+        ////            'cccno',
+        ////            'residence',
+        ////            'county',
+        ////            'facility',
+        //
+        //            'fname' => $request->input('fname'),
+        //            'mname' => $request->input('mname'),
+        //            'lname' => $request->input('lname'),
+        //            'Nemis' => $request->input('Nemis'),
+        //            'dob' => $request->input('dob'),
+        //            'gender' => $request->input('gender'),
+        //            'phone' => $request->input('phone'),
+        //            'id_no' => $request->input('id_no'),
+        //            'facility_id' => $request->input('facility_id'),
+        //            'CCC_Number' => $request->input('CCC_Number'),
+        //            'Resident' => $request->input('Resident'),
+        //            'county' => $request->input('county'),
+        //            'transferin' => 1,
+        //            'transferred_by' => Auth::user()->name,
+        //            'created_by' => Auth::user()->name,
+        //            'updated_by' => Auth::user()->name,
+        //
+        //        ]);
         // return 'success....Client Transfer has been iniated';
         return back()->with(['success' => 'Client Transfer has been initiated successfully']);
     }
@@ -460,19 +476,22 @@ public function searchClient(Request $request){
         $transferstatus = $request->input('transferstatus');
         $mfl_code = $request->input('mflcode2');
         $rject = $request->input('rject');
-        $void=1;
-        $trs=$transferstatus;
+        $void = 1;
+        $trs = $transferstatus;
         $check = 0;
 
 
         if ($check == $trs) {
-            DB::update('update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rject, $rtransfer, $transferstatus, "2022-03-06 12:01:07","2022-03-06 12:01:07" , $id]);
+            DB::update(
+                'update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
+                [$rject, $rtransfer, $transferstatus, "2022-03-06 12:01:07", "2022-03-06 12:01:07", $id]
+            );
+        } else {
 
-        } else{
-
-            DB::update('update patients set void=?, rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
-                [$void, $rtransfer, $transferstatus, $enddate, $enddate, $id]);
+            DB::update(
+                'update patients set void=?, rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
+                [$void, $rtransfer, $transferstatus, $enddate, $enddate, $id]
+            );
 
             $pcreate = Patient::create([
 
@@ -496,7 +515,6 @@ public function searchClient(Request $request){
 
             ]);
             return back()->with(['success' => 'Client Transfer completed successfully']);
-
         }
     }
 }
