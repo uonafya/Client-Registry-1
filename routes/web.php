@@ -7,6 +7,7 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\GeolocationController;
 
 use Illuminate\Http\Request;
 
@@ -77,3 +78,9 @@ Route::get('/get_patient/{api_token}/{name}', function (Request $request) {
 Route::get('notify', function () {
     return view('welcome');
 });
+
+Route::get('file-import-export', [GeolocationController::class, 'fileImportExport']);
+Route::post('file-import', [GeolocationController::class, 'fileImport'])->name('file-import');
+Route::get('file-export', [GeolocationController::class, 'fileExport'])->name('file-export');
+
+Route::post('/import', [GeolocationController::class, 'import'])->name('import');

@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\DBUpdatesCron::class,
+        Commands\syncDB::class,
     ];
 
     /**
@@ -26,16 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $date1 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2030 10:20:00');
-        $date2 = Carbon::createFromFormat('m/d/Y H:i:s', '12/01/2020 10:20:00');
-        //
-        if($date1->gt($date2)){
-          $schedule->command('DBUpdates:cron')->everyMinute();
-        }else{
-            return 'Not Update Found';
-        }
-
-        // ->hourly();
+        $schedule->command('sync:DB')->everyMinute();
+        // ->daily();
     }
 
     /**

@@ -10,20 +10,21 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NotififyTransferEvent implements ShouldBroadcast
+class SycDataApiEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $patient;
+    public $patients;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($patient)
+    public function __construct($patients)
     {
-        $this->patient  = "{$patient} is being transfered to your facility";
+        $this->patients = $patients;
+        // dd($patients);
     }
 
     /**
@@ -34,6 +35,5 @@ class NotififyTransferEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return new PrivateChannel('channel-name');
-        // return ['facility tranfer'];
     }
 }

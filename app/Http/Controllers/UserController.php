@@ -12,7 +12,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-   
+
         if(auth()->attempt(array('email' => request('email'), 'password' => request('password'))))
         {
             if (auth()->user()->is_admin == 1) {
@@ -28,7 +28,7 @@ class UserController extends Controller
                 ->with('error','Email-Address And Password Are Wrong.');
         }
     }
-    
+
     /**
      * Display a listing of the resource.
      *

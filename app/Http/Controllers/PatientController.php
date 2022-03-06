@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Event;
 use App\Helpers\Http;
 use App\Events\AutoUpdateCREvent;
+use App\Events\SycDataApiEvent;
 
 class PatientController extends Controller
 {
@@ -24,6 +25,32 @@ class PatientController extends Controller
     public function index()
     {
         //
+    }
+
+    public function sycPatients()
+    {
+        $data = Http::get('http://localhost:3000/patients');
+        $patients = json_decode($data->getBody()->getContents());
+
+        event(new SycDataApiEvent($patients));
+
+        // foreach($patients as $patient)
+        // {
+
+        //     Patient::Create([
+        //         "fname" => $patient->first_name,
+        //         "mname" => $patient->second_name,
+        //         "lname" => $patient->surname,
+        //         "dob" => $patient->dob,
+        //         "gender" => $patient->gender,
+        //         "date_updated" => $patient->date_updated,
+        //         "date_created" => $patient->date_created,
+        //         "county" => $patient->county,
+        //         "village" => $patient->village,
+        //         "CCC_Number" => rand(10000,90000).'-'.rand(10000,90000)
+        //     ]);
+        // }
+
     }
 
     public function updateEvent()

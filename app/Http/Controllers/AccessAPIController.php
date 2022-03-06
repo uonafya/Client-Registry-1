@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 use App\Models\Patient;
+use App\Helpers\Http;
 
 class AccessAPIController extends Model
 {
@@ -18,5 +19,7 @@ class AccessAPIController extends Model
         // dump($search_obj);
         return $search_obj;
     }
+
+
 
 }
