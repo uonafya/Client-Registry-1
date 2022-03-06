@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use phpDocumentor\Reflection\PseudoTypes\False_;
 
 class UserController extends Controller
 {
@@ -20,13 +23,13 @@ class UserController extends Controller
                 // return redirect()->route('admin.home');
                 return redirect()->intended('landing');
                 // view('index');
-            }else{
+            } else {
                 // return redirect()->route('home');
                 return 'normal user';
             }
-        }else{
+        } else {
             return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+                ->with('error', 'Email-Address And Password Are Wrong.');
         }
     }
 
@@ -45,9 +48,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
+        return redirect()->to('/search');
     }
 
     public function new_user()
@@ -59,12 +63,25 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request   User::create($request->only([
+    
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        // $pwd = $request->input('password');
+        // dd($pwd);
+        User::create($request->only([
+           
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->password),
+            'facility' => $request->input('facility'),
+
+        ]));
+        // dd($request->only());
+
+        return back()->with(['success' => 'Registered successfully']);
     }
 
     /**

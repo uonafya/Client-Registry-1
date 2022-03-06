@@ -33,7 +33,7 @@
                                 <td>{{ $user->lname }}</td>
                                 <td>{{ $user->dob}}</td>
                                 <td>{{ $user->id_no}}</td>
-                                <td>{{$user->fname}}</td>
+                                <td>{{$user->facility_id}}</td>
 {{--                                <td> <li style="margin-left: 9px;"> <strong >--}}
 {{--                                            <?php--}}
 {{--                                            $account = DB::table('patients')--}}

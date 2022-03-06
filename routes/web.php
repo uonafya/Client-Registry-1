@@ -41,6 +41,7 @@ Route::get('/dashboard', [FacilityController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::post('create_patient',[PatientController::class, 'store']);
+Route::post('create_user',[UserController::class, 'store']);
 Route::patch('patient/{id}',[PatientController::class, 'update']);
 
 Route::get('/merger_patient/{id}/{id_no}',[PatientController::class, 'merge']);
