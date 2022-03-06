@@ -10,7 +10,7 @@
                 <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
             </div>
         </div>
-        @endif        
+        @endif
         <form  action = "/editc/{{ $user->id }}" method = "post" >
             @csrf
             <div class="panel-heading">

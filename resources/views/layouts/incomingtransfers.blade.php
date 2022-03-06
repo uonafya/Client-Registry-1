@@ -10,6 +10,14 @@
                     <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
                 </div>
             </div>
+            @elseif(Session::has('error'))
+                <div class="col-sm-12">
+                    <div class="alert alert-danger " role="alert">
+                        {{ Session::get('error') }}
+                        <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                        <button type="button" class="btn btn-primary"><a href="/search"><span aria-hidden="true" style="color: black;">OK</span></a></button>
+                    </div>
+                </div>
             @endif
             <form action = "/transferup/{{ $user->id }}" method = "post" style="margin-top: 5%; padding:10px;">
                 @csrf

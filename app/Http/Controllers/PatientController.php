@@ -469,6 +469,8 @@ public function searchClient(Request $request){
             DB::update('update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
                 [$rject, $rtransfer, $transferstatus, "2022-03-06 12:01:07","2022-03-06 12:01:07" , $id]);
 
+            return back()->with(['error' => 'Client Rejection Noted.Client will continue receiving services on his/her previous
+            Facility ']);
         } else{
 
             DB::update('update patients set void=?, rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
