@@ -11,10 +11,10 @@ class Facility extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    
+
     public function patient()
     {
       return $this->hasMany(Patient::class);
     }
-    
+
 }

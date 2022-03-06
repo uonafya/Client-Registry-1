@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Gate;
+
 class LoginController extends Controller
 {
     public function login(Request $reqs)
@@ -14,6 +16,7 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
 
         if(auth()->attempt(array('email' => request('email'), 'password' => request('password'))))
         {
@@ -29,5 +32,8 @@ class LoginController extends Controller
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
         }
+    }
+    public function documentation(){
+        return view('layouts.documentation');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facility;
+use App\Models\Transfers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Patient;
@@ -10,7 +11,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use Event;
 use App\Helpers\Http;
+use App\Events\AutoUpdateCREvent;
+use App\Events\SycDataApiEvent;
 
 class PatientController extends Controller
 {
@@ -23,6 +27,41 @@ class PatientController extends Controller
     {
         //
     }
+
+    public function sycPatients()
+    {
+        $data = Http::get('http://localhost:3000/patients');
+        $patients = json_decode($data->getBody()->getContents());
+
+        event(new SycDataApiEvent($patients));
+
+        // foreach($patients as $patient)
+        // {
+
+        //     Patient::Create([
+        //         "fname" => $patient->first_name,
+        //         "mname" => $patient->second_name,
+        //         "lname" => $patient->surname,
+        //         "dob" => $patient->dob,
+        //         "gender" => $patient->gender,
+        //         "date_updated" => $patient->date_updated,
+        //         "date_created" => $patient->date_created,
+        //         "county" => $patient->county,
+        //         "village" => $patient->village,
+        //         "CCC_Number" => rand(10000,90000).'-'.rand(10000,90000)
+        //     ]);
+        // }
+
+    }
+
+    public function updateEvent()
+    {
+        $data = Http::get('http://localhost:3000/patients');
+        $patients = json_decode($data->getBody()->getContents());
+
+        event(new AutoUpdateCREvent($patients));
+    }
+
     public function search()
     {
         $users = Patient::join('facilities', 'patients.facility_id', '=', 'facilities.mfl_code')
@@ -200,16 +239,6 @@ class PatientController extends Controller
         return view('layouts.new_client', compact('patient', 'facilities'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -291,17 +320,6 @@ class PatientController extends Controller
         if ($patient_exists->exists()) {
             dd($patient[0]);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function optionCounty()
@@ -434,50 +452,49 @@ class PatientController extends Controller
         $residence = $request->input('Resident');
         $county = $request->input('county');
         $enddate = $request->input('enddate');
+        $rtransfer = $request->input('rtransfer');
         $transferstatus = 1;
         $transferred_by = Auth::user()->name;
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update(
-            'update patients set  facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-            [$facility_id, $transferstatus, $enddate, $enddate, $id]
-        );
+        DB::update('update patients set rtransfer=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+            [$rtransfer, $facility_id, $transferstatus, $enddate, $enddate, $id]);
 
-        //        $pcreate = Patient::create([
-        ////            'fname',
-        ////            'mname',
-        ////            'lname',
-        ////            'nemis',
-        ////            'dob',
-        ////            'gender',s
-        ////            'phone',
-        ////            'id_no',
-        ////            'cccno',
-        ////            'residence',
-        ////            'county',
-        ////            'facility',
-        //
-        //            'fname' => $request->input('fname'),
-        //            'mname' => $request->input('mname'),
-        //            'lname' => $request->input('lname'),
-        //            'Nemis' => $request->input('Nemis'),
-        //            'dob' => $request->input('dob'),
-        //            'gender' => $request->input('gender'),
-        //            'phone' => $request->input('phone'),
-        //            'id_no' => $request->input('id_no'),
-        //            'facility_id' => $request->input('facility_id'),
-        //            'CCC_Number' => $request->input('CCC_Number'),
-        //            'Resident' => $request->input('Resident'),
-        //            'county' => $request->input('county'),
-        //            'transferin' => 1,
-        //            'transferred_by' => Auth::user()->name,
-        //            'created_by' => Auth::user()->name,
-        //            'updated_by' => Auth::user()->name,
-        //
-        //        ]);
+//        $pcreate = Patient::create([
+////            'fname',
+////            'mname',
+////            'lname',
+////            'nemis',
+////            'dob',
+////            'gender',s
+////            'phone',
+////            'id_no',
+////            'cccno',
+////            'residence',
+////            'county',
+////            'facility',
+//
+//            'fname' => $request->input('fname'),
+//            'mname' => $request->input('mname'),
+//            'lname' => $request->input('lname'),
+//            'Nemis' => $request->input('Nemis'),
+//            'dob' => $request->input('dob'),
+//            'gender' => $request->input('gender'),
+//            'phone' => $request->input('phone'),
+//            'id_no' => $request->input('id_no'),
+//            'facility_id' => $request->input('facility_id'),
+//            'CCC_Number' => $request->input('CCC_Number'),
+//            'Resident' => $request->input('Resident'),
+//            'county' => $request->input('county'),
+//            'transferin' => 1,
+//            'transferred_by' => Auth::user()->name,
+//            'created_by' => Auth::user()->name,
+//            'updated_by' => Auth::user()->name,
+//
+//        ]);
         // return 'success....Client Transfer has been iniated';
-        return back()->with(['success' => 'Client Transfer has been initiated successfully']);
+        return back()->with(['success' => 'Client Transfer has been initiated']);
     }
     public function transferup(Request $request, $id)
     {
@@ -505,11 +522,12 @@ class PatientController extends Controller
 
 
         if ($check == $trs) {
-            DB::update(
-                'update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
-                [$rject, $rtransfer, $transferstatus, "2022-03-06 12:01:07", "2022-03-06 12:01:07", $id]
-            );
-        } else {
+            DB::update('update patients set rject=?, rtransfer=?,  transferstatus=?, enddate=?, dot=? where id = ?',
+                [$rject, $rtransfer, $transferstatus, "2022-03-06 12:01:07","2022-03-06 12:01:07" , $id]);
+
+            return back()->with(['error' => 'Client Rejection Noted.Client will continue receiving services on his/her previous
+            Facility ']);
+        } else{
 
             DB::update(
                 'update patients set void=?, rtransfer=?, transferstatus=?, enddate=?, dot=? where id = ?',
@@ -537,7 +555,54 @@ class PatientController extends Controller
                 'updated_by' => Auth::user()->name,
 
             ]);
+            $pcreate = Transfers::create([
+
+                'fname' => $request->input('fname'),
+                'mname' => $request->input('mname'),
+                'lname' => $request->input('lname'),
+                'Nemis' => $request->input('Nemis'),
+                'dob' => $request->input('dob'),
+                'gender' => $request->input('gender'),
+                'phone' => $request->input('phone'),
+                'id_no' => $request->input('id_no'),
+                'facility_id' => $request->input('facility_id'),
+                'CCC_Number' => $request->input('CCC_Number'),
+                'Resident' => $request->input('Resident'),
+                'rtransfer' => $request->input('rtransfer'),
+                'ifacility' => $request->input('ifacility'),
+                'transferstatus' => 2,
+                'transferred_by' => Auth::user()->name,
+
+            ]);
             return back()->with(['success' => 'Client Transfer completed successfully']);
         }
     }
+
+    public function getPatientWithCCC(Patient $patient, Request $req)
+    {
+                // dump($req->ccc_no);
+        $search_obj = $patient->where('CCC_Number', $req->ccc_no)->get();
+        // dump($search_obj);
+        return $search_obj;
+
+
+    }
+
+    public function getAllPatientsInFacility(Patient $facility, Request $req)
+    {
+        // dd($req->mfl_code);
+
+        $search_obj = $facility->where('facility_id', $req->mfl_code)->get();
+        return$search_obj;
+
+    }
+
+    public function searcPatientWithCCC(Request $reqs)
+    {
+        $patient = $reqs->all();
+        response()->json([$patient]);
+    }
+
+
+
 }

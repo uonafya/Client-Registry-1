@@ -80,12 +80,12 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="serial_number">Serial Number</label>
-                  
+
                     <input name="serial_number" type="text" class="form-control" id="serial_number" value="{{ $user->CCC_Number}}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="ccc_number">CCC Number</label>
-                  
+
                     <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" value="{{ $user->CCC_Number}}" readonly>
                 </div>
             </div>
@@ -144,16 +144,19 @@
             <button type="submit" class="btn btn-success">Edit  </button>
         </form>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
     <script type="text/javascript">
         $(document).ready(function($){
-
+            $("#facility_id").select2();
             $('#mfl_code, #CCC_Number, #facility_id, #serial_number').on('change', function() {
                 $('#mfl_code').val($('#facility_id').val());
                 $('#CCC_Number').val($('#facility_id').val()+ ' - '+$('#serial_number').val());
             });
-            
+
             $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
                 $('#Resident').val($('#county').val() +'/'

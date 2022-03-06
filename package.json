@@ -16,6 +16,10 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+<<<<<<< HEAD
         "datatables.net": "^1.11.5"
+=======
+        "push.js": "^1.0.12"
+>>>>>>> 42d807c07451126c1de05c40415dfe4c2773daa9
     }
 }

@@ -1,6 +1,6 @@
 {
-    "patient_with_ccc":[
-        [
+
+    "patients":[
             {
                 "first_name": "Wenger",
                 "second_name": "Fundamentals",
@@ -364,6 +364,254 @@
                 "ccc_number": "22892-39234",
                 "facility_id": "22892"
             }
+<<<<<<< HEAD
+    ],
+    "facility": [
+        {
+            "name": "Aguthi Dispensary",
+            "mfl_code": "10017",
+            "county": "Nyeri",
+            "sub_county": "Tetu",
+            "ward": "Aguthi-gaaki",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Gathehu Dispensary",
+            "mfl_code": "21927",
+            "county": "Nyeri",
+            "sub_county": "Mathira East",
+            "ward": "Magutu",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Menduki Medical Services- Ngangarithi",
+            "mfl_code": "24716",
+            "county": "Nyeri",
+            "sub_county": "Nyeri Central",
+            "ward": "Rware",
+            "facility_type": "Medical Center"
+        },
+        {
+            "name": "Ruiru Family Clinic",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Ruiru",
+            "ward": "Kahawa/Sukari",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Kimathi Medical Clinic",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Nursing and Maternity Home"
+        },
+        {
+            "name": "nyandarua hospital",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Ndumberi",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Phoenicia Test Facility Group 2",
+            "mfl_code": "25248",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Majala Majala",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Leo Medical Clinic",
+            "mfl_code": "25254",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Monda Health Centre",
+            "mfl_code": "25255",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Ngerenya Yehu Dispensary",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Ole Keem Health Center",
+            "mfl_code": "25247",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Center"
+        },
+        {
+            "name": "Martini Med Clinic",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "kiambu township",
+            "mfl_code": "25249",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Kuya Health Centre",
+            "mfl_code": "25252",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Phonecia  Hospital",
+            "mfl_code": "25256",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Mbajoni Dispensary",
+            "mfl_code": "25250",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Kiambu township",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "ug urban health centre",
+            "mfl_code": "25251",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Phoenecia Nursing Home",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Nursing Homes"
+        },
+        {
+            "name": "Tiba Medical Clinic",
+            "mfl_code": "25253",
+            "county": "Kiambu",
+            "sub_county": "Kiambu Town",
+            "ward": "Township",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Sample Health Facility 23 Sep 2021",
+            "mfl_code": null,
+            "county": "Kiambu",
+            "sub_county": "Kiambaa",
+            "ward": "Cianda",
+            "facility_type": "Primary care hospitals"
+        },
+        {
+            "name": "Kapchepkisa",
+            "mfl_code": "22891",
+            "county": "Baringo",
+            "sub_county": "Baringo North",
+            "ward": "Saimoi/Kipsaraman",
+            "facility_type": "Dispensary"
+        },
+        {
+            "name": "Himacare Medical Centre",
+            "mfl_code": null,
+            "county": "Nandi",
+            "sub_county": "Nandi Hills",
+            "ward": "Nandi Hills",
+            "facility_type": "Medical Clinic"
+        },
+        {
+            "name": "Sunrise Health Centre",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Lake View Health Center",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "St Lucy Health Center",
+            "mfl_code": null,
+            "county": "Busia",
+            "sub_county": "Bunyala",
+            "ward": "Bunyala Central",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Afya Bora Hospital",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Secondary care hospitals"
+        },
+        {
+            "name": "Vasha",
+            "mfl_code": null,
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Basic Health Centre"
+        },
+        {
+            "name": "Test Facility Naivasha LCC",
+            "mfl_code": "25245",
+            "county": "Nakuru",
+            "sub_county": "Naivasha",
+            "ward": "Lake View",
+            "facility_type": "Medical Clinic"
+        }
+    ]
+
+}
+=======
         ]
     ]
 }
+>>>>>>> 8d25c5a266fe5299a5ded69dfd117faf8268da63

@@ -4,8 +4,16 @@
 
 @section('content')
 <div class="container" style="background-color: white; margin-top:10%;">
-    <form action="/create_patient" method="post" >
+    <form action="/create_user" method="post" >
         @csrf
+        @if (Session::has('success'))
+        <div class="col-sm-12">
+            <div class="alert alert-success " role="alert">
+                {{ Session::get('success') }}
+                <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+            </div>
+        </div>
+        @endif
         <div class="panel-heading" style="padding-top:2%">
             <center>Register User</center>
         </div>
@@ -24,12 +32,8 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="password">Nemis</label>
+                <label for="password">Password</label>
                 <input name="password" type="password" class="form-control" id="password" placeholder="Enter password">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="confirm_password">Last Name</label>
-                <input name="confirm_password" type="password" class="form-control" id="password" placeholder="Confirm password">
             </div>
             
         </div>
