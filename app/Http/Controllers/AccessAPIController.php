@@ -13,52 +13,179 @@ use App\Helpers\Http;
 use App\Http\Controllers\Controller;
 use App\Models\Facility;
 
+use JWTAuth;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Validator;
+
 class AccessAPIController extends Controller
 {
     use HasFactory;
 
-    public function getToken(Request $reqs)
+    public function register(Request $request)
     {
-        //Event Listnser send email;
+    	//Validate data
+        $data = $request->only('name', 'email','is_admin','password');
+        $validator = Validator::make($data, [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6|max:50',
+            'is_admin' => 'required'
+        ]);
+
+        //Send failed response if request is not valid
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
+        }
+
+        //Request is valid, create new user
+        $user = User::create([
+        	'name' => $request->name,
+        	'email' => $request->email,
+            'is_admin' => $request->is_admin,
+        	'password' => bcrypt($request->password)
+        ]);
+
+        //User created, return success response
+        return response()->json([
+            'success' => true,
+            'message' => 'User created successfully',
+            'data' => $user
+        ], Response::HTTP_OK);
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        //valid credential
+        $validator = Validator::make($credentials, [
+            'email' => 'required|email',
+            'password' => 'required|string|min:6|max:50'
+        ]);
+
+        //Send failed response if request is not valid
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
+        }
+
+        //Request is validated
+        //Crean token
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return response()->json([
+                	'success' => false,
+                	'message' => 'Login credentials are invalid.',
+                ], 400);
+            }
+        } catch (JWTException $e) {
+    	return $credentials;
+            return response()->json([
+                	'success' => false,
+                	'message' => 'Could not create token.',
+                ], 500);
+        }
+
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp',
+            'token' => $token
+        ];
+
+        // \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\MyTestMail($details));
+        // Mail::to("client@mail.com")->send(new \App\Mail\ClientRegVerification($details));
+
+        // dd("Email is Sent.");
+
+ 		//Token created, return with success response and jwt token
+        return response()->json([
+            'success' => true,
+            'token' => $token,
+        ]);
 
 
-        // foreach($facility as $facility)
-        // {
-        //     // // dump($facility);
-        //     // sleep(100);
-        //     // if(Facility::where('mfl_code', $facility->mfl_code)->exists() && $facility->mfl_code == null ){
-        //     //     continue;
-        //     // }else{
-
-        //     // }
-
-        //     Facility::create([
-        //         "name" => $facility->name,
-        //         "mfl_code" => $facility->mfl_code,
-        //         "county" => $facility->county,
-        //         "sub_county" => $facility->sub_county,
-        //         "ward" => $facility->ward,
-        //         "facility_type" => $facility->facility_type
-        //     ]);
-        // }
-
-        // dump("facility import complete");
 
     }
 
-    public function getPatientWithCCC(Patient $patient, Request $req)
+    public function logout(Request $request)
     {
-        $patient = Patient::where('CCC_Number',$req->name)->get();
+        //valid credential
+        $validator = Validator::make($request->only('token'), [
+            'token' => 'required'
+        ]);
 
-        return $patient;
+        //Send failed response if request is not valid
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
+        }
 
+		//Request is validated, do logout
+        try {
+            JWTAuth::invalidate($request->token);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User has been logged out'
+            ]);
+        } catch (JWTException $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sorry, user cannot be logged out'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
-    public function getFacilityByMfl(Request $req)
+
+    public function get_user(Request $request)
     {
-        $facility = Facility::where('mfl_code', $req->mflcode)->get();
+        $this->validate($request, [
+            'token' => 'required'
+        ]);
 
-        return $facility;
+        $user = JWTAuth::authenticate($request->token);
+
+        return response()->json(['user' => $user]);
     }
+
+    public function getPatientWithCCC(Request $request)
+    {
+        $this->validate($request, [
+            'ccc_no' => 'required'
+        ]);
+
+        // $user = JWTAuth::authenticate($request->token);
+        $patient = Patient::where('CCC_Number',$request->ccc_no)->get();
+
+        return response()->json(['user' => $patient]);
+    }
+
+    public function getFacilityByMfl(Request $request)
+    {
+        $this->validate($request, [
+            'mfl_code' => 'required'
+        ]);
+
+        // $user = JWTAuth::authenticate($request->token);
+        $facility = Facility::where('mfl_code',$request->mfl_code)->get();
+
+        return response()->json(['facility' => $facility]);
+    }
+
+    public function getAllPatientsInFacility(Request $request)
+    {
+        $this->validate($request, [
+            'mfl_code' => 'required'
+        ]);
+
+        // $user = JWTAuth::authenticate($request->token);
+        $patients = Patient::where('facility_id',$request->mfl_code)->get();
+
+        return response()->json(['patients' => $patients]);
+    }
+
+
+
 
 
 
