@@ -142,7 +142,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="residence">Reason For Transfer</label>
-                    <input name="rtransfer" type="text" class="form-control" id="rtransfer" placeholder="Reason"
+                    <input name="rtransfer" type="text" class="form-control" id="rtransfer" placeholder="Reason for transfer"
                     style="height: 100px;">
                 </div>
             </div>

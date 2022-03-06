@@ -75,6 +75,7 @@
                         {{--                        @endforeach--}}
                         {{--                    </select>--}}
                         <input name="facility1" type="text" class="form-control" id="facilitys" value="{{ $user->name}}" readonly>
+                        <input style="display: none" name="ifacility" type="text" class="form-control" id="facilitys" value="{{ $user->facility_id}}" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="mfl_code">MFL Code</label>
@@ -94,6 +95,10 @@
                     <div class="form-group col-md-4">
                         <label for="mfl_code">MFL Code</label>
                         <input name="mfl_code" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility2}}">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="mfl_code">Reason for Transfer</label>
+                        <input style="height: 100px; max-width: 500px; line-break: auto" name="rtransfer" type="text" class="form-control" id="mfl_code1" readonly value="{{$user->rtransfer}}">
                     </div>
 
                     <div class="form-group col-md-4">
@@ -131,8 +136,7 @@
                 </div>
                     <div class="form-group col-md-6" id="reject" style="display: none;">
                         <label for="residence" style="color: red;">Please give a reason for rejection</label>
-                        <input name="rject" type="text" class="form-control" id="rject" placeholder="Reason"
-                               style="height: 90px;">
+                        <input name="rject" type="text" class="form-control" id="rject" placeholder="Reason" style="height: 90px;">
                     </div>
                 </div>
 

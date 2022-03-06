@@ -384,13 +384,14 @@ public function searchClient(Request $request){
         $residence = $request->input('Resident');
         $county = $request->input('county');
         $enddate = $request->input('enddate');
+        $rtransfer = $request->input('rtransfer');
         $transferstatus = 1;
         $transferred_by = Auth::user()->name;
         /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
         /*DB::table('student')->update($data);*/
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-        DB::update('update patients set  facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
-            [ $facility_id, $transferstatus, $enddate, $enddate, $id]);
+        DB::update('update patients set rtransfer=?, facility2=?, transferstatus=?, enddate=?, dot=? where id = ?',
+            [$rtransfer, $facility_id, $transferstatus, $enddate, $enddate, $id]);
 
 //        $pcreate = Patient::create([
 ////            'fname',
@@ -425,7 +426,7 @@ public function searchClient(Request $request){
 //
 //        ]);
         // return 'success....Client Transfer has been iniated';
-        return back()->with(['success' => 'Client Transfer has been initiated successfully']);
+        return back()->with(['success' => 'Client Transfer has been initiated']);
     }
     public function transferup(Request $request, $id)
     {
