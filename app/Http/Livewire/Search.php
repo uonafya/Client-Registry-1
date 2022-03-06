@@ -22,4 +22,4 @@ class Search extends Component
 //         $this->patient = Patient::where('fname', 'ilike', $searchPatient)->get();
 //         return view('livewire.search');
 //     }
-// }
+ }

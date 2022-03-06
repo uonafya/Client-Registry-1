@@ -1,89 +1,92 @@
 @extends('layouts.app')
 
 @section('content')
+
     @foreach ($users as $user)
-    <div class="container" style="background-color: white; margin-top:10%; margin-bottom:20%;">
+    <div class="container" style="background-color: white; margin-top:10%; margin-bottom:30%; ">
+
         @if (Session::has('success'))
-        <div class="col-sm-12">
-            <div class="alert alert-success " role="alert">
-                {{ Session::get('success') }}
-                <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+            <div class="col-sm-12">
+                <div class="alert alert-success " role="alert">
+                    {{ Session::get('success') }}
+                    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                </div>
             </div>
-        </div>
         @endif
-        <form  action = "/editc/{{ $user->id }}" method = "post" >
+
+        <form  action = "/update_client/{{ $user->id }}" method = "post" style="margin-top: 5%; ">
             @csrf
             <div class="panel-heading">
-                <center style="font-weight: bold"><h2>Client Transfer</h2></center>
+                <center ><h4>Edit Client Information</h4></center>
             </div>
             <hr>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="fname">First Name</label>
-                    <input name="fname" type="text" class="form-control" id="fname" placeholder="First name" value="{{ $user->fname}}" readonly>
+                    <input name="fname" type="text" class="form-control" id="fname" placeholder="First name" value="{{ $user->fname}}" >
                 </div>
                 <div class="form-group col-md-4">
                     <label for="mname">Middle Name</label>
-                    <input name="mname" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->mname}}" readonly>
+                    <input name="mname" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->mname}}" >
                 </div>
                 <div class="form-group col-md-4">
                     <label for="lname">Last Name</label>
-                    <input name="lname" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->lname}}" readonly>
+                    <input name="lname" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->lname}}" >
                 </div>
 
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="nemis">Nemis</label>
-                    <input name="Nemis" type="text" class="form-control" id="Nemis" placeholder="Nemis" value="{{ $user->Nemis}}" readonly>
+                    <input name="nemis" type="text" class="form-control" id="nemis" placeholder="Nemis" value="{{ $user->Nemis}}" >
                 </div>
                 <div class="form-group col-md-4">
                     <label for="dob">DOB</label>
-                    <input name="dob" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->dob}}" readonly>
+                    <input name="dob" type="text" class="form-control" id="mname" placeholder="Middle name" value="{{ $user->dob}}" >
                 </div>
                 <div class="form-group col-md-4">
                     <label for="gender">Gender</label>
-                    <input name="gender" type="text" class="form-control" id="gender" value="{{ $user->gender}}" readonly>
+                    <select name='gender' id="gender" class="form-control" value="{{ $user->gender}}">
+                        {{-- <option selected disabled>{{ $user->gender}}</option> --}}
+                        <option value='F'>Female</option>
+                        <option value='M'>Male</option>
+                    </select>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="phone_number">Phone Number</label>
-                    <input name="phone" type="text" class="form-control" id="gender" value="{{ $user->phone}}" readonly>
+                    <input name="phone" type="text" class="form-control" id="gender" value="{{ $user->phone}}" >
                 </div>
                 <div class="form-group col-md-6">
                     <label for="national_id_number">National Id Number</label>
-                    <input name="id_no" type="text" class="form-control" id="gender" value="{{ $user->id_no}}" readonly>
+                    <input name="id_no" type="text" class="form-control" id="gender" value="{{ $user->id_no}}" >
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="facility">Current Facility</label>
-                    <input name="facility1" type="text" class="form-control" id="facilitys" value="{{$user->facility_id}}  {{$user->name }}" readonly>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="mfl_code">MFL Code</label>
-                    <input name="mfl_code1" type="number" class="form-control" id="mfl_code1" readonly value="{{$user->facility_id}}">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="ccc_number">CCC Number</label>
-                    <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" readonly value="{{$user->CCC_Number}}">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="national_id_number">Facility Transferring To</label>
-                    <select name="facility_id" id="facility" class="form-control">
-                        <option selected disabled>Select facility</option>
+                <div class="form-group col-md-3">
+                    <label for="national_id_number">Facility</label>
+                    <select name="facility_id" id="facility_id" class="form-control">
+                        <option defaultValue="{{ $user->facility_id }}" selected disabled>{{$user->facility_id}}  {{$user->name  }}</option>
                         @foreach ($facilities as $facilitykey => $facility)
 
                             <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
                     <label for="mfl_code">MFL Code</label>
-                    <input name="mfl_code" type="number" class="form-control" id="mfl_code"  readonly>
+                    <input name="mfl_code" type="text" class="form-control" id="mfl_code" value="{{$user->facility_id}}"  readonly>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="serial_number">Serial Number</label>
+
+                    <input name="serial_number" type="text" class="form-control" id="serial_number" value="{{ $user->CCC_Number}}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="ccc_number">CCC Number</label>
+
+                    <input name="CCC_Number" type="text" class="form-control" id="CCC_Number" value="{{ $user->CCC_Number}}" readonly>
                 </div>
             </div>
 
@@ -130,39 +133,30 @@
 
                 <div class="form-group col-md-3">
                     <label for="village">Village</label>
-                    <input name="village" type="text" class="form-control" id="village">
+                    <input name="village" type="text" class="form-control" id="village" >
 
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="residence">Residence</label>
-                    <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St"  value="{{$user->Resident}}">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="residence">Reason For Transfer</label>
-                    <input name="rtransfer" type="text" class="form-control" id="rtransfer" placeholder="Reason for transfer"
-                    style="height: 100px;">
                 </div>
             </div>
             <div class="form-group">
-                <label for="residence">Date of Initiation</label>
-                <input name="enddate" type="date" class="form-control" id="enddate" placeholder="Date of Transfer">
+                <label for="residence">Residence</label>
+                <input name="Resident" type="text" class="form-control" id="Resident" placeholder="1234 Main St" value="{{$user->Resident}}">
             </div>
-            <center><button type="submit" class="btn btn-success">Initiate Transfer</button></center>
+            <button type="submit" class="btn btn-success">Edit  </button>
         </form>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
     <script type="text/javascript">
         $(document).ready(function($){
-            $("#facility").select2();
-            $('#mfl_code, #facility, #serial_number').on('change', function() {
-                $('#mfl_code').val($('#facility').val());
+            $("#facility_id").select2();
+            $('#mfl_code, #CCC_Number, #facility_id, #serial_number').on('change', function() {
+                $('#mfl_code').val($('#facility_id').val());
+                $('#CCC_Number').val($('#facility_id').val()+ ' - '+$('#serial_number').val());
             });
+
             $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
                 $('#Resident').val($('#county').val() +'/'
@@ -171,6 +165,13 @@
                     + '/'+$('#village').val());
             });
 
+            //extract serial number
+            var ccc_number=$('#CCC_Number').val();
+            var array= ccc_number.split(" - ");
+            var serial_no = array[1];
+            $('#serial_number').val(serial_no);
+
+            //extract residence
             var residence=$('#Resident').val();
             var array= residence.split("/");
             var county = array[0];

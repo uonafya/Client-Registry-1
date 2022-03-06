@@ -3,10 +3,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="background-color: white">
-    <form action="/create_patient" method="post" style="margin-top: 5%; padding:10px;">
+<div class="container" style="background-color: white; margin-top:10%; margin-bottom:30%;">
+    @if (Session::has('success'))
+    <div class="col-sm-12">
+        <div class="alert alert-success " role="alert">
+            {{ Session::get('success') }}
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+        </div>
+    </div>
+    @endif
+    <form action="/create_patient" method="post" >
         @csrf
-        <div class="panel-heading">
+        <div class="panel-heading" style="padding-top:2%">
             <center>Client Information</center>
         </div>
                <hr><br>
@@ -56,15 +64,15 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="facility">Facility</label>
-                <select name="facility_id" id="facility" class="form-control" searchable>
-                    <option selected disabled>Select facility</option>
+                <select name="facility_id" id="facility_id" class="form-control">
+                    <option value="" selected disabled>Select facility</option>
                     {{-- <option value='Facility1'>Facility 1</option>
                     <option value='Facility2'>Facility 2</option> --}}
 
                     @foreach ($facilities as $facilitykey => $facility)
 
-                    <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}} {{ $facility->name }}</option>
-            @endforeach
+                    <option value="{{ $facility->mfl_code }}" >{{$facility->mfl_code}}  - {{ $facility->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group col-md-3">
@@ -111,7 +119,7 @@
 
             <div class="form-group col-md-3">
                 <label for="ward">Ward</label>
-                    <select name="ward" id="ward" class="form-control">
+                    <select name="ward" id="ward" value=""class="form-control">
                         <option value="" selected disabled>Select  Ward</option>
                 @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
 
@@ -123,16 +131,9 @@
             </div>
 
             <div class="form-group col-md-3">
-                <label for="village">Village</label>
-                    <select name="village" id="village" class="form-control">
-                        <option value="" selected disabled>Select Village</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-
-                        <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>
-                @endforeach
-
-                    </select>
-
+                
+                    <label for="village">Village</label>
+                    <input name="village" type="text" class="form-control" id="village" placeholder="Village">
             </div>
         </div>
         <div class="form-group">
@@ -142,21 +143,30 @@
         <button type="submit" class="btn btn-success">Save</button>
     </form>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
 <script type="text/javascript">
     $(document).ready(function($){
-        $('#mfl_code, #facility, #serial_number').on('change', function() {
-            $('#CCC_Number').val($('#facility').val() + ' - ' + $('#serial_number').val() );
-            $('#mfl_code').val($('#facility').val());
+        $("#facility_id").select2();
+        $('#mfl_code, #CCC_Number, #facility_id, #serial_number').on('change', function() {
+            $('#CCC_Number').val($('#facility_id').val() + ' - ' + $('#serial_number').val() );
+            $('#mfl_code').val($('#facility_id').val());
         });
-
         $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
-        $('#Resident').val($('#county').val() +',  '
+        $('#Resident').val(
+                            // if($('#county').val() =="" || $('#sub_county').val()== ""||$('#ward').val()==""){
+                            //     $('#county').val()="",
+                            //     $('#sub_county').val()="",
+                            //     $('#ward').val()="",
+                            // }
+                            $('#county').val() +'/'
                             + $('#sub_county').val()
-                            +',  ' +$('#ward').val()
-
-                            + ',  '+$('#village').val());
+                            +'/' +$('#ward').val()
+                            + '/'+$('#village').val());
         });
 
     })

@@ -49,6 +49,12 @@ class UserController extends Controller
         //
     }
 
+    public function new_user()
+    {
+
+        return view('layouts.new_user');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

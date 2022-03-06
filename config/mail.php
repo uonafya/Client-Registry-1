@@ -32,17 +32,25 @@ return [
     |            "postmark", "log", "array", "failover"
     |
     */
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
 
     'mailers' => [
         'smtp' => [
-            'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
+            'driver' => env('MAIL_DRIVER', ''),
+            'host' => env('MAIL_HOST', ''),
+            'port' => env('MAIL_PORT', ),
+            'from' => ['address' => '', 'name' => ''],
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
-            'auth_mode' => null,
+            'username' => '',
+            'password' => '',
+            'sendmail' => '',
+            'pretend' => false,
         ],
 
         'ses' => [
@@ -59,7 +67,7 @@ return [
 
         'sendmail' => [
             'transport' => 'sendmail',
-            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -t -i'),
+            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs'),
         ],
 
         'log' => [

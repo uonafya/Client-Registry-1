@@ -26,11 +26,14 @@ class LoginController extends Controller
                 // view('index');
             }else{
                 // return redirect()->route('home');
-                return 'normal user';
+                return redirect()->intended('search');
             }
         }else{
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');
         }
+    }
+    public function documentation(){
+        return view('layouts.documentation');
     }
 }
