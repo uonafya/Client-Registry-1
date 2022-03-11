@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use JWTAuth;
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 class JwtMiddleware extends BaseMiddleware
@@ -31,6 +32,11 @@ class JwtMiddleware extends BaseMiddleware
                 return response()->json(['status' => 'Authorization Token not found']);
             }
         }
-        return $next($request);
+
+        if(Cache::get($user->email) == exec("getmac")){
+            return $next($request);
+        }else{
+            return response()->json(['status' => 'Unauthorized access your mac address is not registered']);
+        }
     }
 }

@@ -9,6 +9,8 @@ use App\Events\AutoUpdateCREvent;
 use App\Events\SycDataApiEvent;
 use App\Events\syncFacilityEvent;
 
+use GuzzleHttp;
+
 
 class syncDB extends Command
 {
@@ -46,16 +48,22 @@ class syncDB extends Command
         $data = Http::get('http://localhost:3000/patients');
         $patients = json_decode($data->getBody()->getContents());
 
-        $data = Http::get('http://localhost:3000/facility');
-        $facility = json_decode($data->getBody()->getContents());
+        event(new SycDataApiEvent($patients));
 
-        event(new syncFacilityEvent($facility));
+        //this data is being fetched from kmfl
+        // $data = Http::get('http://localhost:3000/facility');
+        // $facility = json_decode($data->getBody()->getContents());
+        // http://api.kmhfltest.health.go.ke/o/token/
+
+
+        event(new syncFacilityEvent());
+
 
         // event(new AutoUpdateCREvent($patients));
-        event(new SycDataApiEvent($patients));
 
 
         // return 0;
         $this->info('Syncing db with data from remote source');
     }
+
 }

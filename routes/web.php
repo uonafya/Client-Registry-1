@@ -1,3 +1,4 @@
+
 <?php
 
 
@@ -17,7 +18,6 @@ use App\Models\Patient;
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AccessAPIController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -96,3 +96,6 @@ Route::get('/mail/send', [MailController::class, 'send']);
 Route::post('transferup/{id}',[PatientController::class, 'transferup']);
 
 Route::get('transfers',[PatientController::class, 'transfers']);
+
+
+// ->middleware('api_token');

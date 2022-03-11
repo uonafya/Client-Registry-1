@@ -12,17 +12,20 @@ use App\Models\Patient;
 use App\Helpers\Http;
 use App\Http\Controllers\Controller;
 use App\Models\Facility;
-
+use App\Models\mac_address;
 use JWTAuth;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
 
 class AccessAPIController extends Controller
 {
     use HasFactory;
+    public $user;
 
     public function register(Request $request)
     {
@@ -85,7 +88,7 @@ class AccessAPIController extends Controller
             return response()->json([
                 	'success' => false,
                 	'message' => 'Could not create token.',
-                ], 500);
+            ], 500);
         }
 
         $details = [
@@ -97,17 +100,31 @@ class AccessAPIController extends Controller
         // \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\MyTestMail($details));
         // Mail::to("client@mail.com")->send(new \App\Mail\ClientRegVerification($details));
 
-        // dd("Email is Sent.");
+        $auth_key = auth()->user(); //$auth_key->email
+        $this->user = $auth_key;
 
- 		//Token created, return with success response and jwt token
-        return response()->json([
-            'success' => true,
-            'token' => $token,
-        ]);
+        // mac_address::firstOrCreate(["user_email" => $auth_key->email,  "mac_address" => exec('getmac')]);
+
+        // $mc_add = mac_address::where('user_email', $auth_key->email)->get();
+
+        Cache::forever($auth_key->email, exec("getmac"));
+
+        // $cache_mac = Cache::get($auth_key->email);
 
 
+        // $user_mac = Cache::get($auth_key->email);
 
+        // if(exec('getmac') == $cache_mac)
+        // {
+            return response()->json([
+                'success' => true,
+                'mac_address' => exec('getmac'),
+                'token' => $token,
+                // 'user' =>
+            ]);
+        // }
     }
+
 
     public function logout(Request $request)
     {
@@ -150,9 +167,11 @@ class AccessAPIController extends Controller
 
     public function getPatientWithCCC(Request $request)
     {
+
         $this->validate($request, [
             'ccc_no' => 'required'
         ]);
+
 
         // $user = JWTAuth::authenticate($request->token);
         $patient = Patient::where('CCC_Number',$request->ccc_no)->get();

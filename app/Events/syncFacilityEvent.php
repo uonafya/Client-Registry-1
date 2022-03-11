@@ -14,16 +14,18 @@ class syncFacilityEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $facilities;
+    // public $facilities;
+    // public $token;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($facilities)
+    public function __construct()
     {
-        $this->facilities = $facilities;
+        // $this->facilities = $facilities;
+        // $this->token = $token;
         // dd($facilities);
     }
 
