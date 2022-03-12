@@ -16,9 +16,13 @@ use App\Helpers\Http;
 use App\Events\AutoUpdateCREvent;
 use App\Events\SycDataApiEvent;
 use App\Models\Geolocation;
+use Illuminate\Support\Facades\Cache;
 
 class PatientController extends Controller
 {
+
+    public $parent_id;
+
     /**S
      * Display a listing of the resource.
      *
@@ -230,17 +234,21 @@ class PatientController extends Controller
     //     return view('layouts.search_facility_patient'));
     // }
 
-    public function new_client(Patient $patient)
+    public function new_client(Patient $patient, Request $reqs)
     {
-        $data = Http::get('http://localhost:3000/facility');
-        $facilities = json_decode($data->getBody()->getContents());
-
-        $patient = $this->optionCounty();
-        //$this->getFacility();
+        // $data = Http::get('http://localhost:3000/facility');
+        $facilities = Facility::all();
 
 
+        // Cache::Forever("facilities", $facilities);
 
-        return view('layouts.new_client', compact('patient', 'facilities'));
+        $county = $this->allCountiesList();
+
+        // $subcounties = $this->locationDecoder();
+
+        $geoany = Geolocation::where('parent_id', 0)->get();
+
+        return view('layouts.new_client', compact('county', 'facilities', 'geoany'));
     }
 
     public function allCountiesList()
@@ -252,7 +260,8 @@ class PatientController extends Controller
 
     public function locationDecoder(Request $req)
     {
-        //this query rerturns a list of respective subcounties and wards
+        $this->parent_id = $req->any;
+
         $geo_any = Geolocation::where('parent_id',$req->any)->get();
         return  $geo_any;
     }

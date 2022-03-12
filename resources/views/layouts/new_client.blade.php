@@ -1,4 +1,7 @@
-
+{{-- //TODO: --}}
+ {{-- //fix subcounty undified bug; --}}
+{{-- //cache facilities for easier run time access in new client form; --}}
+{{-- //fix append issue in residents consequctive action --}}
 
 @extends('layouts.app')
 
@@ -46,7 +49,7 @@
                 <label for="age">Age</label>
                 <input name="age" type="text" class="form-control" id="age" readonly>
             </div>
-            
+
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -100,9 +103,9 @@
                 <label for="county">County</label>
                     <select name="county" id="county" class="form-control">
                         <option value="" selected disabled>Select County</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
+                @foreach ($county as $location)
 
-                        <option value="{{ $countyOPtionsValue }}" >{{ $countyOPtionsValue }}</option>
+                        <option value="{{$location->geolocation_id}}" >{{ $location->name }}</option>
                 @endforeach
 
                     </select>
@@ -110,33 +113,57 @@
             </div>
 
             <div class="form-group col-md-3">
-                <label for="sub_county">Sub County</label>
-                    <select name="sub_county" id="sub_county" class="form-control">
+                <label for="subcounty">subcounty</label>
+                    <select name="subcounty" id="subcounty" class="form-control">
                         <option value="" selected disabled>Select Sub County</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
+                @foreach ($geoany as $location)
 
-                        <option value="{{ $countyOPtionsValue }}"  >{{ $countyOPtionsValue }}</option>
+                        <option value="{{$location->geolocation_id}}" >{{ $location->name }}</option>
                 @endforeach
 
                     </select>
 
             </div>
 
+            {{-- <div class="form-group col-md-3">
+                <label for="subcounty">Sub County</label>
+                    <select name="subcounty" id="subcounty" class="form-control">
+                        <option value="" selected disabled>Select Sub County</option>
+                @foreach ($geoany as $subcounty)
+                        <option value="{{ $subcounty->geolocation }}"  >{{ $subcounty->name }}</option>
+                @endforeach
+
+                    </select>
+
+            </div> --}}
+
             <div class="form-group col-md-3">
+                <label for="subcounty">Ward</label>
+                    <select name="ward" id="ward" class="form-control">
+                        <option value="" selected disabled>Select Ward</option>
+                @foreach ($geoany as $ward)
+
+                        <option value="{{$ward->geolocation_id}}" >{{ $ward->name }}</option>
+                @endforeach
+
+                    </select>
+
+            </div>
+
+            {{-- <div class="form-group col-md-3">
                 <label for="ward">Ward</label>
                     <select name="ward" id="ward" value=""class="form-control">
-                        <option value="" selected disabled>Select  Ward</option>
-                @foreach ($patient as $countyOPtionsKey => $countyOPtionsValue)
-
-                        <option value="{{ $countyOPtionsValue }}" >{{ $countyOPtionsValue }}</option>
-                @endforeach
+                    <option value="" selected disabled>Select  Ward</option>
+                    @foreach ($geoany as $ward)
+                        <option value="{{ $ward->geolocation }}"  >{{ $ward->name }}</option>
+                    @endforeach
 
                     </select>
 
-            </div>
+            </div> --}}
 
             <div class="form-group col-md-3">
-                
+
                     <label for="village">Village</label>
                     <input name="village" type="text" class="form-control" id="village" placeholder="Village">
             </div>
@@ -155,6 +182,41 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
 <script type="text/javascript">
     $(document).ready(function($){
+
+        // location.reload(true);
+
+
+
+        $('#county').on('change', function(){
+
+var str = $("#county").val();
+// console.log(str);
+
+
+    $.get('location_decode/' + str, function (data, textStatus, jqXHR) {
+    // $('p').append(data.firstName);
+        var arr_data = [];
+
+        for (var index = 0; index <= data.length; index++) {
+                $('#subcounty').append('<option value="' + data[index]["geolocation_id"] + '">' + data[index]["name"] + '</option>');
+            }
+        });
+    });
+
+    $('#subcounty').on('change', function(){
+
+    var str = $("#subcounty").val();
+    // console.log(str);
+    $.get('location_decode/' + str, function (data, textStatus, jqXHR) {
+        // $('p').append(data.firstName);
+        for (var index = 0; index <= data.length; index++) {
+            $('#ward').append('<option value="' + data[index]["geolocation_id"] + '">' + data[index]["name"] + '</option>');
+
+        }
+
+    });
+    });
+
         $("#facility_id").select2();
         $('#mfl_code, #CCC_Number, #facility_id, #serial_number').on('change', function() {
             $('#CCC_Number').val($('#facility_id').val() + ' - ' + $('#serial_number').val() );
