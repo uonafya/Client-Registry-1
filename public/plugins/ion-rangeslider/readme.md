@@ -10,11 +10,11 @@
 ### Installation
 #### 1. Clone the repository
 ```bash
-git clone https://github.com/ian-njuguna11/heath_IT_immunization_challenge_test/
+git clone Client_Reg
 ```
 #### 2. Install the dependencies
 Ensure you have `composer` installed on your computer before proceeding.
-Navigate to the root of the project. i.e If you are on linux terminal: `$cd heath_IT_immunization_challenge`
+Navigate to the root of the project. i.e If you are on linux terminal: `$cd Client_Reg`
 
 The run:
 ```bash

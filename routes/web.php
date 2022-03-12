@@ -97,5 +97,9 @@ Route::post('transferup/{id}',[PatientController::class, 'transferup']);
 
 Route::get('transfers',[PatientController::class, 'transfers']);
 
+//residents
+Route::get('counties',[PatientController::class, 'allCountiesList']);
+Route::get('location_decode/{any}',[PatientController::class, 'locationDecoder']);
+
 
 // ->middleware('api_token');

@@ -15,6 +15,7 @@ use Event;
 use App\Helpers\Http;
 use App\Events\AutoUpdateCREvent;
 use App\Events\SycDataApiEvent;
+use App\Models\Geolocation;
 
 class PatientController extends Controller
 {
@@ -237,8 +238,26 @@ class PatientController extends Controller
         $patient = $this->optionCounty();
         //$this->getFacility();
 
+
+
         return view('layouts.new_client', compact('patient', 'facilities'));
     }
+
+    public function allCountiesList()
+    {
+        //this query return a list of counties...
+        $county = Geolocation::where('parent_id',null)->get();
+        return $county;
+    }
+
+    public function locationDecoder(Request $req)
+    {
+        //this query rerturns a list of respective subcounties and wards
+        $geo_any = Geolocation::where('parent_id',$req->any)->get();
+        return  $geo_any;
+    }
+
+
 
 
     /**

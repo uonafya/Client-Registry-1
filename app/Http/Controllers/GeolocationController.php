@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\GeolocationImport;
 use App\Exports\GeolocationExport;
+use App\Models\Geolocation;
 use Exception;
 
 class GeolocationController extends Controller
@@ -55,5 +56,11 @@ class GeolocationController extends Controller
 
         Excel::import(new GeolocationImport , $request->file);
         return back();
+    }
+
+    public function linkedGeoLocationDecoder()
+    {
+        $geolocation = Geolocation::all();
+        dd($geolocation);
     }
 }
