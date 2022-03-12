@@ -1,5 +1,4 @@
 {{-- //TODO: --}}
- {{-- //fix subcounty undified bug; --}}
 {{-- //cache facilities for easier run time access in new client form; --}}
 {{-- //fix append issue in residents consequctive action --}}
 
@@ -189,7 +188,7 @@
 
         $('#county').on('change', function(){
 
-var str = $("#county").val();
+    var str = $("#county").val();
 // console.log(str);
 
 
@@ -225,7 +224,7 @@ var str = $("#county").val();
         $('#county, #Resident, #sub_county, #ward, #village').on('change', function() {
 
         $('#Resident').val($('#county').val() +'/'
-                            + $('#sub_county').val()
+                            + $('#subcounty').val()
                             +'/' +$('#ward').val()
                             + '/'+$('#village').val());
         });
